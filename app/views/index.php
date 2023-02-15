@@ -1,9 +1,8 @@
 <?php
 session_start();
 $rooms = new HomeController();
-$types = $rooms->get_room_types();
-$capacities = $rooms->get_room_capacities();
-// var_dump($capacities);
+$room_n_c = $rooms->get_room_names_capacities();
+$room_types = $rooms->get_room_types();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,11 +22,6 @@ $capacities = $rooms->get_room_capacities();
 	<title>Pestana Hotel</title>
 </head>
 <body class="bg-zinc-900 text-zinc-100">
-    <?php
-    for($i = 0; $i < count($types); $i++) {
-        echo $types[$i]["Room_Type"] . "<br>";
-    }
-    ?>
 	<!-- Breakpoints of TailwindCSS -->
     <!-- <div class="fixed top-96 left-4 z-50 bg-black">
         <p class="text-4xl font-bold block sm:hidden">ESM</p>
@@ -100,15 +94,20 @@ $capacities = $rooms->get_room_capacities();
 		</section>
 		<!-- Small section where the user can pick the room that he needs -->
 		<section class="py-10 px-3 md:px-0">
+		<?php for($i = 0; $i < count($room_n_c); $i++) {
+			echo $room_n_c[$i]["Room_Capacity"] . "<br>";
+		} 
+		echo count($room_types) . $room_types[0]["Room_Type"] . "<br>";
+		?>
 			<svg class="relative rotate-180 container max-w-3xl fill-zinc-100 top-0.5" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100"><g fill="%23000000"><path d="M-1-.4h1004v34a874.4 874.4 0 01-178.7 17.8c-68.8-.4-106.2-8.9-150.6-14-172-19.7-238 35.3-411.7 34.2A860 860 0 01-1 27.4"></path><path d="M-1 5.4h1004v31c-57.6 13-118 26-178.7 25.8-68.9-.4-106.2-9.7-150.6-15.3-172-21.7-238 38.7-411.7 37.4C201.4 84 110.6 69.4-1 29.5" opacity=".5"></path><path d="M492.6 100.6a442.8 442.8 0 01233-4c3.8 1-1.3-2.8-1.9-3.3a36.2 36.2 0 00-11.6-6.1A447 447 0 00476 91c-.6.1 6.9 5.5 7.5 6 2 1.1 6.5 4.3 9 3.6z" opacity=".5"></path><path d="M699.5 68.2a336.2 336.2 0 00-181-5.9c-2 .5 4.3 4.5 4.8 4.8 2 1.3 8 5.8 10.8 5.1A332.4 332.4 0 01713 77.6c3.8 1.2-1.4-3-2-3.3a41 41 0 00-11.5-6.1z"></path></g></svg>
 			<form action="booking" method="post" class="py-5 max-w-3xl mx-auto bg-zinc-100 text-zinc-900">
 				<div class="container max-w-xl grid grid-cols-12 gap-x-8 gap-y-2 px-2 md:px-0">
 					<h3 class="col-span-12 font-serif text-lg">Please choose the type of room that fits your needs followed by the number of your guests:</h3>
 					<div class="col-span-9 relative">
 						<select class="w-full col-span-3 px-6 py-3 text-lg bg-zinc-200 border border-zinc-900 rounded-lg" name="" id="room-type">
-							<option value="Single">Single</option>
-							<option value="Double">Double</option>
-							<option value="Suite">Suite</option>
+							<?php foreach($room_n_c as $name) { 
+								echo '<option value="' . $name["Room_Name"] . '">' . $name["Room_Name"] . '</option>';
+							} ?>
 						</select>
 					</div>
 					<select class="col-span-3 bg-zinc-200 border border-zinc-900 rounded-lg px-4 py-3 text-lg" name="" id="guests-number">
@@ -142,4 +141,45 @@ $capacities = $rooms->get_room_capacities();
 	</main>
     <?php require_once(INCLUDES . "footer.php"); ?>
 </body>
+<script>
+	const roomType = document.querySelector("#room-type");
+	const guestsNum = document.querySelector("#guests-number");
+	const suiteType = document.querySelector("#suite-type");
+
+	roomType.addEventListener("change", function(event) {
+		guestsNum.innerHTML = "";
+		suiteType.innerHTML = "";
+
+		const selectedRoom = event.target.value;
+		let guests = 0;
+
+		<?php
+		
+		?>
+		if(selectedRoom == "Single") {
+			guests = 1;
+		}else if(selectedRoom == "Double") {
+			guests = 2;
+		}else if(selectedRoom == "Suite") {
+			guests = 6;
+			suiteType.innerHTML = `
+			<h3 class="w-full font-serif text-lg mb-1">Please select the type of suite room:</h3>
+			<select class="w-full col-span-3 px-6 py-3 text-lg bg-zinc-200 border border-zinc-900 rounded-lg" name="" id="">
+				<option value="Standard">Standard suite</option>
+				<option value="Junior">Junior suite</option>
+				<option value="Presidential">Presidential suite</option>
+				<option value="Penthouse">Penthouse suite</option>
+				<option value="Honeymoon">Honeymoon suite</option>
+				<option value="Bridal">Bridal suite</option>
+			</select>`;
+		}
+
+		for(let i = 1; i <= guests; i++) {
+			const options = document.createElement("option");
+			options.value = i;
+			options.innerHTML = i;
+			guestsNum.appendChild(options);
+		}
+	});
+</script>
 </html>
