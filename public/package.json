@@ -1,0 +1,27 @@
+{
+  "name": "06-pestana-hotel",
+  "version": "1.0.0",
+  "description": "Welcome to Pestana Hotel where you can find the best offers and the most comfortable services.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tailwindcss -i ./css/tailwind_compile.css -o ./css/tailwind_style.css --watch"
+  },
+  "author": "ThisMSH",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThisMSH/Pestana-Hotel.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ThisMSH/Pestana-Hotel/issues"
+  },
+  "homepage": "https://github.com/ThisMSH/Pestana-Hotel#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.2.4"
+  },
+  "dependencies": {
+    "flowbite": "^1.6.3",
+    "jquery": "^3.6.3"
+  }
+}
