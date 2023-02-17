@@ -1,5 +1,4 @@
 <?php
-
 class SignupController extends SignupModel {
     private $name;
     private $fname;
@@ -10,13 +9,6 @@ class SignupController extends SignupModel {
     private $password;
     private $passwordRepeat;
 
-    // public function __construct($name, $un, $email, $pass, $passR) {
-    //     $this->name = trim($name);
-    //     $this->username = trim($un);
-    //     $this->password = $pass;
-    //     $this->passwordRepeat = $passR;
-    //     $this->email = trim($email);
-    // }
     public function register() {
         Controller::load("signUp");
     }

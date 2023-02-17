@@ -8,7 +8,7 @@ class HomeModel extends Db {
     }
 
     protected function fetch_room_types() {
-        $stmt = $this->conn()->prepare("SELECT Room_Type FROM pestana.rooms WHERE Room_Type IS NOT NULL AND Room_Type != '';");
+        $stmt = $this->conn()->prepare("SELECT Room_Name, Room_Type FROM pestana.rooms;");
         $stmt->execute();
         return $stmt->fetchAll();
         $stmt = null;

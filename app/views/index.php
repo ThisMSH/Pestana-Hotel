@@ -2,7 +2,7 @@
 session_start();
 $rooms = new HomeController();
 $room_n_c = $rooms->get_room_names_capacities();
-$room_types = $rooms->get_room_types();
+$room_n_t = $rooms->get_room_types();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,14 +11,14 @@ $room_types = $rooms->get_room_types();
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="Welcome to Pestana Hotel where you can find the best offers and the most comfortable services.">
-	<link rel="shortcut icon" href="../img/logo/pestana_logo.png" type="image/x-icon">
+	<link rel="shortcut icon" href="<?= URLROOT ?>/img/logo/pestana_logo.png" type="image/x-icon">
 	<script src="https://kit.fontawesome.com/b44b654493.js" crossorigin="anonymous"></script>
 	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 	<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Sharp|Material+Icons+Two+Tone" rel="stylesheet">
-	<link rel="stylesheet" href="../css/tailwind_style.css">
-	<link rel="stylesheet" href="../css/style.css">
-	<script src="../js/script.js" defer></script>
+	<link rel="stylesheet" href="<?= URLROOT ?>/css/tailwind_style.css">
+	<link rel="stylesheet" href="<?= URLROOT ?>/css/style.css">
+	<script src="<?= URLROOT ?>/js/script.js" defer></script>
 	<title>Pestana Hotel</title>
 </head>
 <body class="bg-zinc-900 text-zinc-100">
@@ -37,19 +37,19 @@ $room_types = $rooms->get_room_types();
 		<section class="h-[800px] lg:h-[700px] flex flex-col-reverse lg:flex-row justify-evenly items-center overflow-hidden">
 			<div class="relative w-11/12 sm:w-6/12 h-[600px] flex justify-center items-center">
 				<div class="top-imgs w-full lg:w-2/3 absolute before:absolute before:w-20 before:h-20 md:before:w-36 md:before:h-36 before:bg-img1 before:bg-cover before:bg-center before:top-5 before:left-10 sm:before:top-20 sm:before:left-full">
-					<img src="../img/home/bed.png" alt="Bed" srcset="">
+					<img src="<?= URLROOT ?>/img/home/bed.png" alt="Bed" srcset="">
 					<p class="text-2xl lg:text-3xl font-semibold text-center"><span class="text-amber-400">Comfortable rooms</span> that will fit all your needs.</p>
 				</div>
 				<div class="top-imgs w-full lg:w-2/3 absolute before:absolute before:bg-img2 before:bg-cover before:bg-center before:w-28 before:h-20 md:before:w-44 md:before:h-36 before:top-5 before:left-10 sm:before:top-20 sm:before:left-full">
-					<img src="../img/home/gaming.png" alt="Gamers" srcset="">
+					<img src="<?= URLROOT ?>/img/home/gaming.png" alt="Gamers" srcset="">
 					<p class="text-2xl lg:text-3xl font-semibold text-center"><span class="text-amber-400">Play</span> with your partners and have fun with all our <span class="text-amber-400">entertainment services</span>.</p>
 				</div>
 				<div class="top-imgs w-full lg:w-2/3 absolute before:absolute before:bg-img3 before:bg-cover before:bg-center before:w-36 before:h-20 md:before:w-52 md:before:h-36 before:top-5 before:left-10 sm:before:top-20 sm:before:left-full">
-					<img src="../img/home/pool.png" alt="Pool" srcset="">
+					<img src="<?= URLROOT ?>/img/home/pool.png" alt="Pool" srcset="">
 					<p class="text-2xl lg:text-3xl font-semibold text-center">Enjoy our <span class="text-amber-400">pool</span>.</p>
 				</div>
 				<div class="top-imgs w-full lg:w-2/3 absolute before:absolute before:bg-img4 before:bg-cover before:bg-center before:w-24 before:h-20 md:before:w-40 md:before:h-36 before:top-5 before:left-10 sm:before:top-20 sm:before:left-full">
-					<img src="../img/home/service.png" alt="Waiter" srcset="">
+					<img src="<?= URLROOT ?>/img/home/service.png" alt="Waiter" srcset="">
 					<p class="text-2xl lg:text-3xl font-semibold text-center">Get the best <span class="text-amber-400">services</span> from our services teams.</p>
 				</div>
 			</div>
@@ -94,36 +94,31 @@ $room_types = $rooms->get_room_types();
 		</section>
 		<!-- Small section where the user can pick the room that he needs -->
 		<section class="py-10 px-3 md:px-0">
-		<?php for($i = 0; $i < count($room_n_c); $i++) {
-			echo $room_n_c[$i]["Room_Capacity"] . "<br>";
-		} 
-		echo count($room_types) . $room_types[0]["Room_Type"] . "<br>";
-		?>
 			<svg class="relative rotate-180 container max-w-3xl fill-zinc-100 top-0.5" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100"><g fill="%23000000"><path d="M-1-.4h1004v34a874.4 874.4 0 01-178.7 17.8c-68.8-.4-106.2-8.9-150.6-14-172-19.7-238 35.3-411.7 34.2A860 860 0 01-1 27.4"></path><path d="M-1 5.4h1004v31c-57.6 13-118 26-178.7 25.8-68.9-.4-106.2-9.7-150.6-15.3-172-21.7-238 38.7-411.7 37.4C201.4 84 110.6 69.4-1 29.5" opacity=".5"></path><path d="M492.6 100.6a442.8 442.8 0 01233-4c3.8 1-1.3-2.8-1.9-3.3a36.2 36.2 0 00-11.6-6.1A447 447 0 00476 91c-.6.1 6.9 5.5 7.5 6 2 1.1 6.5 4.3 9 3.6z" opacity=".5"></path><path d="M699.5 68.2a336.2 336.2 0 00-181-5.9c-2 .5 4.3 4.5 4.8 4.8 2 1.3 8 5.8 10.8 5.1A332.4 332.4 0 01713 77.6c3.8 1.2-1.4-3-2-3.3a41 41 0 00-11.5-6.1z"></path></g></svg>
 			<form action="booking" method="post" class="py-5 max-w-3xl mx-auto bg-zinc-100 text-zinc-900">
 				<div class="container max-w-xl grid grid-cols-12 gap-x-8 gap-y-2 px-2 md:px-0">
 					<h3 class="col-span-12 font-serif text-lg">Please choose the type of room that fits your needs followed by the number of your guests:</h3>
 					<div class="col-span-9 relative">
-						<select class="w-full col-span-3 px-6 py-3 text-lg bg-zinc-200 border border-zinc-900 rounded-lg" name="" id="room-type">
+						<select class="w-full col-span-3 px-6 py-3 text-lg bg-zinc-200 border border-zinc-900 rounded-lg" name="room-name" id="room-name">
 							<?php foreach($room_n_c as $name) { 
 								echo '<option value="' . $name["Room_Name"] . '">' . $name["Room_Name"] . '</option>';
 							} ?>
 						</select>
 					</div>
-					<select class="col-span-3 bg-zinc-200 border border-zinc-900 rounded-lg px-4 py-3 text-lg" name="" id="guests-number">
+					<select class="col-span-3 bg-zinc-200 border border-zinc-900 rounded-lg px-4 py-3 text-lg" name="room-capacity" id="guests-number">
 						<option value="1">1</option>
 					</select>
-					<div class="col-span-12" id="suite-type">
+					<div class="col-span-12" id="room-type">
 
                     </div>
 					<h3 class="col-span-12 font-serif text-lg">Please choose the date of your booking:</h3>
 					<div class="date flex justify-between items-center md:block col-span-12 md:col-span-4">
 						<label class="font-serif text-lg" for="checkin-date">Check In</label>
-						<input class="bg-zinc-200 border border-zinc-900 rounded-lg px-4 py-3" type="date" id="checkin-date" name="" min="<?= date('Y-m-d') ?>">
+						<input class="bg-zinc-200 border border-zinc-900 rounded-lg px-4 py-3" type="date" id="checkin-date" name="check-in" min="<?= date('Y-m-d') ?>">
 					</div>
 					<div class="date flex justify-between items-center md:block col-span-12 md:col-span-4">
 						<label class="font-serif text-lg" for="checkout-date">Check Out</label>
-						<input class="bg-zinc-200 border border-zinc-900 rounded-lg px-4 py-3" type="date" id="checkout-date" name="" min="<?= date('Y-m-d') ?>">
+						<input class="bg-zinc-200 border border-zinc-900 rounded-lg px-4 py-3" type="date" id="checkout-date" name="check-out" min="<?= date('Y-m-d') ?>">
 					</div>
 					<button class="group col-span-4 col-start-5 md:col-start-auto border border-zinc-900 rounded-xl active:bg-slate-300 py-3 px-2" type="submit" name=""><p class="text-2xl transition duration-300 group-hover:scale-125">Search</p></button>
 				</div>
@@ -142,37 +137,63 @@ $room_types = $rooms->get_room_types();
     <?php require_once(INCLUDES . "footer.php"); ?>
 </body>
 <script>
-	const roomType = document.querySelector("#room-type");
+	const roomName = document.querySelector("#room-name");
 	const guestsNum = document.querySelector("#guests-number");
-	const suiteType = document.querySelector("#suite-type");
+	const roomType = document.querySelector("#room-type");
 
-	roomType.addEventListener("change", function(event) {
+	roomName.addEventListener("change", function(event) {
 		guestsNum.innerHTML = "";
-		suiteType.innerHTML = "";
+		roomType.innerHTML = "";
 
 		const selectedRoom = event.target.value;
 		let guests = 0;
 
-		<?php
-		
-		?>
-		if(selectedRoom == "Single") {
-			guests = 1;
-		}else if(selectedRoom == "Double") {
-			guests = 2;
-		}else if(selectedRoom == "Suite") {
-			guests = 6;
-			suiteType.innerHTML = `
-			<h3 class="w-full font-serif text-lg mb-1">Please select the type of suite room:</h3>
-			<select class="w-full col-span-3 px-6 py-3 text-lg bg-zinc-200 border border-zinc-900 rounded-lg" name="" id="">
-				<option value="Standard">Standard suite</option>
-				<option value="Junior">Junior suite</option>
-				<option value="Presidential">Presidential suite</option>
-				<option value="Penthouse">Penthouse suite</option>
-				<option value="Honeymoon">Honeymoon suite</option>
-				<option value="Bridal">Bridal suite</option>
-			</select>`;
-		}
+        if(selectedRoom == "<?= $room_n_c[0]["Room_Name"]?>") {
+		    guests = <?= $room_n_c[0]["Room_Capacity"]?>;
+            <?php
+                $count = 0;
+                for($i = 0; $i < count($room_n_t); $i++) {
+                    if(!empty($room_n_t[$i]["Room_Type"]) && $room_n_t[$i]["Room_Name"] == $room_n_c[0]["Room_Name"]) {
+                        $count++;
+                    }
+                }
+                if($count > 0) {
+                    echo 'roomType.innerHTML = `
+                    <h3 class="w-full font-serif text-lg mb-1">Please select the type of suite room:</h3>
+                    <select class="w-full col-span-3 px-6 py-3 text-lg bg-zinc-200 border border-zinc-900 rounded-lg" name="room-type" id="">';
+                    for($i = 0; $i < count($room_n_t); $i++) {
+                        if(!empty($room_n_t[$i]["Room_Type"]) && $room_n_t[$i]["Room_Name"] == $room_n_c[0]["Room_Name"]) {
+                            echo '<option value="' . $room_n_t[$i]["Room_Type"] . '">' . $room_n_t[$i]["Room_Type"] . '</option>';
+                        }
+                    }
+                    echo '</select>`;';
+                }
+            ?>
+        }
+		<?php for($i = 1; $i < count($room_n_c); $i++) { ?>
+            if(selectedRoom == "<?= $room_n_c[$i]["Room_Name"]?>") {
+                guests = <?= $room_n_c[$i]["Room_Capacity"]?>;
+                <?php
+                    $count = 0;
+                    for($j = 0; $j < count($room_n_t); $j++) {
+                        if(!empty($room_n_t[$j]["Room_Type"]) && $room_n_t[$j]["Room_Name"] == $room_n_c[$i]["Room_Name"]) {
+                            $count++;
+                        }
+                    }
+                    if($count > 0) {
+                        echo 'roomType.innerHTML = `
+                        <h3 class="w-full font-serif text-lg mb-1">Please select the type of suite room:</h3>
+                        <select class="w-full col-span-3 px-6 py-3 text-lg bg-zinc-200 border border-zinc-900 rounded-lg" name="room-type" id="">';
+                        for($j = 0; $j < count($room_n_t); $j++) {
+                            if(!empty($room_n_t[$j]["Room_Type"]) && $room_n_t[$j]["Room_Name"] == $room_n_c[$i]["Room_Name"]) {
+                                echo '<option value="' . $room_n_t[$j]["Room_Type"] . '">' . $room_n_t[$j]["Room_Type"] . '</option>';
+                            }
+                        }
+                        echo '</select>`;';
+                    }
+                ?>
+            }
+		<?php } ?>
 
 		for(let i = 1; i <= guests; i++) {
 			const options = document.createElement("option");
