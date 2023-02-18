@@ -90,7 +90,7 @@
         </div>
     </section>
     <section class="relative">
-        <div class="flex flex-wrap flex-col sm:flex-row gap-8 sm:[&>*]:basis-2/5 lg:[&>*]:basis-auto justify-evenly px-10 md:px-0">
+        <div class="flex flex-wrap md:flex-nowrap flex-col sm:flex-row gap-8 sm:[&>*]:basis-2/5 lg:[&>*]:basis-auto justify-evenly px-10 md:px-0">
             <div class="flex flex-col">
                 <h5 class="text-xl mb-2 font-bold relative pl-3 before:absolute before:top-0 before:left-0 before:h-full before:w-2 before:bg-zinc-900 before:-skew-y-12">Our Groups</h5>
                 <div class="flex flex-col [&>*]:text-lg [&>*]:font-semibold [&>*:hover]:underline [&>*:hover]:underline-offset-2 [&>*:hover]:decoration-2">
@@ -147,7 +147,7 @@
     </section>
     <section class="bg-zinc-900 text-zinc-100 h-10">
         <div class="h-full w-full flex justify-center items-center">
-            <h6 class="">© <script>document.write(new Date().getFullYear() + ",");</script> Copyright Pestana Group. All rights reserved.</h6>
+            <h6 class="text-center">© <script>document.write(new Date().getFullYear() + ",");</script> Copyright Pestana Group. All rights reserved.</h6>
         </div>
     </section>
 </footer>

@@ -32,7 +32,7 @@ module.exports = {
     "./css/*.css",
     "./js/*.js",
     "./*.php",
-    "../app/views/*.php",
+    "../app/views/**/*.php",
   ],
   darkMode: "class",
   theme: {

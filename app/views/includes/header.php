@@ -29,7 +29,7 @@
         </div>
         <?php } ?>
         <!-- Side bar & Burger menu -->
-        <div class="absolute flex flex-col justify-around items-center top-0 -right-60 md:hidden min-h-screen w-60 bg-zinc-100 text-zinc-900 transition-all duration-500" id="side-bar">
+        <div class="absolute flex flex-col justify-around items-center top-0 -right-60 md:hidden min-h-screen w-60 bg-zinc-100 text-zinc-900 rounded-l-2xl transition-all duration-500" id="side-bar">
             <button class="text-3xl border border-zinc-900 rounded-lg flex justify-center items-center px-2 py-3 self-end mr-5" id="close-btn" type="button"><span class="material-icons-outlined text-4xl">close</span></button>
             <div class="flex flex-col justify-center gap-y-5">
                 <a class="group inline-block md:mr-10 w-32 h-12 py-2 text-center text-lg font-semibold border rounded-lg overflow-hidden relative shadow-lg transition-all duration-300 before:absolute before:w-0 before:h-full before:top-0 before:right-0 before:bg-amber-400 before:shadow before:shadow-amber-400 before:transition-all before:duration-300 hover:shadow-amber-400 hover:text-zinc-900 hover:before:w-full hover:before:left-0" href="index"><p class="transition-all duration-300 group-hover:scale-125">Home</p></a>
