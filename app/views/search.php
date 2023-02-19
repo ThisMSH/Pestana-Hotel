@@ -33,9 +33,9 @@
 	<main class="mt-52">
         <?php
         if($view_data["availability"]) {
-            echo "available";
+            echo "Available";
         }else {
-            echo "not available";
+            echo "Not available";
         }
         ?>
 		<!-- Top section right below navbar -->

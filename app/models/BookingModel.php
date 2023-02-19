@@ -11,7 +11,7 @@ class BookingModel extends Db {
         return $stmt->fetch();
         $stmt = null;
     }
-    // checkin - checkout - checkin - checkout
+
     protected function booking_check($in, $out, $name, $type) {
         $stmt = $this->conn()->prepare("
             SELECT * FROM pestana.rooms LEFT JOIN pestana.reservations

@@ -22,9 +22,6 @@ class BookingController extends BookingModel {
     }
 }
 
-
-
-
 // SELECT rooms.* FROM rooms LEFT JOIN reservations
 // ON rooms.ID = reservations.RoomID AND (
 //     "2023-02-15" BETWEEN reservations.Check_In AND reservations.Check_Out
