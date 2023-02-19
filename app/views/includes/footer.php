@@ -137,12 +137,12 @@
             </div>
         </div>
         <div class="[&>*]:max-w-[130px] px-[10%] flex flex-wrap md:flex-nowrap justify-center items-center overflow-hidden [&>*]:basis-1/3 [&>*]:transition-all [&>*]:duration-300 [&>*:hover]:scale-150">
-            <a href="#"><img src="img/icons/Facebook_Box_Filled_L.png" alt="Facebook" srcset=""></a>
-            <a href="#"><img src="img/icons/Instagram_Box_Filled_L.png" alt="Instagram" srcset=""></a>
-            <a href="#"><img src="img/icons/Linkedin_Filled_L.png" alt="LinkedIn" srcset=""></a>
-            <a href="#"><img src="img/icons/Twitter_Box_Filled_L.png" alt="Twitter" srcset=""></a>
-            <a href="#"><img src="img/icons/TikTok_Box_L.png" alt="TikTok" srcset=""></a>
-            <a href="#"><img src="img/icons/YouTube_Mark_Filled_L.png" alt="YouTube" srcset=""></a>
+            <a href="#"><img src="<?= URLROOT . 'img/icons/Facebook_Box_Filled_L.png' ?>" alt="Facebook" srcset=""></a>
+            <a href="#"><img src="<?= URLROOT . 'img/icons/Instagram_Box_Filled_L.png' ?>" alt="Instagram" srcset=""></a>
+            <a href="#"><img src="<?= URLROOT . 'img/icons/Linkedin_Filled_L.png' ?>" alt="LinkedIn" srcset=""></a>
+            <a href="#"><img src="<?= URLROOT . 'img/icons/Twitter_Box_Filled_L.png' ?>" alt="Twitter" srcset=""></a>
+            <a href="#"><img src="<?= URLROOT . 'img/icons/TikTok_Box_L.png' ?>" alt="TikTok" srcset=""></a>
+            <a href="#"><img src="<?= URLROOT . 'img/icons/YouTube_Mark_Filled_L.png' ?>" alt="YouTube" srcset=""></a>
         </div>
     </section>
     <section class="bg-zinc-900 text-zinc-100 h-10">

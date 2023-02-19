@@ -6,7 +6,7 @@ class SignupModel extends Db {
 
         $hashingPassword = password_hash($password, PASSWORD_DEFAULT);
 
-        if (!$stmt->execute(array($name, $fname, $phone, $bday, $username, $email, $hashingPassword))) {
+        if(!$stmt->execute(array($name, $fname, $phone, $bday, $username, $email, $hashingPassword))) {
             $stmt = null;
             header("location: " . URLROOT . "signup/register?error=signup_stmt_failed");
             exit();
@@ -19,7 +19,7 @@ class SignupModel extends Db {
         $stmt = $this->conn()->prepare("SELECT ID FROM pestana.users WHERE Username = :username;");
         $stmt->bindParam(":username", $username);
 
-        if (!$stmt->execute()) {
+        if(!$stmt->execute()) {
             $stmt = null;
             header("location: " . URLROOT . "signup/register?error=usercheck_stmt_failed");
             exit();
@@ -27,7 +27,7 @@ class SignupModel extends Db {
 
         $resultCheck;
 
-        if ($stmt->rowCount() > 0) {
+        if($stmt->rowCount() > 0) {
             $resultCheck = false;
         }else {
             $resultCheck = true;
@@ -38,7 +38,7 @@ class SignupModel extends Db {
     protected function check_email($email) {
         $stmt = $this->conn()->prepare("SELECT ID FROM pestana.users WHERE Email = ?;");
 
-        if (!$stmt->execute(array($email))) {
+        if(!$stmt->execute(array($email))) {
             $stmt = null;
             header("location: " . URLROOT . "signup/register?error=emailcheck_stmt_failed");
             exit();
@@ -46,7 +46,7 @@ class SignupModel extends Db {
 
         $resultCheck;
 
-        if ($stmt->rowCount() > 0) {
+        if($stmt->rowCount() > 0) {
             $resultCheck = false;
         }else {
             $resultCheck = true;

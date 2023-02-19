@@ -5,13 +5,13 @@ class SigninModel extends Db {
     protected function signin_user($user, $password) {
         $stmt = $this->conn()->prepare("SELECT Password FROM pestana.users WHERE Username = ? OR Email = ?;");
 
-        if (!$stmt->execute(array($user, $user))) {
+        if(!$stmt->execute(array($user, $user))) {
             $stmt = null;
             header("location: " . URLROOT . "signin/login?error=stmt1_failed");
             exit();
         }
         
-        if ($stmt->rowCount() == 0) {
+        if($stmt->rowCount() == 0) {
             $stmt = null;
             header("location: " . URLROOT . "signin/login?error=wrong1");
             exit();
@@ -20,20 +20,20 @@ class SigninModel extends Db {
         $hashedPassword = $stmt->fetch(PDO::FETCH_ASSOC);
         $checkingPassword = password_verify($password, $hashedPassword["Password"]);
 
-        if ($checkingPassword == false) {
+        if($checkingPassword == false) {
             $stmt = null;
             header("location: " . URLROOT . "signin/login?error=wrong2");
             exit();
         }elseif ($checkingPassword == true) {
             $stmt = $this->conn()->prepare("SELECT * FROM pestana.users WHERE UserName = ? OR Email = ?;");
 
-            if (!$stmt->execute(array($user, $user))) {
+            if(!$stmt->execute(array($user, $user))) {
                 $stmt = null;
                 header("location: " . URLROOT . "signin/login?error=stmt2_failed");
                 exit();
             }
 
-            if ($stmt->rowCount() == 0) {
+            if($stmt->rowCount() == 0) {
                 $stmt = null;
                 header("location: " . URLROOT . "signin/login?error=no_users");
                 exit();
@@ -49,6 +49,7 @@ class SigninModel extends Db {
             $_SESSION['email'] = $userInfo["Email"];
             $_SESSION['phone'] = $userInfo["Phone_Number"];
             $_SESSION['birthday'] = $userInfo["Birthday"];
+            $_SESSION['discount'] = $userInfo["Discount"];
             $_SESSION['admin'] = $userInfo["Admin"];
         }
         $stmt = null;

@@ -18,9 +18,4 @@ class HomeController extends HomeModel {
     public function get_room_types() {
         return $this->fetch_room_types();
     }
-    
-    public function booking() {
-        $id = array(4);
-        Controller::load("booking", $id);
-    }
 }

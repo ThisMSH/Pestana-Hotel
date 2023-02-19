@@ -21,7 +21,7 @@ class SigninController extends SigninModel {
     }
     
     public function get_user() {
-        if ($this->empty_input() == false) {
+        if($this->empty_input() == false) {
             header("location: " . URLROOT . "signin/login?error=empty");
             exit();
         }
@@ -30,7 +30,7 @@ class SigninController extends SigninModel {
 
     private function empty_input() {
         $result;
-        if (empty($this->user) || empty($this->password)) {
+        if(empty($this->user) || empty($this->password)) {
             $result = false;
         }else {
             $result = true;

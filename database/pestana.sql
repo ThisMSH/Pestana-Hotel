@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 19, 2023 at 12:44 AM
+-- Generation Time: Feb 19, 2023 at 10:32 PM
 -- Server version: 8.0.31
 -- PHP Version: 8.1.12
 
@@ -106,15 +106,16 @@ CREATE TABLE `users` (
   `Username` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   `Email` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
   `Password` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `Admin` int DEFAULT '0'
+  `Admin` int DEFAULT '0',
+  `Discount` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`ID`, `First_Name`, `Family_Name`, `Phone_Number`, `Birthday`, `Username`, `Email`, `Password`, `Admin`) VALUES
-(1, 'El Mahdi', 'Saissi Hassani', '0453234323', '2022-01-01', 'mahdi', 'mahdi@gmail.com', '$2y$10$uNjF3cgDr9r5LX5M4slCxuqQtSmnrm.yWYhS8caW8rMypMrzqCpWq', 1);
+INSERT INTO `users` (`ID`, `First_Name`, `Family_Name`, `Phone_Number`, `Birthday`, `Username`, `Email`, `Password`, `Admin`, `Discount`) VALUES
+(1, 'El Mahdi', 'Saissi Hassani', '0453234323', '2022-01-01', 'mahdi', 'mahdi@gmail.com', '$2y$10$uNjF3cgDr9r5LX5M4slCxuqQtSmnrm.yWYhS8caW8rMypMrzqCpWq', 1, 0);
 
 --
 -- Indexes for dumped tables

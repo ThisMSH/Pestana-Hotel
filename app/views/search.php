@@ -31,6 +31,13 @@
 	</div> -->
 	<?php require_once(INCLUDES . "header.php"); ?>
 	<main class="mt-52">
+        <?php
+        if($view_data["availability"]) {
+            echo "available";
+        }else {
+            echo "not available";
+        }
+        ?>
 		<!-- Top section right below navbar -->
 		<section class="h-[800px] lg:h-[700px] flex flex-col-reverse lg:flex-row justify-evenly items-center overflow-hidden">
 			<div class="relative w-11/12 sm:w-6/12 h-[600px] flex justify-center items-center">
