@@ -24,7 +24,7 @@
         </div>
         <?php }else { ?>
         <div class="hidden md:block">
-            <a class="group inline-block w-32 h-12 py-2 text-center text-lg font-semibold border rounded-lg overflow-hidden relative shadow-lg transition-all duration-300 before:absolute before:w-0 before:h-full before:top-0 before:right-0 before:bg-amber-400 before:shadow before:shadow-amber-400 before:transition-all before:duration-300 hover:shadow-amber-400 hover:text-zinc-900 hover:before:w-full hover:before:left-0" href="<?= URLROOT . 'signin/login' ?>"><p class="transition-all duration-300 group-hover:scale-125">Dashboard</p></a>
+            <a class="group inline-block w-32 h-12 py-2 text-center text-lg font-semibold border rounded-lg overflow-hidden relative shadow-lg transition-all duration-300 before:absolute before:w-0 before:h-full before:top-0 before:right-0 before:bg-amber-400 before:shadow before:shadow-amber-400 before:transition-all before:duration-300 hover:shadow-amber-400 hover:text-zinc-900 hover:before:w-full hover:before:left-0" href="<?= URLROOT . 'dashboard/my_profile' ?>"><p class="transition-all duration-300 group-hover:scale-125">Dashboard</p></a>
             <a class="group inline-block md:ml-10 w-32 h-12 py-2 text-center text-lg font-semibold border rounded-lg overflow-hidden relative shadow-lg transition-all duration-300 before:absolute before:w-0 before:h-full before:top-0 before:right-0 before:bg-amber-400 before:shadow before:shadow-amber-400 before:transition-all before:duration-300 hover:shadow-amber-400 hover:text-zinc-900 hover:before:w-full hover:before:left-0" href="<?= URLROOT . 'home/logout' ?>"><p class="transition-all duration-300 group-hover:scale-125">Logout</p></a>
         </div>
         <?php } ?>

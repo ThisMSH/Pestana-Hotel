@@ -125,14 +125,14 @@
                 </div>
             </div>
             <div class="flex flex-col">
-                <h5 class="text-xl mb-2 font-bold relative pl-3 before:absolute before:top-0 before:left-0 before:h-full before:w-2 before:bg-zinc-900 before:-skew-y-12">Chi 7aja zayda</h5>
+                <h5 class="text-xl mb-2 font-bold relative pl-3 before:absolute before:top-0 before:left-0 before:h-full before:w-2 before:bg-zinc-900 before:-skew-y-12">Margaret Trends</h5>
                 <div class="flex flex-col [&>*]:text-lg [&>*]:font-semibold [&>*:hover]:underline [&>*:hover]:underline-offset-2 [&>*:hover]:decoration-2">
-                    <a href="#">Chof lhih</a>
+                    <a href="#">Haut Gamme</a>
+                    <a href="#">Ghayyarha</a>
+                    <a href="#">7tal 10</a>
+                    <a href="#">Yarbi nsali</a>
+                    <a href="#">What celebrate?!</a>
                     <a href="#">baksa7bi</a>
-                    <a href="#">Je s'appelle</a>
-                    <a href="#">I france bien</a>
-                    <a href="#">Celebrate, what celebrate?!</a>
-                    <a href="#">PHP 4 vs PHP 96?</a>
                 </div>
             </div>
         </div>

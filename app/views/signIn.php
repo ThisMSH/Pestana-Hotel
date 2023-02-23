@@ -11,14 +11,14 @@ if(isset($_SESSION["id"])) {
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="Welcome to Pestana Hotel where you can find the best offers and the most comfortable services.">
-	<link rel="shortcut icon" href="../img/logo/pestana_logo.png" type="image/x-icon">
+	<link rel="shortcut icon" href="<?= URLROOT ?>/img/logo/pestana_logo.png" type="image/x-icon">
 	<script src="https://kit.fontawesome.com/b44b654493.js" crossorigin="anonymous"></script>
 	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 	<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Sharp|Material+Icons+Two+Tone" rel="stylesheet">
-	<link rel="stylesheet" href="../css/tailwind_style.css">
-	<link rel="stylesheet" href="../css/style.css">
-    <script src="../js/signIn.js" defer></script>
+	<link rel="stylesheet" href="<?= URLROOT ?>/css/tailwind_style.css">
+	<link rel="stylesheet" href="<?= URLROOT ?>/css/style.css">
+    <script src="<?= URLROOT ?>/js/signIn.js" defer></script>
 	<title>Sign In - Pestana Hotel</title>
 </head>
 <body class="bg-zinc-900 text-zinc-100">
@@ -40,7 +40,7 @@ if(isset($_SESSION["id"])) {
         </button>
     </div>
     <?php } ?>
-    <?php if(isset($_GET["error"]) && $_GET["error"] == "stmt1_failed" || $_GET["error"] == "stmt2_failed") { ?>
+    <?php if(isset($_GET["error"]) && $_GET["error"] == "stmt1_failed" || isset($_GET["error"]) && $_GET["error"] == "stmt2_failed") { ?>
     <div id="alert" class="fixed top-10 left-1/2 -translate-x-1/2 flex p-4 mb-4 text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 z-10">
         <span class="material-icons-outlined text-amber-600">cancel</span>
         <p class="ml-3 text-sm font-medium">
@@ -53,7 +53,7 @@ if(isset($_SESSION["id"])) {
         </button>
     </div>
     <?php } ?>
-    <?php if(isset($_GET["error"]) && $_GET["error"] == "wrong1" || $_GET["error"] == "wrong2") { ?>
+    <?php if(isset($_GET["error"]) && $_GET["error"] == "wrong1" || isset($_GET["error"]) && $_GET["error"] == "wrong2") { ?>
     <div id="alert" class="fixed top-10 left-1/2 -translate-x-1/2 flex p-4 mb-4 text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 z-10">
         <span class="material-icons-outlined text-amber-600">cancel</span>
         <p class="ml-3 text-sm font-medium">Your Username/Email or/and the password is wrong.</p>

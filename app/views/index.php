@@ -33,6 +33,15 @@ $room_n_t = $rooms->get_room_types();
     </div> -->
     <?php require_once(INCLUDES . "header.php"); ?>
 	<main class="mt-52">
+        <?php if(isset($_GET["booking"]) && $_GET["booking"] == "success") { ?>
+        <div id="alert" class="fixed top-44 left-1/2 -translate-x-1/2 flex p-4 mb-4 text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 z-50">
+            <span class="material-icons-outlined text-amber-600">check_circle</span>
+            <p class="ml-3 text-sm font-medium">Thank you. Your reservation has been successfully added.</p>
+            <button type="button" id="close-alert" class="ml-auto -mx-1.5 -my-1.5 bg-yellow-50 text-yellow-500 rounded-lg focus:ring-2 focus:ring-yellow-400 p-1.5 hover:bg-yellow-200 inline-flex h-8 w-8 dark:bg-gray-800 dark:text-yellow-300 dark:hover:bg-gray-700">
+                <svg aria-hidden="true" class="w-5 h-5 pointer-events-none" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            </button>
+        </div>
+        <?php } ?>
 		<!-- Top section right below navbar -->
 		<section class="h-[800px] lg:h-[700px] flex flex-col-reverse lg:flex-row justify-evenly items-center overflow-hidden">
 			<div class="relative w-11/12 sm:w-6/12 h-[600px] flex justify-center items-center">
@@ -105,7 +114,7 @@ $room_n_t = $rooms->get_room_types();
 							} ?>
 						</select>
 					</div>
-					<select class="col-span-3 bg-zinc-200 border border-zinc-900 rounded-lg px-4 py-3 text-lg" name="room-capacity" id="guests-number">
+					<select class="col-span-3 bg-zinc-200 border border-zinc-900 rounded-lg px-4 py-3 text-lg" name="guests-number" id="guests-number">
 						<option value="1">1</option>
 					</select>
 					<div class="col-span-12" id="room-type">
@@ -114,13 +123,13 @@ $room_n_t = $rooms->get_room_types();
 					<h3 class="col-span-12 font-serif text-lg">Please choose the date of your booking:</h3>
 					<div class="date flex justify-between items-center md:block col-span-12 md:col-span-4">
 						<label class="font-serif text-lg" for="checkin-date">Check In</label>
-						<input class="bg-zinc-200 border border-zinc-900 rounded-lg px-4 py-3" type="date" id="checkin-date" name="check-in" min="<?= date('Y-m-d') ?>">
+						<input class="bg-zinc-200 border border-zinc-900 rounded-lg px-4 py-3" type="date" id="checkin-date" name="check-in" min="<?= date('Y-m-d') ?>" required>
 					</div>
 					<div class="date flex justify-between items-center md:block col-span-12 md:col-span-4">
 						<label class="font-serif text-lg" for="checkout-date">Check Out</label>
-						<input class="bg-zinc-200 border border-zinc-900 rounded-lg px-4 py-3" type="date" id="checkout-date" name="check-out" min="<?= date('Y-m-d') ?>">
+						<input class="bg-zinc-200 border border-zinc-900 rounded-lg px-4 py-3" type="date" id="checkout-date" name="check-out" min="<?= date('Y-m-d') ?>" required>
 					</div>
-					<button class="group col-span-4 col-start-5 md:col-start-auto border border-zinc-900 rounded-xl active:bg-slate-300 py-3 px-2" type="submit" name=""><p class="text-2xl transition duration-300 group-hover:scale-125">Search</p></button>
+					<button class="group col-span-4 col-start-5 md:col-start-auto border border-zinc-900 rounded-xl active:bg-slate-300 py-3 px-2" type="submit" name="search"><p class="text-2xl transition duration-300 group-hover:scale-125">Search</p></button>
 				</div>
 			</form>
 			<svg class="relative container max-w-3xl fill-zinc-100 bottom-0.5" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100"><g fill="%23000000"><path d="M907 19c-55-5-97 5-109 8-44 12-44 24-101 44-36 12-63 21-97 20-46-1-81-20-100-33-19 13-54 32-100 33-34 1-61-8-97-20-57-20-57-32-101-44-12-3-54-13-109-8A306 306 0 000 43V0h1000v43a306 306 0 00-93-24z"></path><path d="M50 38s76-32 155 2c0 0-65-21-155-2z" opacity=".5"></path><path d="M80 46s47-20 95 1c0 0-40-13-95-1z" opacity=".3"></path><path d="M801 38s76-32 155 2c0 0-65-21-155-2z" opacity=".5"></path><path d="M831 46s47-20 95 1c0 0-40-13-95-1z" opacity=".3"></path></g></svg>

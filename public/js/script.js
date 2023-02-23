@@ -20,4 +20,13 @@ closeBtn.addEventListener("click", function() {
 	sideBar.classList.remove("right-0");
 });
 
-// ===== Home form =====
+// ===== Alert =====
+const alertContainer = document.querySelector("#alert");
+
+document.addEventListener("click", function(event) {
+    if(event.target.id == "close-alert") {
+        alertContainer.classList.remove("fixed");
+        alertContainer.classList.add("hidden");
+    }
+});
+

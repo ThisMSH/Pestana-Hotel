@@ -1,5 +1,12 @@
 <?php
-    
+    session_start();
+    if(!isset($_POST["search"])) {
+        header("location: " . URLROOT . "home/index");
+    }else {
+        $rooms = new HomeController();
+        $room_n_c = $rooms->get_room_names_capacities();
+        $room_n_t = $rooms->get_room_types();
+        $discount = $view_data["Price"] * (100 - $_SESSION["discount"]) / 100;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,13 +38,6 @@
 	</div> -->
 	<?php require_once(INCLUDES . "header.php"); ?>
 	<main class="mt-52">
-        <?php
-        if($view_data["availability"]) {
-            echo "Available";
-        }else {
-            echo "Not available";
-        }
-        ?>
 		<!-- Top section right below navbar -->
 		<section class="h-[800px] lg:h-[700px] flex flex-col-reverse lg:flex-row justify-evenly items-center overflow-hidden">
 			<div class="relative w-11/12 sm:w-6/12 h-[600px] flex justify-center items-center">
@@ -84,53 +84,147 @@
 		</section>
 		<!-- Here where the user can see the selected room -->
 		<section>
-			<form action="booking" method="post">
-				<div class="relative mx-auto w-3/4 flex px-7 py-5 bg-zinc-100 text-zinc-900 rounded-md">
-					<div class="w-1/4">
-						<img class="rounded-md" src="img/single/1.jpg" alt="Room Type: Single" srcset="">
-					</div>
-					<div class="w-3/4 flex flex-col justify-between">
-						<h3 class="text-5xl font-bold text-shadow-zinc-1 pl-10">Single Room</h3>
-						<div class="flex justify-around text-xl font-medium px-5 leading-loose">
-							<div class="">
-								<p><span class="material-icons-outlined text-amber-500">meeting_room</span> Room Type: <span>Single</span></p>
-								<p><span class="material-icons-outlined text-amber-500">manage_accounts</span> Room Capacity: <span>1 Person</span></p>
-								<p><span class="material-icons-outlined text-amber-500">groups</span> Number of your guests: <span>1 Person</span></p>
-								<p><span class="material-icons-outlined text-amber-500">flaky</span> Availability: <span>Available</span></p>
-							</div>
-							<div class="flex flex-col justify-between">
-								<p class="text-2xl"><span class="material-icons-outlined text-amber-500">payments</span> Price: <span>988.76 €</span></p>
-								<button type="button" id="book-btn" class="group relative w-40 py-1 bg-amber-400 rounded-md before:absolute before:top-0 before:-left-8 before:h-full before:w-5 before:bg-gradient-to-l before:from-zinc-100 before:to-transparent before:bg-opacity-40 before:skew-x-[30deg] before:transition-all before:duration-300 before:hover:left-[110%] active:bg-amber-500 overflow-hidden"><p class="transition-all duration-300 group-hover:scale-110 group-active:scale-95 group-active:transition-none">Book</p></button>
-							</div>
-						</div>
-					</div>
-					<div class="absolute flex justify-center items-center -right-3 -top-3 w-44 h-44 overflow-hidden pointer-events-none before:absolute before:content-['Available'] before:text-center before:py-2 before:text-2xl before:font-medium before:text-zinc-100 before:drop-shadow-lg before:bg-emerald-400 before:w-[150%] before:h-12 before:rotate-45 before:translate-x-4 before:-translate-y-4 before:z-10 after:absolute after:w-3 after:h-3 after:bg-emerald-600 after:top-0 after:left-0 after:shadow-[164px_164px_rgb(5_150_105)]"></div>
-				</div>
-				<div>
-					<!-- Amount of the guests including the booker -->
-					<input type="hidden" name="" id="guests-num" value="6">
-					<!-- User's first name -->
-					<input type="hidden" name="" id="" value="first name here">
-					<!-- User's family name -->
-					<input type="hidden" name="" id="" value="family name here">
-					<!-- User's birthday -->
-					<input type="hidden" name="" id="ggg" value="11-02-2023">
-				</div>
-				<div class="guests-form hidden w-1/2 h-5/6 top-1/2 left-1/2 bg-zinc-800 rounded-xl border-2 border-amber-400 -translate-x-1/2 -translate-y-1/2 overflow-y-auto z-[100]">
-					<div class="flex flex-col items-center gap-y-10 w-full h-fit min-h-full py-10 px-6">
-						<div class="flex justify-end w-full -m-4">
-							<button type="button" id="close-guests-form"><span class="material-icons-outlined text-6xl text-amber-400"> cancel </span></button>
-						</div>
-						<h3 class="text-3xl font-bold text-shadow-white-1 text-center">Please enter the informations for your guests.</h3>
-						<div class="flex flex-col items-center gap-y-10" id="guest-info-cont">
-						</div>
-						<div class="flex justify-around items-center gap-x-10 text-zinc-900 font-semibold text-xl">
-							<button type="reset" class="group relative w-40 py-2 bg-amber-400 rounded-md before:absolute before:top-0 before:-left-8 before:h-full before:w-5 before:bg-gradient-to-l before:from-zinc-100 before:to-transparent before:bg-opacity-40 before:skew-x-[30deg] before:transition-all before:duration-300 before:hover:left-[110%] active:bg-amber-500 overflow-hidden"><p class="transition-all duration-300 group-hover:scale-110 group-active:scale-95 group-active:transition-none">Clear</p></button>
-							<button type="submit" class="group relative w-40 py-2 bg-amber-400 rounded-md before:absolute before:top-0 before:-left-8 before:h-full before:w-5 before:bg-gradient-to-l before:from-zinc-100 before:to-transparent before:bg-opacity-40 before:skew-x-[30deg] before:transition-all before:duration-300 before:hover:left-[110%] active:bg-amber-500 overflow-hidden"><p class="transition-all duration-300 group-hover:scale-110 group-active:scale-95 group-active:transition-none">Submit</p></button>
-						</div>
-					</div>
-				</div>
-			</form>
+            <?php if($view_data["availability"]) { ?>
+                <form action="booking" method="post">
+                    <div class="relative mx-auto w-3/4 flex px-7 py-5 bg-zinc-100 text-zinc-900 rounded-md">
+                        <div class="w-1/4">
+                            <img class="rounded-md" src="<?= URLROOT; ?>public/img/uploads/<?= $view_data["Thumbnail"]; ?>" alt="Room Type: Single" srcset="">
+                        </div>
+                        <div class="w-3/4 flex flex-col justify-between">
+                            <h3 class="text-5xl font-bold text-shadow-zinc-1 pl-10"><?= $view_data["Room_Name"] ?> Room</h3>
+                            <div class="flex justify-around text-xl font-medium px-5 leading-loose">
+                                <div class="">
+                                    <p><span class="material-icons-outlined text-amber-500">meeting_room</span> Room Type: <span>
+                                        <?php
+                                        if(empty($view_data["Room_Type"])) {
+                                            echo "Standard";
+                                        }else {
+                                            echo $view_data["Room_Type"];
+                                        }
+                                        ?>
+                                    </span></p>
+                                    <p><span class="material-icons-outlined text-amber-500">manage_accounts</span> Room Capacity: <span><?= $view_data["Room_Capacity"]; ?></span></p>
+                                    <p><span class="material-icons-outlined text-amber-500">groups</span> Number of your guests: <span><?= $_POST["guests-number"]; ?></span></p>
+                                    <p><span class="material-icons-outlined text-amber-500">flaky</span> Availability: <span class="text-emerald-500">Available</span></p>
+                                </div>
+                                <div class="flex flex-col justify-end gap-10">
+                                    <?php 
+                                        if($_SESSION["discount"] > 0) {
+                                    ?>
+                                        <p class="relative text-2xl">
+                                            <span class="material-icons-outlined text-amber-500">payments</span> 
+                                            Price: 
+                                            <span class="absolute -top-6 left-1/2 line-through text-base"><?= number_format($view_data["Price"], 2); ?> €</span>
+                                            <span class="absolute -top-6 left-1/4 text-lg text-emerald-500"><?= "-" . $_SESSION["discount"]; ?> %</span>
+                                            <span><?= number_format($discount, 2); ?> €</span>
+                                        </p>
+                                    <?php }else { ?>
+                                        <p class="relative text-2xl">
+                                            <span class="material-icons-outlined text-amber-500">payments</span> 
+                                            Price: 
+                                            <span><?= number_format($view_data["Price"], 2); ?> €</span>
+                                        </p>
+                                    <?php } ?>
+                                    <button type="button" id="book-btn" class="group relative w-40 py-1 bg-amber-400 rounded-md before:absolute before:top-0 before:-left-8 before:h-full before:w-5 before:bg-gradient-to-l before:from-zinc-100 before:to-transparent before:bg-opacity-40 before:skew-x-[30deg] before:transition-all before:duration-300 before:hover:left-[110%] active:bg-amber-500 overflow-hidden"><p class="transition-all duration-300 group-hover:scale-110 group-active:scale-95 group-active:transition-none">Book</p></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="absolute flex justify-center items-center -right-3 -top-3 w-44 h-44 overflow-hidden pointer-events-none before:absolute before:content-['Available'] before:text-center before:py-2 before:text-2xl before:font-medium before:text-zinc-100 before:drop-shadow-lg before:bg-emerald-400 before:w-[150%] before:h-12 before:rotate-45 before:translate-x-4 before:-translate-y-4 before:z-10 after:absolute after:w-3 after:h-3 after:bg-emerald-600 after:top-0 after:left-0 after:shadow-[164px_164px_rgb(5_150_105)]"></div>
+                    </div>
+                    <div>
+                        <!-- Amount of the guests including the booker -->
+                        <input onlyread type="hidden" name="id" value="<?= $_SESSION["id"]; ?>">
+                        <input onlyread type="hidden" name="room-id" value="<?= $view_data["ID"]; ?>">
+                        <input onlyread type="hidden" name="full-name" value="<?= $_SESSION["first-name"] . " " . $_SESSION["family-name"]; ?>">
+                        <input onlyread type="hidden" name="guests-num" id="guests-num" value="<?= $_POST["guests-number"]; ?>">
+                        <input onlyread type="hidden" name="room-name" value="<?= $view_data["Room_Name"]; ?>">
+                        <input onlyread type="hidden" name="room-type" value="<?= $view_data["Room_Type"]; ?>">
+                        <input onlyread type="hidden" name="check-in" value="<?= $_POST["check-in"]; ?>">
+                        <input onlyread type="hidden" name="check-out" value="<?= $_POST["check-out"]; ?>">
+                        <input onlyread type="hidden" name="price" value="<?= $discount; ?>">
+                        <input onlyread type="hidden" name="discount" value="<?= $_SESSION["discount"]; ?>">
+                    </div>
+                    <div class="guests-form hidden w-1/2 h-5/6 top-1/2 left-1/2 bg-zinc-800 rounded-xl border-2 border-amber-400 -translate-x-1/2 -translate-y-1/2 overflow-y-auto z-[100]">
+                        <div class="flex flex-col items-center gap-y-10 w-full h-fit min-h-full py-10 px-6">
+                            <div class="flex justify-end w-full -m-4">
+                                <button type="button" id="close-guests-form"><span class="material-icons-outlined text-6xl text-amber-400"> cancel </span></button>
+                            </div>
+                            <h3 class="text-3xl font-bold text-shadow-white-1 text-center">Please enter the informations for your guests.</h3>
+                            <div class="flex flex-col items-center gap-y-10" id="guest-info-cont">
+                                <h4 class="text-2xl font-semibold text-center">You or the guest number <span class="text-amber-400 font-bold">1</span></h4>
+                                <div class="input-container relative w-80">
+                                    <input class="w-full p-4 border border-solid border-zinc-100 rounded-lg text-zinc-100 bg-zinc-800 outline-none" type="text" name="first-name[]" value="<?= $_SESSION['first-name']; ?>" required>
+                                    <span class="absolute left-0 p-4 pointer-events-none text-zinc-100 transition-all duration-300 ease-in-out">First Name</span>
+                                </div>
+                                <div class="input-container relative w-80">
+                                    <input class="w-full p-4 border border-solid border-zinc-100 rounded-lg text-zinc-100 bg-zinc-800 outline-none" type="text" name="family-name[]" value="<?= $_SESSION['family-name']; ?>" required>
+                                    <span class="absolute left-0 p-4 pointer-events-none text-zinc-100 transition-all duration-300 ease-in-out">Family Name</span>
+                                </div>
+                                <div class="input-container relative w-80">
+                                    <input class="w-full p-4 border border-solid border-zinc-100 rounded-lg text-zinc-900 bg-zinc-800 outline-none transition duration-300 focus:text-zinc-100 valid:text-zinc-100" type="date" name="bday[]" value="<?= $_SESSION['birthday']; ?>" required>
+                                    <span class="absolute left-0 p-4 pointer-events-none text-zinc-100 transition-all duration-300 ease-in-out">Birthday</span>
+                                </div>
+                            </div>
+                            <div class="flex justify-around items-center gap-x-10 text-zinc-900 font-semibold text-xl">
+                                <button type="reset" class="group relative w-40 py-2 bg-amber-400 rounded-md before:absolute before:top-0 before:-left-8 before:h-full before:w-5 before:bg-gradient-to-l before:from-zinc-100 before:to-transparent before:bg-opacity-40 before:skew-x-[30deg] before:transition-all before:duration-300 before:hover:left-[110%] active:bg-amber-500 overflow-hidden"><p class="transition-all duration-300 group-hover:scale-110 group-active:scale-95 group-active:transition-none">Clear</p></button>
+                                <button type="submit" name="submit" class="group relative w-40 py-2 bg-amber-400 rounded-md before:absolute before:top-0 before:-left-8 before:h-full before:w-5 before:bg-gradient-to-l before:from-zinc-100 before:to-transparent before:bg-opacity-40 before:skew-x-[30deg] before:transition-all before:duration-300 before:hover:left-[110%] active:bg-amber-500 overflow-hidden"><p class="transition-all duration-300 group-hover:scale-110 group-active:scale-95 group-active:transition-none">Submit</p></button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            <?php }else { ?>
+                <div>
+                    <div class="relative mx-auto w-3/4 flex px-7 py-5 bg-zinc-100 text-zinc-900 rounded-md">
+                        <div class="w-1/4">
+                            <img class="rounded-md" src="<?= URLROOT; ?>public/img/uploads/<?= $view_data["Thumbnail"]; ?>" alt="Room Type: Single" srcset="">
+                        </div>
+                        <div class="w-3/4 flex flex-col justify-between">
+                            <h3 class="text-5xl font-bold text-shadow-zinc-1 pl-10"><?= $view_data["Room_Name"] ?> Room</h3>
+                            <div class="flex justify-around text-xl font-medium px-5 leading-loose">
+                                <div class="">
+                                    <p><span class="material-icons-outlined text-amber-500">meeting_room</span> Room Type: <span>
+                                        <?php
+                                        if(empty($view_data["Room_Type"])) {
+                                            echo "Standard";
+                                        }else {
+                                            echo $view_data["Room_Type"];
+                                        }
+                                        ?>
+                                    </span></p>
+                                    <p><span class="material-icons-outlined text-amber-500">manage_accounts</span> Room Capacity: <span><?= $view_data["Room_Capacity"]; ?></span></p>
+                                    <p><span class="material-icons-outlined text-amber-500">groups</span> Number of your guests: <span><?= $_POST["guests-number"]; ?></span></p>
+                                    <p><span class="material-icons-outlined text-amber-500">flaky</span> Availability: <span class="text-red-500">Unavailable</span></p>
+                                </div>
+                                <div class="flex flex-col justify-end gap-10">
+                                    <?php 
+                                        if($_SESSION["discount"] > 0) { 
+                                            $discount = $view_data["Price"] * (100 - $_SESSION["discount"]) / 100;
+                                    ?>
+                                        <p class="relative text-2xl">
+                                            <span class="material-icons-outlined text-amber-500">payments</span> 
+                                            Price: 
+                                            <span class="absolute -top-6 left-1/2 line-through text-base"><?= number_format($view_data["Price"], 2); ?> €</span>
+                                            <span class="absolute -top-6 left-1/4 text-lg text-emerald-500"><?= "-" . $_SESSION["discount"]; ?> %</span>
+                                            <span><?= number_format($discount, 2); ?> €</span>
+                                        </p>
+                                    <?php }else { ?>
+                                        <p class="relative text-2xl">
+                                            <span class="material-icons-outlined text-amber-500">payments</span> 
+                                            Price: 
+                                            <span><?= number_format($view_data["Price"], 2); ?> €</span>
+                                        </p>
+                                    <?php } ?>
+                                    <button type="button" id="" class="group relative w-40 py-1 bg-amber-200 rounded-md text-zinc-500 before:absolute before:top-0 before:-left-8 before:h-full before:w-5 before:bg-gradient-to-l before:from-zinc-100 before:to-transparent before:bg-opacity-40 before:skew-x-[30deg] before:transition-all before:duration-300 overflow-hidden"><p class="transition-all duration-300" disabled>Book</p></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="absolute flex justify-center items-center -right-3 -top-3 w-44 h-44 overflow-hidden pointer-events-none before:absolute before:content-['Unavailable'] before:text-center before:py-2 before:text-2xl before:font-medium before:text-zinc-100 before:drop-shadow-lg before:bg-red-400 before:w-[150%] before:h-12 before:rotate-45 before:translate-x-4 before:-translate-y-4 before:z-10 after:absolute after:w-3 after:h-3 after:bg-red-600 after:top-0 after:left-0 after:shadow-[164px_164px_rgb(248_113_113)]"></div>
+                        <input disabled type="hidden" id="guests-num">
+                        <input disabled type="hidden" id="book-btn">
+                        <input disabled type="hidden" id="close-guests-form">
+                    </div>
+                </div>
+            <?php } ?>
 		</section>
 		<!-- Here where the user can search for another type of room -->
 		<section class="py-10 px-3 md:px-0 mt-20">
@@ -140,26 +234,28 @@
 				<div class="container max-w-xl grid grid-cols-12 gap-x-8 gap-y-2 px-2 md:px-0">
 					<h3 class="col-span-12 font-serif text-lg">Please choose the type of room that fits your needs followed by the number of your guests:</h3>
 					<div class="col-span-9 relative">
-						<select class="w-full col-span-3 px-6 py-3 text-lg bg-zinc-200 border border-zinc-900 rounded-lg" name="" id="room-type">
-							<option value="Single">Single</option>
-							<option value="Double">Double</option>
-							<option value="Suite">Suite</option>
+						<select class="w-full col-span-3 px-6 py-3 text-lg bg-zinc-200 border border-zinc-900 rounded-lg" name="room-name" id="room-name">
+							<?php foreach($room_n_c as $name) { 
+								echo '<option value="' . $name["Room_Name"] . '">' . $name["Room_Name"] . '</option>';
+							} ?>
 						</select>
 					</div>
-					<select class="col-span-3 bg-zinc-200 border border-zinc-900 rounded-lg px-4 py-3 text-lg" name="" id="guests-number">
+					<select class="col-span-3 bg-zinc-200 border border-zinc-900 rounded-lg px-4 py-3 text-lg" name="guests-number" id="guests-number">
 						<option value="1">1</option>
 					</select>
-					<div class="col-span-12" id="suite-type"></div>
+					<div class="col-span-12" id="room-type">
+
+                    </div>
 					<h3 class="col-span-12 font-serif text-lg">Please choose the date of your booking:</h3>
 					<div class="date flex justify-between items-center md:block col-span-12 md:col-span-4">
 						<label class="font-serif text-lg" for="checkin-date">Check In</label>
-						<input class="bg-zinc-200 border border-zinc-900 rounded-lg px-4 py-3" type="date" id="checkin-date" name="" min="2023-02-05">
+						<input class="bg-zinc-200 border border-zinc-900 rounded-lg px-4 py-3" type="date" id="checkin-date" name="check-in" min="<?= date('Y-m-d') ?>" required>
 					</div>
 					<div class="date flex justify-between items-center md:block col-span-12 md:col-span-4">
 						<label class="font-serif text-lg" for="checkout-date">Check Out</label>
-						<input class="bg-zinc-200 border border-zinc-900 rounded-lg px-4 py-3" type="date" id="checkout-date" name="" min="2023-02-05">
+						<input class="bg-zinc-200 border border-zinc-900 rounded-lg px-4 py-3" type="date" id="checkout-date" name="check-out" min="<?= date('Y-m-d') ?>" required>
 					</div>
-					<button class="group col-span-4 col-start-5 md:col-start-auto border border-zinc-900 rounded-xl active:bg-slate-300 py-3 px-2" type="submit" name=""><p class="text-2xl transition duration-300 group-hover:scale-125">Search</p></button>
+					<button class="group col-span-4 col-start-5 md:col-start-auto border border-zinc-900 rounded-xl active:bg-slate-300 py-3 px-2" type="submit" name="search"><p class="text-2xl transition duration-300 group-hover:scale-125">Search</p></button>
 				</div>
 			</form>
 			<svg class="relative container max-w-3xl fill-zinc-100 bottom-0.5" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100"><g fill="%23000000"><path d="M907 19c-55-5-97 5-109 8-44 12-44 24-101 44-36 12-63 21-97 20-46-1-81-20-100-33-19 13-54 32-100 33-34 1-61-8-97-20-57-20-57-32-101-44-12-3-54-13-109-8A306 306 0 000 43V0h1000v43a306 306 0 00-93-24z"></path><path d="M50 38s76-32 155 2c0 0-65-21-155-2z" opacity=".5"></path><path d="M80 46s47-20 95 1c0 0-40-13-95-1z" opacity=".3"></path><path d="M801 38s76-32 155 2c0 0-65-21-155-2z" opacity=".5"></path><path d="M831 46s47-20 95 1c0 0-40-13-95-1z" opacity=".3"></path></g></svg>
@@ -168,4 +264,73 @@
 	<?php require_once(INCLUDES . "footer.php"); ?>
 	<div class="blured-bg hidden top-1/2 left-1/2 w-screen h-screen rounded-xl -translate-x-1/2 -translate-y-1/2 z-[90] backdrop-blur"></div>
 </body>
+<script>
+	const roomName = document.querySelector("#room-name");
+	const guestsNum = document.querySelector("#guests-number");
+	const roomType = document.querySelector("#room-type");
+
+	roomName.addEventListener("change", function(event) {
+		guestsNum.innerHTML = "";
+		roomType.innerHTML = "";
+
+		const selectedRoom = event.target.value;
+		let guests = 0;
+
+        if(selectedRoom == "<?= $room_n_c[0]["Room_Name"]?>") {
+		    guests = <?= $room_n_c[0]["Room_Capacity"]?>;
+            <?php
+                $count = 0;
+                for($i = 0; $i < count($room_n_t); $i++) {
+                    if(!empty($room_n_t[$i]["Room_Type"]) && $room_n_t[$i]["Room_Name"] == $room_n_c[0]["Room_Name"]) {
+                        $count++;
+                    }
+                }
+                if($count > 0) {
+                    echo 'roomType.innerHTML = `
+                    <h3 class="w-full font-serif text-lg mb-1">Please select the type of suite room:</h3>
+                    <select class="w-full col-span-3 px-6 py-3 text-lg bg-zinc-200 border border-zinc-900 rounded-lg" name="room-type" id="">';
+                    for($i = 0; $i < count($room_n_t); $i++) {
+                        if(!empty($room_n_t[$i]["Room_Type"]) && $room_n_t[$i]["Room_Name"] == $room_n_c[0]["Room_Name"]) {
+                            echo '<option value="' . $room_n_t[$i]["Room_Type"] . '">' . $room_n_t[$i]["Room_Type"] . '</option>';
+                        }
+                    }
+                    echo '</select>`;';
+                }
+            ?>
+        }
+		<?php for($i = 1; $i < count($room_n_c); $i++) { ?>
+            if(selectedRoom == "<?= $room_n_c[$i]["Room_Name"]?>") {
+                guests = <?= $room_n_c[$i]["Room_Capacity"]?>;
+                <?php
+                    $count = 0;
+                    for($j = 0; $j < count($room_n_t); $j++) {
+                        if(!empty($room_n_t[$j]["Room_Type"]) && $room_n_t[$j]["Room_Name"] == $room_n_c[$i]["Room_Name"]) {
+                            $count++;
+                        }
+                    }
+                    if($count > 0) {
+                        echo 'roomType.innerHTML = `
+                        <h3 class="w-full font-serif text-lg mb-1">Please select the type of suite room:</h3>
+                        <select class="w-full col-span-3 px-6 py-3 text-lg bg-zinc-200 border border-zinc-900 rounded-lg" name="room-type" id="">';
+                        for($j = 0; $j < count($room_n_t); $j++) {
+                            if(!empty($room_n_t[$j]["Room_Type"]) && $room_n_t[$j]["Room_Name"] == $room_n_c[$i]["Room_Name"]) {
+                                echo '<option value="' . $room_n_t[$j]["Room_Type"] . '">' . $room_n_t[$j]["Room_Type"] . '</option>';
+                            }
+                        }
+                        echo '</select>`;';
+                    }
+                ?>
+            }
+		<?php } ?>
+
+		for(let i = 1; i <= guests; i++) {
+			const options = document.createElement("option");
+			options.value = i;
+			options.innerHTML = i;
+			guestsNum.appendChild(options);
+		}
+	});
+</script>
 </html>
+<?php
+    }
