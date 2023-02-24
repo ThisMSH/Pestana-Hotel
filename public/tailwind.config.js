@@ -67,6 +67,8 @@ module.exports = {
         '0': '0px',
         'amber-1': '1px #fbbf24',
         'amber-2': '2px #fbbf24',
+        'black-1': '1px #000',
+        'black-2': '2px #000',
       },
       height: {
         'sidenav': 'calc(100vh - 360px)',

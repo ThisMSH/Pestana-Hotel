@@ -1,5 +1,4 @@
 <?php
-    session_start();
     if(!isset($_SESSION["id"])) {
         header("location: " . URLROOT . "home/index");
     }else {
@@ -10,7 +9,7 @@
 ?>
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="<?= URLROOT ?>img/logo/pestana_logo.png" type="image/x-icon">
@@ -26,8 +25,8 @@
     <link rel="stylesheet" href="<?= URLROOT ?>css/style.css">
     <script src="<?= URLROOT ?>public/js/trigger-popup.js" defer></script>
     <title>Pestana Dashboard - Booking</title>
-  </head>
-  <body class="m-0 font-sans text-base font-normal dark:bg-zinc-900 leading-default bg-zinc-100 text-zinc-900">
+</head>
+<body class="m-0 font-sans text-base font-normal dark:bg-zinc-900 leading-default bg-zinc-100 text-zinc-900">
     <div class="absolute w-full bg-amber-500 min-h-75"></div>
     <!-- sidenav  -->
     <aside class="fixed inset-y-0 flex-wrap items-center justify-between block w-full p-0 my-4 overflow-y-auto transition-transform duration-200 -translate-x-full bg-zinc-100 border-0 shadow-xl dark:shadow-none dark:bg-zinc-700 max-w-64 ease z-990 xl:ml-6 rounded-2xl xl:left-0 xl:translate-x-0" aria-expanded="false">
@@ -203,7 +202,7 @@
                     <ul class="flex flex-row justify-end pl-0 mb-0 list-none md-max:w-full md:ml-auto">
                         <li class="flex items-center text-zinc-100">
                                 <i class="relative top-0 text-2xl leading-normal material-icons-outlined">waving_hand</i>
-                                <span class="hidden sm:inline ml-2 text-lg font-semibold">Welcome back</span>
+                                <span class="hidden sm:inline ml-2 text-lg font-semibold">Welcome back <?= $_SESSION['first-name'] . " " . $_SESSION['family-name'];?></span>
                         </li>
                         <li class="flex items-center pl-4 xl:hidden">
                             <button type="button" class="block p-0 text-sm text-white transition-all ease" sidenav-trigger>
@@ -228,64 +227,162 @@
                 </div>
                 <div class="px-0 pb-2">
                     <div class="overflow-x-auto scroll-bar">
-                      <table class="items-center w-full mb-0 align-top border-collapse dark:border-white/40 text-slate-500">
+                        <table class="items-center w-full mb-0 align-top border-collapse dark:border-white/40 text-slate-500">
+                            <thead class="align-bottom">
+                                <tr>
+                                    <th class="px-6 py-3 font-semibold capitalize align-middle bg-transparent border-b border-collapse border-solid shadow-none dark:border-white/40 dark:text-white tracking-none whitespace-nowrap text-slate-400 opacity-70"></th>
+                                    <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Room Type</th>
+                                    <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Check In</th>
+                                    <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Check Out</th>
+                                    <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Price</th>
+                                    <th class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Status</th>
+                                    <th class="px-6 py-3 font-semibold capitalize align-middle bg-transparent border-b border-collapse border-solid shadow-none dark:border-white/40 dark:text-white tracking-none whitespace-nowrap text-slate-400 opacity-70"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($reservations as $reserv) { ?>
+                                    <tr>
+                                        <td class="p-2 align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                            <button class="bookers-pop relative left-1/2 -translate-x-1/2">
+                                                <span class="material-icons">more_horiz</span>
+                                            </button>
+                                        </td>
+                                        <td class="p-2 align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                            <div class="px-2 py-1">
+                                                <h6 class="leading-normal dark:text-white"><?= $reserv['Room_Name'] ?></h6>
+                                                <p class="text-xs leading-tight dark:text-white dark:opacity-80 text-slate-400"><?= $reserv['Room_Type'] ?></p>
+                                            </div>
+                                        </td>
+                                        <td class="p-2 align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                            <p class="text-sm font-semibold leading-tight dark:text-white dark:opacity-80"><?= $reserv['Check_In'] ?></p>
+                                        </td>
+                                        <td class="p-2 align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                            <p class="text-sm font-semibold leading-tight dark:text-white dark:opacity-80"><?= $reserv['Check_Out'] ?></p>
+                                        </td>
+                                        <td class="p-2 align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                            <p class="text-sm font-semibold leading-tight dark:text-white dark:opacity-80"><?= number_format($reserv['Price'], 2) . " €" ?></p>
+                                        </td>
+                                        <td class="p-2 text-sm leading-normal text-center align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                            <?php if($reserv['Check_Out'] > date("Y-m-d") && $reserv['Check_In'] < date("Y-m-d")) { ?>
+                                                <span class="bg-gradient-to-tl from-emerald-600 to-teal-400 px-2.5 text-xs rounded-1.8 py-1.4 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white">In Service</span>
+                                            <?php }else if($reserv['Check_Out'] < date("Y-m-d")) { ?>
+                                                <span class="bg-gradient-to-tl from-blue-600 to-sky-400 px-2.5 text-xs rounded-1.8 py-1.4 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white">Done</span>
+                                            <?php }else if($reserv['Check_In'] > date("Y-m-d")) { ?>
+                                                <span class="bg-gradient-to-tl from-amber-600 to-yellow-400 px-2.5 text-xs rounded-1.8 py-1.4 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white">Pending</span>
+                                            <?php } ?>
+                                        </td>
+                                        <td class="p-2 align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                            <button type="button" class="update-btn inline-flex items-center px-4 py-2.5 mb-0 font-bold text-center align-middle transition-all bg-transparent border-0 rounded-lg shadow-none cursor-pointer leading-normal text-sm ease-in hover:-translate-y-px active:opacity-85 bg-x-25 text-sky-700 dark:text-sky-300"><span class="material-icons-outlined mr-2 text-sky-700 dark:text-sky-300">edit</span>Edit</button>
+                                            <button type="button" class="cancel-btn relative z-10 inline-flex items-center px-4 py-2.5 mb-0 font-bold text-center text-transparent align-middle transition-all border-0 rounded-lg shadow-none cursor-pointer leading-normal text-sm ease-in bg-gradient-to-tl from-red-700 to-orange-600 dark:from-red-400 dark:to-orange-300 hover:-translate-y-px active:opacity-85 bg-x-25 bg-clip-text"><span class="material-icons-outlined mr-2 bg-gradient-to-tl from-red-700 to-orange-600 dark:from-red-400 dark:to-orange-300 bg-x-25 bg-clip-text">highlight_off</span>Cancel</button>
+                                            <div class="cancel-popup fixed hidden top-1/2 left-1/2 w-[500px] max-w-[94%] h-72 bg-slate-100 text-slate-900 rounded-xl px-3 py-8 -translate-x-1/2 -translate-y-1/2 z-[999]">
+                                                <div class="flex flex-col justify-between items-center w-full h-full">
+                                                    <p class="text-center font-semibold text-2xl">ARE YOU SURE THAT YOU WANT<br>TO CANCEL YOUR RESERVATION?</p>
+                                                    <div>
+                                                        <span class="material-icons-outlined text-6xl text-amber-400 text-stroke-black-2">warning</span>
+                                                    </div>
+                                                    <div class="flex gap-8">
+                                                        <button class="undo-btn bg-slate-900 text-slate-100 px-4 py-2 rounded-lg font-semibold">Nooooo!</button>
+                                                        <a href="#" class="rounded-lg"><p class="bg-red-600 text-slate-100 px-4 py-2 rounded-lg font-semibold">Yes, I'm sure</p></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <?php foreach($reservations as $reserv) { ?>
+                <div class="bookers hidden fixed top-1/2 left-1/2 px-4 py-3 -translate-x-1/2 -translate-y-1/2 bg-white border shadow-xl dark:bg-zinc-800 dark:shadow-dark-xl rounded-2xl bg-clip-border z-[999]">
+                    <div class="flex justify-between">
+                        <h6 class="dark:text-white text-lg font-semibold">Bookers</h6>
+                        <button>
+                            <span class="bookers-btn material-icons-outlined text-3xl text-zinc-900 dark:text-zinc-100">close</span>
+                        </button>
+                    </div>
+                    <table class="items-center w-full mb-0 align-top border-collapse dark:border-white/40 text-slate-500">
                         <thead class="align-bottom">
                             <tr>
-                                <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Room Type</th>
-                                <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Check In</th>
-                                <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Check Out</th>
-                                <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Price</th>
-                                <th class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Status</th>
-                                <th class="px-6 py-3 font-semibold capitalize align-middle bg-transparent border-b border-collapse border-solid shadow-none dark:border-white/40 dark:text-white tracking-none whitespace-nowrap text-slate-400 opacity-70"></th>
+                                <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">First Name</th>
+                                <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Family Name</th>
+                                <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Birthday</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($reservations as $reserv) { ?>
+                            <?php 
+                                foreach($bookers as $booker) { 
+                                    if($booker['ReservationID'] == $reserv['ID']) {
+                            ?>
                                 <tr>
                                     <td class="p-2 align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
-                                        <div class="px-2 py-1">
-                                            <h6 class="leading-normal dark:text-white"><?= $reserv['Room_Name'] ?></h6>
-                                            <p class="text-xs leading-tight dark:text-white dark:opacity-80 text-slate-400"><?= $reserv['Room_Type'] ?></p>
-                                        </div>
+                                        <p class="text-base font-semibold dark:text-white dark:opacity-80"><?= $booker['First_Name'] ?></p>
                                     </td>
                                     <td class="p-2 align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
-                                        <p class="text-sm font-semibold leading-tight dark:text-white dark:opacity-80"><?= $reserv['Check_In'] ?></p>
+                                        <p class="text-base font-semibold dark:text-white dark:opacity-80"><?= $booker['Family_Name'] ?></p>
                                     </td>
                                     <td class="p-2 align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
-                                        <p class="text-sm font-semibold leading-tight dark:text-white dark:opacity-80"><?= $reserv['Check_Out'] ?></p>
-                                    </td>
-                                    <td class="p-2 align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
-                                        <p class="text-sm font-semibold leading-tight dark:text-white dark:opacity-80"><?= number_format($reserv['Price'], 2) . " €" ?></p>
-                                    </td>
-                                    <td class="p-2 text-sm leading-normal text-center align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
-                                        <?php if($reserv['Check_Out'] > date("Y-m-d") && $reserv['Check_In'] < date("Y-m-d")) { ?>
-                                            <span class="bg-gradient-to-tl from-emerald-600 to-teal-400 px-2.5 text-xs rounded-1.8 py-1.4 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white">In Service</span>
-                                        <?php }else if($reserv['Check_Out'] < date("Y-m-d")) { ?>
-                                            <span class="bg-gradient-to-tl from-blue-600 to-sky-400 px-2.5 text-xs rounded-1.8 py-1.4 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white">Done</span>
-                                        <?php }else if($reserv['Check_In'] > date("Y-m-d")) { ?>
-                                            <span class="bg-gradient-to-tl from-amber-600 to-yellow-400 px-2.5 text-xs rounded-1.8 py-1.4 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white">Pending</span>
-                                        <?php } ?>
-                                    </td>
-                                    <td class="p-2 align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
-                                        <a class="inline-flex items-center px-4 py-2.5 mb-0 font-bold text-center align-middle transition-all bg-transparent border-0 rounded-lg shadow-none cursor-pointer leading-normal text-sm ease-in bg-150 hover:-translate-y-px active:opacity-85 bg-x-25 text-sky-700 dark:text-sky-300"><span class="material-icons-outlined mr-2 text-sky-700 dark:text-sky-300">edit</span>Edit</a>
-                                        <button type="button" class="cancel-btn relative z-10 inline-flex items-center px-4 py-2.5 mb-0 font-bold text-center text-transparent align-middle transition-all border-0 rounded-lg shadow-none cursor-pointer leading-normal text-sm ease-in bg-150 bg-gradient-to-tl from-red-700 to-orange-600 dark:from-red-400 dark:to-orange-300 hover:-translate-y-px active:opacity-85 bg-x-25 bg-clip-text"><span class="material-icons-outlined mr-2 bg-150 bg-gradient-to-tl from-red-700 to-orange-600 dark:from-red-400 dark:to-orange-300 bg-x-25 bg-clip-text">highlight_off</span>Cancel</button>
-                                        <div class="cancel-popup hidden top-1/2 left-1/2 w-[500px] max-w-[94%] h-72 bg-slate-100 text-slate-900 rounded-xl px-3 py-8 -translate-x-1/2 -translate-y-1/2 z-[999]">
-                                            <div class="flex flex-col justify-between items-center w-full h-full">
-                                                <p class="text-center font-semibold text-2xl">ARE YOU SURE THAT YOU WANT<br>TO CANCEL YOUR RESERVATION?</p>
-                                                <div class="flex gap-8">
-                                                    <button class="undo-btn w-24 bg-slate-900 text-slate-100 px-4 py-2 rounded-lg font-semibold">Nooooo!</button>
-                                                    <a href="#" class="rounded-lg"><p class="w-24 bg-red-600 text-slate-100 px-4 py-2 rounded-lg font-semibold">Yes, I'm sure</p></a>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <p class="text-base font-semibold dark:text-white dark:opacity-80"><?= $booker['Birthday'] ?></p>
                                     </td>
                                 </tr>
-                            <?php } ?>
+                            <?php
+                                    }
+                                }
+                            ?>
                         </tbody>
-                      </table>
+                    </table>
+                </div>
+            <?php } ?>
+            <?php foreach($reservations as $reserv) { ?>
+                <div class="update-bookers hidden fixed top-1/2 left-1/2 px-4 py-3 -translate-x-1/2 -translate-y-1/2 bg-white border shadow-xl dark:bg-zinc-800 dark:shadow-dark-xl rounded-2xl bg-clip-border z-[999]">
+                    <div class="flex justify-between">
+                        <h6 class="dark:text-white text-lg font-semibold">Update bookers</h6>
+                        <button>
+                            <span class="close-update material-icons-outlined text-3xl text-zinc-900 dark:text-zinc-100">close</span>
+                        </button>
                     </div>
-                  </div>
-            </div>
+                    <form action="update_bookers" method="post">
+                        <div>
+                            <!-- Hidden values that will go with the form -->
+                            <input onlyread type="hidden" name="reservation-id" value="<?= $reserv['ID']; ?>">
+                        </div>
+                        <div class="guests-form max-h-[600px] overflow-y-auto">
+                            <div class="flex flex-col items-center gap-y-10 w-full min-h-full py-10 px-6">
+                                <?php 
+                                    $cnt = 1;
+                                    foreach($bookers as $booker) { 
+                                        if($booker['ReservationID'] == $reserv['ID']) {
+                                ?>
+                                    <div class="flex flex-col items-center gap-y-10" id="guest-info-cont">
+                                        <h4 class="text-2xl font-semibold text-center dark:text-zinc-100"># - <span class="text-amber-400 font-bold"><?= $cnt ?></span></h4>
+                                        <div class="input-container relative w-80">
+                                            <input class="w-full p-4 border border-solid rounded-lg border-zinc-900 dark:border-white text-zinc-900 dark:text-zinc-100 bg-white dark:bg-zinc-800 outline-none transition duration-300" type="text" name="first-name[]" value="<?= $booker['First_Name'] ?>" required>
+                                            <span class="absolute left-0 p-4 pointer-events-none text-zinc-100 transition-all duration-300 ease-in-out">First Name</span>
+                                        </div>
+                                        <div class="input-container relative w-80">
+                                            <input class="w-full p-4 border border-solid rounded-lg border-zinc-900 dark:border-white text-zinc-900 dark:text-zinc-100 bg-white dark:bg-zinc-800 outline-none transition duration-300" type="text" name="family-name[]" value="<?= $booker['Family_Name'] ?>" required>
+                                            <span class="absolute left-0 p-4 pointer-events-none text-zinc-100 transition-all duration-300 ease-in-out">Family Name</span>
+                                        </div>
+                                        <div class="input-container relative w-80">
+                                            <input class="w-full p-4 border border-solid rounded-lg border-zinc-900 dark:border-white text-white dark:text-zinc-900 bg-white dark:bg-zinc-800 outline-none transition duration-300 focus:text-zinc-900 dark:focus:text-white valid:text-zinc-900 dark:valid:text-white" type="date" name="bday[]" value="<?= $booker['Birthday'] ?>" required>
+                                            <span class="absolute left-0 p-4 pointer-events-none text-zinc-100 transition-all duration-300 ease-in-out">Birthday</span>
+                                        </div>
+                                    </div>
+                                <?php
+                                            $cnt++;
+                                        }
+                                    }
+                                ?>
+                                <div class="flex justify-around items-center gap-x-10 text-zinc-900 font-semibold text-xl">
+                                    <button type="reset" class="group relative w-40 py-2 bg-amber-400 rounded-md before:absolute before:top-0 before:-left-8 before:h-full before:w-5 before:bg-gradient-to-l before:from-zinc-100 before:to-transparent before:bg-opacity-40 before:skew-x-[30deg] before:transition-all before:duration-300 before:hover:left-[110%] active:bg-amber-500 overflow-hidden"><p class="transition-all duration-300 group-hover:scale-110 group-active:scale-95 group-active:transition-none">Reset</p></button>
+                                    <button type="submit" name="submit" class="group relative w-40 py-2 bg-amber-400 rounded-md before:absolute before:top-0 before:-left-8 before:h-full before:w-5 before:bg-gradient-to-l before:from-zinc-100 before:to-transparent before:bg-opacity-40 before:skew-x-[30deg] before:transition-all before:duration-300 before:hover:left-[110%] active:bg-amber-500 overflow-hidden"><p class="transition-all duration-300 group-hover:scale-110 group-active:scale-95 group-active:transition-none">Submit</p></button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            <?php } ?>
             <footer class="pt-4">
                 <div class="w-full px-6 mx-auto">
                     <div class="flex flex-wrap items-center -mx-3 lg:justify-between">
@@ -312,7 +409,7 @@
             </footer>
         </div>
     </main>
-    <div class="blured-bg hidden top-1/2 left-1/2 w-screen h-screen rounded-xl -translate-x-1/2 -translate-y-1/2 z-[998] backdrop-blur"></div>
+    <div class="blured-bg hidden fixed top-1/2 left-1/2 w-screen h-screen rounded-xl -translate-x-1/2 -translate-y-1/2 z-[998] backdrop-blur"></div>
 </body>
 <!-- plugin for charts  -->
 <script src="<?= URLROOT ?>public/js/js/plugins/chartjs.min.js" async></script>

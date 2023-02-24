@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 // DIRECTORY_SEPARATOR == '/' or '\' based on the OS
 define("ROOT_PATH", dirname(__DIR__) . DIRECTORY_SEPARATOR);
 define("APP", ROOT_PATH . 'app' . DIRECTORY_SEPARATOR);

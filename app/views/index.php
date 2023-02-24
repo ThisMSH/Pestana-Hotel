@@ -1,5 +1,4 @@
 <?php
-session_start();
 $rooms = new HomeController();
 $room_n_c = $rooms->get_room_names_capacities();
 $room_n_t = $rooms->get_room_types();

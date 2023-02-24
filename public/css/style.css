@@ -88,7 +88,6 @@ amber-400: rgb(251 191 36)
     height: 10px;
 }
 .scroll-bar::-webkit-scrollbar-track {
-    background-color:   ;
     border-radius: 5px;
     margin: 0 10px;
 }

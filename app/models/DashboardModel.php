@@ -17,4 +17,10 @@ class DashboardModel extends Db {
         $stmt->execute(array($id));
         return $stmt->fetchAll();
     }
+
+    protected function update_data($data, $n) {
+        for($i = 0; $i < $n; $i++) {
+            $stmt = $this->conn()->prepare("UPDATE pestana.bookers SET First_Name = ?, Family_Name = ?, ;");
+        }
+    }
 }

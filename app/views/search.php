@@ -1,5 +1,4 @@
 <?php
-    session_start();
     if(!isset($_POST["search"])) {
         header("location: " . URLROOT . "home/index");
     }else {
@@ -132,7 +131,7 @@
                         <div class="absolute flex justify-center items-center -right-3 -top-3 w-44 h-44 overflow-hidden pointer-events-none before:absolute before:content-['Available'] before:text-center before:py-2 before:text-2xl before:font-medium before:text-zinc-100 before:drop-shadow-lg before:bg-emerald-400 before:w-[150%] before:h-12 before:rotate-45 before:translate-x-4 before:-translate-y-4 before:z-10 after:absolute after:w-3 after:h-3 after:bg-emerald-600 after:top-0 after:left-0 after:shadow-[164px_164px_rgb(5_150_105)]"></div>
                     </div>
                     <div>
-                        <!-- Amount of the guests including the booker -->
+                        <!-- Hidden values that will go with the form -->
                         <input onlyread type="hidden" name="id" value="<?= $_SESSION["id"]; ?>">
                         <input onlyread type="hidden" name="room-id" value="<?= $view_data["ID"]; ?>">
                         <input onlyread type="hidden" name="full-name" value="<?= $_SESSION["first-name"] . " " . $_SESSION["family-name"]; ?>">
