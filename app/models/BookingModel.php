@@ -62,13 +62,15 @@ class BookingModel extends Db {
             }
         }
 
-        $stmt = $this->conn()->prepare("UPDATE pestana.users SET Discount = LEAST(Discount + 1, 10) WHERE ID = ?;");
+        $stmt = $this->conn()->prepare("UPDATE pestana.users SET Discount = LEAST((Discount + 1), 10) WHERE ID = ?;");
 
         if(!$stmt->execute(array($data["user-ID"]))) {
             $stmt = null;
             header("location: " . URLROOT . "home/index?error=insert-data-stmt3");
             exit();
         }
+
+        $_SESSION['discount'] = $_SESSION['discount'] < 10 ? $_SESSION['discount'] + 1 : 10;
 
         header("location: " . URLROOT . "home/index?booking=success");
         $stmt = null;

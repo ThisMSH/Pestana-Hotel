@@ -66,37 +66,31 @@
                         <span class="ml-1 duration-300 ease">My Bookings</span>
                     </a>
                 </li>
-                <li class="w-full mt-4">
-                    <div class="flex justify-center items-center gap-x-4">
-                        <i class="relative top-0 text-4xl leading-normal text-yellow-400 text-shadow-zinc-1 dark:text-shadow-white-1 material-icons">admin_panel_settings</i>
-                        <h6 class="text-lg text-center font-semibold leading-tight uppercase dark:text-white">ADMIN</h6>
-                    </div>
-                    <hr class="h-px mt-0 bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent dark:bg-gradient-to-r dark:from-transparent dark:via-white dark:to-transparent" />
-                </li>
-                <li class="mt-0.5 w-full">
-                    <a class=" dark:text-zinc-100 dark:opacity-80 py-2.5 text-sm ease my-0 mx-2 flex items-center whitespace-nowrap px-4 rounded-lg transition-colors hover:bg-white hover:dark:shadow-white hover:dark:bg-black hover:shadow" href="d_manage">
-                        <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                            <i class="relative top-0 text-2xl leading-normal text-amber-500 material-icons">room_preferences</i>
+                <?php if($_SESSION['admin'] == true) { ?>
+                    <li class="w-full mt-4">
+                        <div class="flex justify-center items-center gap-x-4">
+                            <i class="relative top-0 text-4xl leading-normal text-yellow-400 text-shadow-zinc-1 dark:text-shadow-white-1 material-icons">admin_panel_settings</i>
+                            <h6 class="text-lg text-center font-semibold leading-tight uppercase dark:text-white">ADMIN</h6>
                         </div>
-                        <span class="ml-1 duration-300 ease">Rooms Management</span>
-                    </a>
-                </li>
-                <li class="mt-0.5 w-full">
-                    <a class=" dark:text-zinc-100 dark:opacity-80 py-2.5 text-sm ease my-0 mx-2 flex items-center whitespace-nowrap px-4 rounded-lg transition-colors hover:bg-white hover:dark:shadow-white hover:dark:bg-black hover:shadow" href="d_active">
-                        <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                            <i class="relative top-0 text-2xl leading-normal text-amber-500 material-icons-outlined">assignment_turned_in</i>
-                        </div>
-                        <span class="ml-1 duration-300 ease">Active Bookings</span>
-                    </a>
-                </li>
-                <li class="mt-0.5 w-full">
-                    <a class=" dark:text-zinc-100 dark:opacity-80 py-2.5 text-sm ease my-0 mx-2 flex items-center whitespace-nowrap px-4 rounded-lg transition-colors hover:bg-white hover:dark:shadow-white hover:dark:bg-black hover:shadow" href="d_canceled">
-                        <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                            <i class="relative top-0 text-2xl leading-normal text-amber-500 material-icons-outlined">assignment_late</i>
-                        </div>
-                        <span class="ml-1 duration-300 ease">Canceled Bookings</span>
-                    </a>
-                </li>
+                        <hr class="h-px mt-0 bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent dark:bg-gradient-to-r dark:from-transparent dark:via-white dark:to-transparent" />
+                    </li>
+                    <li class="mt-0.5 w-full">
+                        <a class=" dark:text-zinc-100 dark:opacity-80 py-2.5 text-sm ease my-0 mx-2 flex items-center whitespace-nowrap px-4 rounded-lg transition-colors hover:bg-white hover:dark:shadow-white hover:dark:bg-black hover:shadow" href="rooms_manage">
+                            <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
+                                <i class="relative top-0 text-2xl leading-normal text-amber-500 material-icons">room_preferences</i>
+                            </div>
+                            <span class="ml-1 duration-300 ease">Rooms Management</span>
+                        </a>
+                    </li>
+                    <li class="mt-0.5 w-full">
+                        <a class=" dark:text-zinc-100 dark:opacity-80 py-2.5 text-sm ease my-0 mx-2 flex items-center whitespace-nowrap px-4 rounded-lg transition-colors hover:bg-white hover:dark:shadow-white hover:dark:bg-black hover:shadow" href="actived">
+                            <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
+                                <i class="relative top-0 text-2xl leading-normal text-amber-500 material-icons-outlined">assignment_turned_in</i>
+                            </div>
+                            <span class="ml-1 duration-300 ease">Active Bookings</span>
+                        </a>
+                    </li>
+                <?php } ?>
             </ul>
         </div>
         <div class="mx-4">
@@ -268,7 +262,7 @@
                         <div class="flex flex-wrap -mx-3 mb-6">
                             <div class="flex-none w-auto max-w-full px-3">
                                 <div class="relative inline-flex items-center justify-center text-white transition-all duration-200 ease-in-out text-base h-19 w-19 rounded-xl">
-                                    <img src="<?= URLROOT ?>public/img/user_image.jpg" alt="profile_image" class="w-full shadow-xl rounded-xl">
+                                    <img src="<?= URLROOT ?>img/user_image.jpg" alt="profile_image" class="w-full shadow-xl rounded-xl">
                                 </div>
                             </div>
                             <div class="flex-none w-auto max-w-full px-3 my-auto">
@@ -313,36 +307,13 @@
                     </div>
                 </div>
             </div>
-            <footer class="pt-4">
-                <div class="w-full px-6 mx-auto">
-                    <div class="flex flex-wrap items-center -mx-3 lg:justify-between">
-                        <div class="w-full max-w-full px-3 mt-0 mb-6 shrink-0 lg:mb-0 lg:w-1/2 lg:flex-none">
-                            <div class="text-sm leading-normal text-center text-zinc-500 lg:text-left">
-                                © <script>document.write(new Date().getFullYear() + ",");</script> Copyright Pestana Group. All rights reserved.
-                            </div>
-                        </div>
-                        <div class="w-full max-w-full px-3 mt-0 shrink-0 lg:w-1/2 lg:flex-none">
-                            <ul class="flex flex-wrap justify-center pl-0 mb-0 list-none lg:justify-end">
-                                <li class="nav-item ps">
-                                    <a href="<?= URLROOT ?>home/index" class="block px-4 pt-0 pb-1 text-sm font-normal transition-colors ease-in-out text-zinc-500">Home</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="block px-4 pt-0 pb-1 text-sm font-normal transition-colors ease-in-out text-zinc-500">Privacy & Policy</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="block px-4 pt-0 pb-1 text-sm font-normal transition-colors ease-in-out text-zinc-500">Terms of Service</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+            <?php include_once INCLUDES . "d-footer.php"; ?>
         </div>
     </main>
 </body>
 <!-- plugin for charts  -->
-<script src="<?= URLROOT ?>public/js/js/plugins/chartjs.min.js" async></script>
+<script src="<?= URLROOT ?>js/js/plugins/chartjs.min.js" async></script>
 <!-- main script file  -->
-<script src="<?= URLROOT ?>public/js/js/argon-dashboard-tailwind.js?v=1.0.1" async></script>
+<script src="<?= URLROOT ?>js/js/argon-dashboard-tailwind.js?v=1.0.1" async></script>
 </html>
 <?php }

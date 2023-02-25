@@ -29,4 +29,3 @@ document.addEventListener("click", function(event) {
         alertContainer.classList.add("hidden");
     }
 });
-

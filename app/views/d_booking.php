@@ -23,11 +23,29 @@
     <link href="<?= URLROOT ?>css/argon-dashboard-tailwind.css?v=1.0.1" rel="stylesheet" />
     <link rel="stylesheet" href="<?= URLROOT ?>css/tailwind_style.css">
     <link rel="stylesheet" href="<?= URLROOT ?>css/style.css">
-    <script src="<?= URLROOT ?>public/js/trigger-popup.js" defer></script>
+    <script src="<?= URLROOT ?>js/trigger-popup.js" defer></script>
     <title>Pestana Dashboard - Booking</title>
 </head>
 <body class="m-0 font-sans text-base font-normal dark:bg-zinc-900 leading-default bg-zinc-100 text-zinc-900">
     <div class="absolute w-full bg-amber-500 min-h-75"></div>
+    <?php if(isset($_GET["update"]) && $_GET["update"] == "success") { ?>
+        <div id="alert" class="fixed top-10 left-1/2 -translate-x-1/2 flex p-4 mb-4 text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 z-50">
+            <span class="material-icons-outlined text-amber-600">check_circle</span>
+            <p class="ml-3 text-sm font-medium">Your booking were successfully updated.</p>
+            <button type="button" id="close-alert" class="ml-auto -mx-1.5 -my-1.5 bg-yellow-50 text-yellow-500 rounded-lg focus:ring-2 focus:ring-yellow-400 p-1.5 hover:bg-yellow-200 inline-flex h-8 w-8 dark:bg-gray-800 dark:text-yellow-300 dark:hover:bg-gray-700">
+                <svg aria-hidden="true" class="w-5 h-5 pointer-events-none" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            </button>
+        </div>
+    <?php } ?>
+    <?php if(isset($_GET["cancel"]) && $_GET["cancel"] == "success") { ?>
+        <div id="alert" class="fixed top-10 left-1/2 -translate-x-1/2 flex p-4 mb-4 text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 z-50">
+            <span class="material-icons-outlined text-amber-600">check_circle</span>
+            <p class="ml-3 text-sm font-medium">Your booking were successfully canceled.</p>
+            <button type="button" id="close-alert" class="ml-auto -mx-1.5 -my-1.5 bg-yellow-50 text-yellow-500 rounded-lg focus:ring-2 focus:ring-yellow-400 p-1.5 hover:bg-yellow-200 inline-flex h-8 w-8 dark:bg-gray-800 dark:text-yellow-300 dark:hover:bg-gray-700">
+                <svg aria-hidden="true" class="w-5 h-5 pointer-events-none" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            </button>
+        </div>
+    <?php } ?>
     <!-- sidenav  -->
     <aside class="fixed inset-y-0 flex-wrap items-center justify-between block w-full p-0 my-4 overflow-y-auto transition-transform duration-200 -translate-x-full bg-zinc-100 border-0 shadow-xl dark:shadow-none dark:bg-zinc-700 max-w-64 ease z-990 xl:ml-6 rounded-2xl xl:left-0 xl:translate-x-0" aria-expanded="false">
         <div class="h-19">
@@ -69,37 +87,31 @@
                         <span class="ml-1 duration-300 ease">My Bookings</span>
                     </a>
                 </li>
-                <li class="w-full mt-4">
-                    <div class="flex justify-center items-center gap-x-4">
-                        <i class="relative top-0 text-4xl leading-normal text-yellow-400 text-shadow-zinc-1 dark:text-shadow-white-1 material-icons">admin_panel_settings</i>
-                        <h6 class="text-lg text-center font-semibold leading-tight uppercase dark:text-white">ADMIN</h6>
-                    </div>
-                    <hr class="h-px mt-0 bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent dark:bg-gradient-to-r dark:from-transparent dark:via-white dark:to-transparent" />
-                </li>
-                <li class="mt-0.5 w-full">
-                    <a class=" dark:text-zinc-100 dark:opacity-80 py-2.5 text-sm ease my-0 mx-2 flex items-center whitespace-nowrap px-4 rounded-lg transition-colors hover:bg-white hover:dark:shadow-white hover:dark:bg-black hover:shadow" href="d_manage">
-                        <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                            <i class="relative top-0 text-2xl leading-normal text-amber-500 material-icons">room_preferences</i>
+                <?php if($_SESSION['admin'] == true) { ?>
+                    <li class="w-full mt-4">
+                        <div class="flex justify-center items-center gap-x-4">
+                            <i class="relative top-0 text-4xl leading-normal text-yellow-400 text-shadow-zinc-1 dark:text-shadow-white-1 material-icons">admin_panel_settings</i>
+                            <h6 class="text-lg text-center font-semibold leading-tight uppercase dark:text-white">ADMIN</h6>
                         </div>
-                        <span class="ml-1 duration-300 ease">Rooms Management</span>
-                    </a>
-                </li>
-                <li class="mt-0.5 w-full">
-                    <a class=" dark:text-zinc-100 dark:opacity-80 py-2.5 text-sm ease my-0 mx-2 flex items-center whitespace-nowrap px-4 rounded-lg transition-colors hover:bg-white hover:dark:shadow-white hover:dark:bg-black hover:shadow" href="d_active">
-                        <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                            <i class="relative top-0 text-2xl leading-normal text-amber-500 material-icons-outlined">assignment_turned_in</i>
-                        </div>
-                        <span class="ml-1 duration-300 ease">Active Bookings</span>
-                    </a>
-                </li>
-                <li class="mt-0.5 w-full">
-                    <a class=" dark:text-zinc-100 dark:opacity-80 py-2.5 text-sm ease my-0 mx-2 flex items-center whitespace-nowrap px-4 rounded-lg transition-colors hover:bg-white hover:dark:shadow-white hover:dark:bg-black hover:shadow" href="d_canceled">
-                        <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                            <i class="relative top-0 text-2xl leading-normal text-amber-500 material-icons-outlined">assignment_late</i>
-                        </div>
-                        <span class="ml-1 duration-300 ease">Canceled Bookings</span>
-                    </a>
-                </li>
+                        <hr class="h-px mt-0 bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent dark:bg-gradient-to-r dark:from-transparent dark:via-white dark:to-transparent" />
+                    </li>
+                    <li class="mt-0.5 w-full">
+                        <a class=" dark:text-zinc-100 dark:opacity-80 py-2.5 text-sm ease my-0 mx-2 flex items-center whitespace-nowrap px-4 rounded-lg transition-colors hover:bg-white hover:dark:shadow-white hover:dark:bg-black hover:shadow" href="rooms_manage">
+                            <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
+                                <i class="relative top-0 text-2xl leading-normal text-amber-500 material-icons">room_preferences</i>
+                            </div>
+                            <span class="ml-1 duration-300 ease">Rooms Management</span>
+                        </a>
+                    </li>
+                    <li class="mt-0.5 w-full">
+                        <a class=" dark:text-zinc-100 dark:opacity-80 py-2.5 text-sm ease my-0 mx-2 flex items-center whitespace-nowrap px-4 rounded-lg transition-colors hover:bg-white hover:dark:shadow-white hover:dark:bg-black hover:shadow" href="actived">
+                            <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
+                                <i class="relative top-0 text-2xl leading-normal text-amber-500 material-icons-outlined">assignment_turned_in</i>
+                            </div>
+                            <span class="ml-1 duration-300 ease">Active Bookings</span>
+                        </a>
+                    </li>
+                <?php } ?>
             </ul>
         </div>
         <div class="mx-4">
@@ -234,13 +246,17 @@
                                     <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Room Type</th>
                                     <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Check In</th>
                                     <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Check Out</th>
+                                    <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Bookers</th>
                                     <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Price</th>
                                     <th class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Status</th>
                                     <th class="px-6 py-3 font-semibold capitalize align-middle bg-transparent border-b border-collapse border-solid shadow-none dark:border-white/40 dark:text-white tracking-none whitespace-nowrap text-slate-400 opacity-70"></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($reservations as $reserv) { ?>
+                                <?php
+                                    foreach ($reservations as $reserv) { 
+                                        if($reserv['Check_Out'] != "0000-00-00" && $reserv['Check_In'] != "0000-00-00") { 
+                                ?>
                                     <tr>
                                         <td class="p-2 align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
                                             <button class="bookers-pop relative left-1/2 -translate-x-1/2">
@@ -260,10 +276,23 @@
                                             <p class="text-sm font-semibold leading-tight dark:text-white dark:opacity-80"><?= $reserv['Check_Out'] ?></p>
                                         </td>
                                         <td class="p-2 align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                            <p class="text-sm font-semibold leading-tight dark:text-white dark:opacity-80">
+                                                <?php
+                                                    $count_bookers = 0;
+                                                    foreach($bookers as $booker) {
+                                                        if($booker["ReservationID"] == $reserv["ID"]) {
+                                                            $count_bookers++;
+                                                        }
+                                                    }
+                                                    echo $count_bookers;
+                                                ?>
+                                            </p>
+                                        </td>
+                                        <td class="p-2 align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
                                             <p class="text-sm font-semibold leading-tight dark:text-white dark:opacity-80"><?= number_format($reserv['Price'], 2) . " €" ?></p>
                                         </td>
                                         <td class="p-2 text-sm leading-normal text-center align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
-                                            <?php if($reserv['Check_Out'] > date("Y-m-d") && $reserv['Check_In'] < date("Y-m-d")) { ?>
+                                            <?php if($reserv['Check_Out'] >= date("Y-m-d") && $reserv['Check_In'] <= date("Y-m-d")) { ?>
                                                 <span class="bg-gradient-to-tl from-emerald-600 to-teal-400 px-2.5 text-xs rounded-1.8 py-1.4 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white">In Service</span>
                                             <?php }else if($reserv['Check_Out'] < date("Y-m-d")) { ?>
                                                 <span class="bg-gradient-to-tl from-blue-600 to-sky-400 px-2.5 text-xs rounded-1.8 py-1.4 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white">Done</span>
@@ -272,23 +301,29 @@
                                             <?php } ?>
                                         </td>
                                         <td class="p-2 align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
-                                            <button type="button" class="update-btn inline-flex items-center px-4 py-2.5 mb-0 font-bold text-center align-middle transition-all bg-transparent border-0 rounded-lg shadow-none cursor-pointer leading-normal text-sm ease-in hover:-translate-y-px active:opacity-85 bg-x-25 text-sky-700 dark:text-sky-300"><span class="material-icons-outlined mr-2 text-sky-700 dark:text-sky-300">edit</span>Edit</button>
-                                            <button type="button" class="cancel-btn relative z-10 inline-flex items-center px-4 py-2.5 mb-0 font-bold text-center text-transparent align-middle transition-all border-0 rounded-lg shadow-none cursor-pointer leading-normal text-sm ease-in bg-gradient-to-tl from-red-700 to-orange-600 dark:from-red-400 dark:to-orange-300 hover:-translate-y-px active:opacity-85 bg-x-25 bg-clip-text"><span class="material-icons-outlined mr-2 bg-gradient-to-tl from-red-700 to-orange-600 dark:from-red-400 dark:to-orange-300 bg-x-25 bg-clip-text">highlight_off</span>Cancel</button>
-                                            <div class="cancel-popup fixed hidden top-1/2 left-1/2 w-[500px] max-w-[94%] h-72 bg-slate-100 text-slate-900 rounded-xl px-3 py-8 -translate-x-1/2 -translate-y-1/2 z-[999]">
-                                                <div class="flex flex-col justify-between items-center w-full h-full">
-                                                    <p class="text-center font-semibold text-2xl">ARE YOU SURE THAT YOU WANT<br>TO CANCEL YOUR RESERVATION?</p>
-                                                    <div>
-                                                        <span class="material-icons-outlined text-6xl text-amber-400 text-stroke-black-2">warning</span>
-                                                    </div>
-                                                    <div class="flex gap-8">
-                                                        <button class="undo-btn bg-slate-900 text-slate-100 px-4 py-2 rounded-lg font-semibold">Nooooo!</button>
-                                                        <a href="#" class="rounded-lg"><p class="bg-red-600 text-slate-100 px-4 py-2 rounded-lg font-semibold">Yes, I'm sure</p></a>
+                                            <?php if(!empty($reserv['Check_In']) && ($reserv['Check_In'] > date('Y-m-d'))) { ?>
+                                                <button type="button" class="update-btn inline-flex items-center px-4 py-2.5 mb-0 font-bold text-center align-middle transition-all bg-transparent border-0 rounded-lg shadow-none cursor-pointer leading-normal text-sm ease-in hover:-translate-y-px active:opacity-85 bg-x-25 text-sky-700 dark:text-sky-300"><span class="material-icons-outlined mr-2 text-sky-700 dark:text-sky-300">edit</span>Edit</button>
+                                                <button type="button" class="cancel-btn relative z-10 inline-flex items-center px-4 py-2.5 mb-0 font-bold text-center text-transparent align-middle transition-all border-0 rounded-lg shadow-none cursor-pointer leading-normal text-sm ease-in bg-gradient-to-tl from-red-700 to-orange-600 dark:from-red-400 dark:to-orange-300 hover:-translate-y-px active:opacity-85 bg-x-25 bg-clip-text"><span class="material-icons-outlined mr-2 bg-gradient-to-tl from-red-700 to-orange-600 dark:from-red-400 dark:to-orange-300 bg-x-25 bg-clip-text">highlight_off</span>Cancel</button>
+                                                <div class="cancel-popup fixed hidden top-1/2 left-1/2 w-[500px] max-w-[94%] h-72 bg-slate-100 text-slate-900 rounded-xl px-3 py-8 -translate-x-1/2 -translate-y-1/2 z-[999]">
+                                                    <div class="flex flex-col justify-between items-center w-full h-full">
+                                                        <p class="text-center font-semibold text-2xl">ARE YOU SURE THAT YOU WANT<br>TO CANCEL YOUR RESERVATION?</p>
+                                                        <p class="text-center text-sm">Note that you'll lose -1% of your discount.</p>
+                                                        <div>
+                                                            <span class="material-icons-outlined text-6xl text-amber-400 text-stroke-black-2">warning</span>
+                                                        </div>
+                                                        <div class="flex gap-8">
+                                                            <button class="undo-btn bg-slate-900 text-slate-100 px-4 py-2 rounded-lg font-semibold">Nooooo!</button>
+                                                            <a href="cancel_booking/<?= $reserv['ID'] ?>" class="rounded-lg"><p class="bg-red-600 text-slate-100 px-4 py-2 rounded-lg font-semibold">Yes, I'm sure</p></a>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            <?php } ?>
                                         </td>
                                     </tr>
-                                <?php } ?>
+                                <?php
+                                        }
+                                    }
+                                ?>
                             </tbody>
                         </table>
                     </div>
@@ -343,10 +378,6 @@
                         </button>
                     </div>
                     <form action="update_bookers" method="post">
-                        <div>
-                            <!-- Hidden values that will go with the form -->
-                            <input onlyread type="hidden" name="reservation-id" value="<?= $reserv['ID']; ?>">
-                        </div>
                         <div class="guests-form max-h-[600px] overflow-y-auto">
                             <div class="flex flex-col items-center gap-y-10 w-full min-h-full py-10 px-6">
                                 <?php 
@@ -368,6 +399,7 @@
                                             <input class="w-full p-4 border border-solid rounded-lg border-zinc-900 dark:border-white text-white dark:text-zinc-900 bg-white dark:bg-zinc-800 outline-none transition duration-300 focus:text-zinc-900 dark:focus:text-white valid:text-zinc-900 dark:valid:text-white" type="date" name="bday[]" value="<?= $booker['Birthday'] ?>" required>
                                             <span class="absolute left-0 p-4 pointer-events-none text-zinc-100 transition-all duration-300 ease-in-out">Birthday</span>
                                         </div>
+                                        <input onlyread type="hidden" name="booker-id[]" value="<?= $booker['ID']; ?>">
                                     </div>
                                 <?php
                                             $cnt++;
@@ -376,44 +408,23 @@
                                 ?>
                                 <div class="flex justify-around items-center gap-x-10 text-zinc-900 font-semibold text-xl">
                                     <button type="reset" class="group relative w-40 py-2 bg-amber-400 rounded-md before:absolute before:top-0 before:-left-8 before:h-full before:w-5 before:bg-gradient-to-l before:from-zinc-100 before:to-transparent before:bg-opacity-40 before:skew-x-[30deg] before:transition-all before:duration-300 before:hover:left-[110%] active:bg-amber-500 overflow-hidden"><p class="transition-all duration-300 group-hover:scale-110 group-active:scale-95 group-active:transition-none">Reset</p></button>
-                                    <button type="submit" name="submit" class="group relative w-40 py-2 bg-amber-400 rounded-md before:absolute before:top-0 before:-left-8 before:h-full before:w-5 before:bg-gradient-to-l before:from-zinc-100 before:to-transparent before:bg-opacity-40 before:skew-x-[30deg] before:transition-all before:duration-300 before:hover:left-[110%] active:bg-amber-500 overflow-hidden"><p class="transition-all duration-300 group-hover:scale-110 group-active:scale-95 group-active:transition-none">Submit</p></button>
+                                    <button type="submit" name="submit" class="group relative w-40 py-2 bg-amber-400 rounded-md before:absolute before:top-0 before:-left-8 before:h-full before:w-5 before:bg-gradient-to-l before:from-zinc-100 before:to-transparent before:bg-opacity-40 before:skew-x-[30deg] before:transition-all before:duration-300 before:hover:left-[110%] active:bg-amber-500 overflow-hidden"><p class="transition-all duration-300 group-hover:scale-110 group-active:scale-95 group-active:transition-none">Update</p></button>
                                 </div>
                             </div>
                         </div>
                     </form>
                 </div>
-            <?php } ?>
-            <footer class="pt-4">
-                <div class="w-full px-6 mx-auto">
-                    <div class="flex flex-wrap items-center -mx-3 lg:justify-between">
-                        <div class="w-full max-w-full px-3 mt-0 mb-6 shrink-0 lg:mb-0 lg:w-1/2 lg:flex-none">
-                            <div class="text-sm leading-normal text-center text-zinc-500 lg:text-left">
-                                © <script>document.write(new Date().getFullYear() + ",");</script> Copyright Pestana Group. All rights reserved.
-                            </div>
-                        </div>
-                        <div class="w-full max-w-full px-3 mt-0 shrink-0 lg:w-1/2 lg:flex-none">
-                            <ul class="flex flex-wrap justify-center pl-0 mb-0 list-none lg:justify-end">
-                                <li class="nav-item ps">
-                                    <a href="<?= URLROOT ?>home/index" class="block px-4 pt-0 pb-1 text-sm font-normal transition-colors ease-in-out text-zinc-500">Home</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="block px-4 pt-0 pb-1 text-sm font-normal transition-colors ease-in-out text-zinc-500">Privacy & Policy</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="block px-4 pt-0 pb-1 text-sm font-normal transition-colors ease-in-out text-zinc-500">Terms of Service</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+            <?php 
+                    } 
+                include_once(INCLUDES . "d-footer.php");
+            ?>
         </div>
     </main>
     <div class="blured-bg hidden fixed top-1/2 left-1/2 w-screen h-screen rounded-xl -translate-x-1/2 -translate-y-1/2 z-[998] backdrop-blur"></div>
 </body>
 <!-- plugin for charts  -->
-<script src="<?= URLROOT ?>public/js/js/plugins/chartjs.min.js" async></script>
+<script src="<?= URLROOT ?>js/js/plugins/chartjs.min.js" async></script>
 <!-- main script file  -->
-<script src="<?= URLROOT ?>public/js/js/argon-dashboard-tailwind.js?v=1.0.1" async></script>
+<script src="<?= URLROOT ?>js/js/argon-dashboard-tailwind.js?v=1.0.1" async></script>
 </html>
 <?php }

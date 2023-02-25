@@ -55,3 +55,13 @@ for(let i = 0; i < updateBtn.length; i++) {
         updateCnt[i].classList.add("hidden");
     })
 }
+
+// ===== Alert =====
+const alertContainer = document.querySelector("#alert");
+
+document.addEventListener("click", function(event) {
+    if(event.target.id == "close-alert") {
+        alertContainer.classList.remove("fixed");
+        alertContainer.classList.add("hidden");
+    }
+});
