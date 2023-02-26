@@ -87,7 +87,7 @@
                             <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
                                 <i class="relative top-0 text-2xl leading-normal text-amber-500 material-icons-outlined">assignment_turned_in</i>
                             </div>
-                            <span class="ml-1 duration-300 ease">Active Bookings</span>
+                            <span class="ml-1 duration-300 ease">All Reservations</span>
                         </a>
                     </li>
                 <?php } ?>

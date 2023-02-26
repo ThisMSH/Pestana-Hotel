@@ -13,11 +13,4 @@ class HomeModel extends Db {
         return $stmt->fetchAll();
         $stmt = null;
     }
-
-    // protected function fetch_room_capacities() {
-    //     $stmt = $this->conn()->prepare("SELECT DISTINCT Room_Capacity FROM pestana.rooms;");
-    //     $stmt->execute();
-    //     return $stmt->fetchAll();
-    //     $stmt = null;
-    // }
 }

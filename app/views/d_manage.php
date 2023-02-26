@@ -2,10 +2,6 @@
     if(!isset($_SESSION["id"]) || ($_SESSION["admin"] == false)) {
         Controller::load("404");
     }else {
-        // $obj = new DashboardController;
-        // $obj->id = $_SESSION['id'];
-        // $reservations = $obj->fetch_reservations($obj->id);
-        // $bookers = $obj->fetch_bookers($obj->id);
 ?>
 <!DOCTYPE html>
 <html>
@@ -28,6 +24,33 @@
   </head>
   <body class="m-0 font-sans text-base font-normal dark:bg-zinc-900 leading-default bg-zinc-100 text-zinc-900">
     <div class="absolute w-full bg-amber-500 min-h-75"></div>
+    <?php if(isset($_GET["add"]) && $_GET["add"] == "success") { ?>
+        <div id="alert" class="fixed top-10 left-1/2 -translate-x-1/2 flex p-4 mb-4 text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 z-50">
+            <span class="material-icons-outlined text-amber-600">check_circle</span>
+            <p class="ml-3 text-sm font-medium">A new room has been successfully added.</p>
+            <button type="button" id="close-alert" class="ml-auto -mx-1.5 -my-1.5 bg-yellow-50 text-yellow-500 rounded-lg focus:ring-2 focus:ring-yellow-400 p-1.5 hover:bg-yellow-200 inline-flex h-8 w-8 dark:bg-gray-800 dark:text-yellow-300 dark:hover:bg-gray-700">
+                <svg aria-hidden="true" class="w-5 h-5 pointer-events-none" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            </button>
+        </div>
+    <?php } ?>
+    <?php if(isset($_GET["update"]) && $_GET["update"] == "success") { ?>
+        <div id="alert" class="fixed top-10 left-1/2 -translate-x-1/2 flex p-4 mb-4 text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 z-50">
+            <span class="material-icons-outlined text-amber-600">check_circle</span>
+            <p class="ml-3 text-sm font-medium">The room has been successfully updated.</p>
+            <button type="button" id="close-alert" class="ml-auto -mx-1.5 -my-1.5 bg-yellow-50 text-yellow-500 rounded-lg focus:ring-2 focus:ring-yellow-400 p-1.5 hover:bg-yellow-200 inline-flex h-8 w-8 dark:bg-gray-800 dark:text-yellow-300 dark:hover:bg-gray-700">
+                <svg aria-hidden="true" class="w-5 h-5 pointer-events-none" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            </button>
+        </div>
+    <?php } ?>
+    <?php if(isset($_GET["delete"]) && $_GET["delete"] == "success") { ?>
+        <div id="alert" class="fixed top-10 left-1/2 -translate-x-1/2 flex p-4 mb-4 text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 z-50">
+            <span class="material-icons-outlined text-amber-600">check_circle</span>
+            <p class="ml-3 text-sm font-medium">The room has been successfully deleted.</p>
+            <button type="button" id="close-alert" class="ml-auto -mx-1.5 -my-1.5 bg-yellow-50 text-yellow-500 rounded-lg focus:ring-2 focus:ring-yellow-400 p-1.5 hover:bg-yellow-200 inline-flex h-8 w-8 dark:bg-gray-800 dark:text-yellow-300 dark:hover:bg-gray-700">
+                <svg aria-hidden="true" class="w-5 h-5 pointer-events-none" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            </button>
+        </div>
+    <?php } ?>
     <!-- sidenav  -->
     <aside class="fixed inset-y-0 flex-wrap items-center justify-between block w-full p-0 my-4 overflow-y-auto transition-transform duration-200 -translate-x-full bg-zinc-100 border-0 shadow-xl dark:shadow-none dark:bg-zinc-700 max-w-64 ease z-990 xl:ml-6 rounded-2xl xl:left-0 xl:translate-x-0" aria-expanded="false">
         <div class="h-19">
@@ -89,7 +112,7 @@
                         <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
                             <i class="relative top-0 text-2xl leading-normal text-amber-500 material-icons-outlined">assignment_turned_in</i>
                         </div>
-                        <span class="ml-1 duration-300 ease">Active Bookings</span>
+                        <span class="ml-1 duration-300 ease">All Reservations</span>
                     </a>
                 </li>
             </ul>
@@ -216,44 +239,44 @@
             <div class="w-full max-w-full mt-10 bg-white border-0 shadow-xl dark:bg-zinc-800 dark:shadow-dark-xl rounded-2xl bg-clip-border">
                 <div class="flex justify-around sm:justify-between items-center flex-wrap p-6 pb-0 mb-0 border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
                     <h6 class="dark:text-white text-xl font-semibold flex items-center"><i class="relative top-0 text-3xl leading-normal text-amber-500 material-icons">meeting_room</i> Hotel Rooms</h6>
-                    <button type="button" id="" class="bg-zinc-900 dark:bg-amber-400 text-amber-400 dark:text-zinc-900 flex items-center justify-center px-1.5 sm:px-3 py-0.5 sm:py-1 rounded-lg font-semibold text-lg sm:text-xl"><i class="relative top-0 text-2xl leading-normal material-icons">add</i> Add a New Room</button>
+                    <button type="button" id="add-new-room" class="bg-zinc-900 dark:bg-amber-400 text-amber-400 dark:text-zinc-900 flex items-center justify-center px-1.5 sm:px-3 py-0.5 sm:py-1 rounded-lg font-semibold text-lg sm:text-xl"><i class="relative top-0 text-2xl leading-normal material-icons">add</i> Add a New Room</button>
                 </div>
-                <!-- =========================== -->
-                <div class="update-bookers fixed top-1/2 left-1/2 px-4 py-3 -translate-x-1/2 -translate-y-1/2 bg-white border shadow-xl dark:bg-zinc-800 dark:shadow-dark-xl rounded-2xl bg-clip-border z-[999]">
+                <!-- ============= Add a new room form ============= -->
+                <div id="add-room" class="hidden fixed top-1/2 left-1/2 px-4 py-3 -translate-x-1/2 -translate-y-1/2 bg-white border shadow-xl dark:bg-zinc-800 dark:shadow-dark-xl rounded-2xl bg-clip-border z-[999]">
                     <div class="flex justify-between">
-                        <h6 class="dark:text-white text-lg font-semibold">Add a new room</h6>
-                        <button>
-                            <span class="close-update material-icons-outlined text-3xl text-zinc-900 dark:text-zinc-100">close</span>
+                        <h6 class="dark:text-white text-lg font-semibold py-2">Add a new room</h6>
+                        <button id="close-btn">
+                            <span class="material-icons-outlined text-3xl text-zinc-900 dark:text-zinc-100">close</span>
                         </button>
                     </div>
-                    <form action="update_bookers" method="post">
+                    <form action="add_room" method="post" enctype="multipart/form-data">
                         <div class="guests-form max-h-[600px] overflow-y-auto">
                             <div class="flex flex-col items-center gap-y-10 w-full min-h-full py-10 px-6">
                                 <div class="flex flex-col items-center gap-y-10" id="guest-info-cont">
-                                    <div class="input-container relative w-80">
-                                        <input class="w-full p-4 border border-solid rounded-lg border-zinc-900 dark:border-white text-zinc-900 dark:text-zinc-100 bg-white dark:bg-zinc-800 outline-none transition duration-300" type="text" name="room-name[]" value="" required>
-                                        <span class="absolute left-0 p-4 pointer-events-none text-zinc-100 transition-all duration-300 ease-in-out">Room name</span>
+                                    <div class="relative w-80">
+                                        <span class="inline-block mb-2 pointer-events-none text-zinc-900 dark:text-zinc-100">Room name</span>
+                                        <input class="w-full p-4 border border-solid rounded-lg border-zinc-900 dark:border-white text-zinc-900 dark:text-zinc-100 bg-white dark:bg-zinc-800 outline-none transition duration-300" type="text" name="room-name" placeholder="Suite" required>
                                     </div>
-                                    <div class="input-container relative w-80">
-                                        <input class="w-full p-4 border border-solid rounded-lg border-zinc-900 dark:border-white text-zinc-900 dark:text-zinc-100 bg-white dark:bg-zinc-800 outline-none transition duration-300" type="text" name="room-type[]">
-                                        <span class="absolute left-0 p-4 pointer-events-none text-zinc-100 transition-all duration-300 ease-in-out">Room type</span>
+                                    <div class="relative w-80">
+                                        <span class="inline-block mb-2 pointer-events-none text-zinc-900 dark:text-zinc-100">Room type</span>
+                                        <input class="w-full p-4 border border-solid rounded-lg border-zinc-900 dark:border-white text-zinc-900 dark:text-zinc-100 bg-white dark:bg-zinc-800 outline-none transition duration-300" type="text" name="room-type" placeholder="Honeymoon Suite">
                                     </div>
-                                    <div class="input-container relative w-80">
-                                        <input class="w-full p-4 border border-solid rounded-lg border-zinc-900 dark:border-white text-zinc-900 dark:text-zinc-100 bg-white dark:bg-zinc-800 outline-none transition duration-300" type="number" name="room-capacity[]" value="">
-                                        <span class="absolute left-0 p-4 pointer-events-none text-zinc-100 transition-all duration-300 ease-in-out">Room capacity</span>
+                                    <div class="relative w-80">
+                                        <span class="inline-block mb-2 pointer-events-none text-zinc-900 dark:text-zinc-100">Room capacity</span>
+                                        <input class="w-full p-4 border border-solid rounded-lg border-zinc-900 dark:border-white text-zinc-900 dark:text-zinc-100 bg-white dark:bg-zinc-800 outline-none transition duration-300" type="number" name="room-capacity" placeholder="6" required>
                                     </div>
-                                    <div class="input-container relative w-80">
-                                        <input class="w-full p-4 border border-solid rounded-lg border-zinc-900 dark:border-white text-zinc-900 dark:text-zinc-100 bg-white dark:bg-zinc-800 outline-none transition duration-300" type="number" name="room-price[]" value="">
-                                        <span class="absolute left-0 p-4 pointer-events-none text-zinc-100 transition-all duration-300 ease-in-out">Room price</span>
+                                    <div class="relative w-80">
+                                        <span class="inline-block mb-2 pointer-events-none text-zinc-900 dark:text-zinc-100">Room price</span>
+                                        <input class="w-full p-4 border border-solid rounded-lg border-zinc-900 dark:border-white text-zinc-900 dark:text-zinc-100 bg-white dark:bg-zinc-800 outline-none transition duration-300" type="number" name="room-price" step="0.01" placeholder="620.50" required>
                                     </div>
-                                    <div class="input-container relative w-80">
-                                        <input class="w-full p-4 border border-solid rounded-lg border-zinc-900 dark:border-white text-zinc-900 dark:text-zinc-100 bg-white dark:bg-zinc-800 outline-none transition duration-300" type="file" name="room-price[]" value="">
-                                        <span class="absolute left-0 p-4 pointer-events-none text-zinc-100 transition-all duration-300 ease-in-out">Image</span>
+                                    <div class="relative w-80">
+                                        <span class="inline-block mb-2 pointer-events-none text-zinc-900 dark:text-zinc-100">Image</span>
+                                        <input class="w-full p-4 border border-solid rounded-lg border-zinc-900 dark:border-white text-zinc-900 dark:text-zinc-100 bg-white dark:bg-zinc-800 outline-none transition duration-300" type="file" name="room-image" required>
                                     </div>
                                 </div>
                                 <div class="flex justify-around items-center gap-x-10 text-zinc-900 font-semibold text-xl">
-                                    <button type="reset" class="group relative w-40 py-2 bg-amber-400 rounded-md before:absolute before:top-0 before:-left-8 before:h-full before:w-5 before:bg-gradient-to-l before:from-zinc-100 before:to-transparent before:bg-opacity-40 before:skew-x-[30deg] before:transition-all before:duration-300 before:hover:left-[110%] active:bg-amber-500 overflow-hidden"><p class="transition-all duration-300 group-hover:scale-110 group-active:scale-95 group-active:transition-none">Reset</p></button>
-                                    <button type="submit" name="submit" class="group relative w-40 py-2 bg-amber-400 rounded-md before:absolute before:top-0 before:-left-8 before:h-full before:w-5 before:bg-gradient-to-l before:from-zinc-100 before:to-transparent before:bg-opacity-40 before:skew-x-[30deg] before:transition-all before:duration-300 before:hover:left-[110%] active:bg-amber-500 overflow-hidden"><p class="transition-all duration-300 group-hover:scale-110 group-active:scale-95 group-active:transition-none">Update</p></button>
+                                    <button type="reset" class="group relative w-40 py-2 bg-amber-400 rounded-md before:absolute before:top-0 before:-left-8 before:h-full before:w-5 before:bg-gradient-to-l before:from-zinc-100 before:to-transparent before:bg-opacity-40 before:skew-x-[30deg] before:transition-all before:duration-300 before:hover:left-[110%] active:bg-amber-500 overflow-hidden"><p class="transition-all duration-300 group-hover:scale-110 group-active:scale-95 group-active:transition-none">Clear</p></button>
+                                    <button type="submit" name="submit" class="group relative w-40 py-2 bg-amber-400 rounded-md before:absolute before:top-0 before:-left-8 before:h-full before:w-5 before:bg-gradient-to-l before:from-zinc-100 before:to-transparent before:bg-opacity-40 before:skew-x-[30deg] before:transition-all before:duration-300 before:hover:left-[110%] active:bg-amber-500 overflow-hidden"><p class="transition-all duration-300 group-hover:scale-110 group-active:scale-95 group-active:transition-none">Add</p></button>
                                 </div>
                             </div>
                         </div>
@@ -291,18 +314,78 @@
                                         <p class="text-sm font-semibold leading-tight dark:text-white dark:opacity-80"><?= $room['Room_Capacity'] ?></p>
                                     </td>
                                     <td class="p-2 text-sm leading-normal align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
-                                        <p class="text-sm font-semibold leading-tight dark:text-white dark:opacity-80"><?= $room['Price'] ?> €</p>
+                                        <p class="text-sm font-semibold leading-tight dark:text-white dark:opacity-80"><?= number_format($room['Price'], 2) ?> €</p>
                                     </td>
                                     <td class="p-2 align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
-                                        <a class="inline-flex items-center px-4 py-2.5 mb-0 font-bold text-center align-middle transition-all bg-transparent border-0 rounded-lg shadow-none cursor-pointer leading-normal text-sm ease-in bg-150 hover:-translate-y-px active:opacity-85 bg-x-25 text-sky-700 dark:text-sky-300" href=""><span class="material-icons-outlined mr-2 text-sky-700 dark:text-sky-300">edit</span>Edit</a>
-                                        <a class="relative z-10 inline-flex items-center px-4 py-2.5 mb-0 font-bold text-center text-transparent align-middle transition-all border-0 rounded-lg shadow-none cursor-pointer leading-normal text-sm ease-in bg-150 bg-gradient-to-tl from-red-700 to-orange-600 dark:from-red-400 dark:to-orange-300 hover:-translate-y-px active:opacity-85 bg-x-25 bg-clip-text" href=""><span class="material-icons-outlined mr-2 bg-150 bg-gradient-to-tl from-red-700 to-orange-600 dark:from-red-400 dark:to-orange-300 bg-x-25 bg-clip-text">highlight_off</span>Delete</a>
+                                        <button type="button" class="edit-btn inline-flex items-center px-4 py-2.5 mb-0 font-bold text-center align-middle transition-all bg-transparent border-0 rounded-lg shadow-none cursor-pointer leading-normal text-sm ease-in bg-150 hover:-translate-y-px active:opacity-85 bg-x-25 text-sky-700 dark:text-sky-300"><span class="material-icons-outlined mr-2 text-sky-700 dark:text-sky-300">edit</span>Edit</button>
+                                        <button type="button" class="delete-btn relative z-10 inline-flex items-center px-4 py-2.5 mb-0 font-bold text-center text-transparent align-middle transition-all border-0 rounded-lg shadow-none cursor-pointer leading-normal text-sm ease-in bg-150 bg-gradient-to-tl from-red-700 to-orange-600 dark:from-red-400 dark:to-orange-300 hover:-translate-y-px active:opacity-85 bg-x-25 bg-clip-text"><span class="material-icons-outlined mr-2 bg-150 bg-gradient-to-tl from-red-700 to-orange-600 dark:from-red-400 dark:to-orange-300 bg-x-25 bg-clip-text">highlight_off</span>Delete</button>
                                     </td>
                                 </tr>
                             <?php } ?>
                         </tbody>
                       </table>
                     </div>
-                  </div>
+                </div>
+                <?php foreach($view_data as $room) { ?>
+                    <!-- ============= Update a room form ============= -->
+                    <div class="update-room hidden fixed top-1/2 left-1/2 px-4 py-3 -translate-x-1/2 -translate-y-1/2 bg-white border shadow-xl dark:bg-zinc-800 dark:shadow-dark-xl rounded-2xl bg-clip-border z-[999]">
+                        <div class="flex justify-between">
+                            <h6 class="dark:text-white text-lg font-semibold py-2">Update a room</h6>
+                            <button class="close-update-btn">
+                                <span class="material-icons-outlined text-3xl text-zinc-900 dark:text-zinc-100">close</span>
+                            </button>
+                        </div>
+                        <form action="update_room" method="post" enctype="multipart/form-data">
+                            <div class="guests-form max-h-[600px] overflow-y-auto">
+                                <div class="flex flex-col items-center gap-y-10 w-full min-h-full py-10 px-6">
+                                    <div class="flex flex-col items-center gap-y-10" id="guest-info-cont">
+                                        <div class="relative w-80">
+                                            <span class="inline-block mb-2 pointer-events-none text-zinc-900 dark:text-zinc-100">Room name</span>
+                                            <input class="w-full p-4 border border-solid rounded-lg border-zinc-900 dark:border-white text-zinc-900 dark:text-zinc-100 bg-white dark:bg-zinc-800 outline-none transition duration-300" type="text" name="room-name" value="<?= $room['Room_Name'] ?>">
+                                        </div>
+                                        <div class="relative w-80">
+                                            <span class="inline-block mb-2 pointer-events-none text-zinc-900 dark:text-zinc-100">Room type</span>
+                                            <input class="w-full p-4 border border-solid rounded-lg border-zinc-900 dark:border-white text-zinc-900 dark:text-zinc-100 bg-white dark:bg-zinc-800 outline-none transition duration-300" type="text" name="room-type" value="<?= $room['Room_Type'] ?>">
+                                        </div>
+                                        <div class="relative w-80">
+                                            <span class="inline-block mb-2 pointer-events-none text-zinc-900 dark:text-zinc-100">Room capacity</span>
+                                            <input class="w-full p-4 border border-solid rounded-lg border-zinc-900 dark:border-white text-zinc-900 dark:text-zinc-100 bg-white dark:bg-zinc-800 outline-none transition duration-300" type="number" name="room-capacity" value="<?= $room['Room_Capacity'] ?>">
+                                        </div>
+                                        <div class="relative w-80">
+                                            <span class="inline-block mb-2 pointer-events-none text-zinc-900 dark:text-zinc-100">Room price</span>
+                                            <input class="w-full p-4 border border-solid rounded-lg border-zinc-900 dark:border-white text-zinc-900 dark:text-zinc-100 bg-white dark:bg-zinc-800 outline-none transition duration-300" type="number" name="room-price" step="0.01" value="<?= $room['Price'] ?>">
+                                        </div>
+                                        <div class="relative w-80">
+                                            <span class="inline-block mb-2 pointer-events-none text-zinc-900 dark:text-zinc-100">Image</span>
+                                            <input class="w-full p-4 border border-solid rounded-lg border-zinc-900 dark:border-white text-zinc-900 dark:text-zinc-100 bg-white dark:bg-zinc-800 outline-none transition duration-300" type="file" name="room-image">
+                                        </div>
+                                        <div class="hidden">
+                                            <input class="w-full p-4 border border-solid rounded-lg border-zinc-900 dark:border-white text-zinc-900 dark:text-zinc-100 bg-white dark:bg-zinc-800 outline-none transition duration-300" type="hidden" name="id" value="<?= $room['ID'] ?>" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-around items-center gap-x-10 text-zinc-900 font-semibold text-xl">
+                                        <button type="reset" class="group relative w-40 py-2 bg-amber-400 rounded-md before:absolute before:top-0 before:-left-8 before:h-full before:w-5 before:bg-gradient-to-l before:from-zinc-100 before:to-transparent before:bg-opacity-40 before:skew-x-[30deg] before:transition-all before:duration-300 before:hover:left-[110%] active:bg-amber-500 overflow-hidden"><p class="transition-all duration-300 group-hover:scale-110 group-active:scale-95 group-active:transition-none">Reset</p></button>
+                                        <button type="submit" name="submit" class="group relative w-40 py-2 bg-amber-400 rounded-md before:absolute before:top-0 before:-left-8 before:h-full before:w-5 before:bg-gradient-to-l before:from-zinc-100 before:to-transparent before:bg-opacity-40 before:skew-x-[30deg] before:transition-all before:duration-300 before:hover:left-[110%] active:bg-amber-500 overflow-hidden"><p class="transition-all duration-300 group-hover:scale-110 group-active:scale-95 group-active:transition-none">Update</p></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- ============= Delete a room pop-up ============= -->
+                    <div class="delete-popup fixed hidden top-1/2 left-1/2 w-[500px] max-w-[94%] h-72 bg-slate-100 text-slate-900 rounded-xl px-3 py-8 -translate-x-1/2 -translate-y-1/2 z-[999]">
+                        <div class="flex flex-col justify-between items-center w-full h-full">
+                            <p class="text-center font-semibold text-2xl">You're about to delete the room:<br><?= $room['Room_Name'] ?><br><?php if(!empty($room['Room_Type'])) { echo "Type: " . $room['Room_Type']; } ?><br>ARE YOU SURE?</p>
+                            <div>
+                                <span class="material-icons-outlined text-6xl text-amber-400 text-stroke-black-2">warning</span>
+                            </div>
+                            <div class="flex gap-8">
+                                <button class="close-delete-btn bg-slate-900 text-slate-100 px-4 py-2 rounded-lg font-semibold">Nooooo!</button>
+                                <a href="delete_room/<?= $room['ID'] ?>" class="rounded-lg"><p class="bg-red-600 text-slate-100 px-4 py-2 rounded-lg font-semibold">Yes, I'm sure</p></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- =========================== -->
+                <?php } ?>
             </div>
             <?php include_once(INCLUDES . "d-footer.php"); ?>
         </div>

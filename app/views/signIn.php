@@ -20,7 +20,7 @@ if(isset($_SESSION["id"])) {
     <script src="<?= URLROOT ?>/js/signIn.js" defer></script>
 	<title>Sign In - Pestana Hotel</title>
 </head>
-<body class="bg-zinc-900 text-zinc-100">
+<body class="bg-zinc-900 text-zinc-100 min-[1921px]:bg-signInBg min-[1921px]:bg-[length:100%]">
     <?php if(isset($_GET["account"]) && $_GET["account"] == "success") { ?>
     <div id="alert" class="fixed top-10 left-1/2 -translate-x-1/2 flex p-4 mb-4 text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 z-10">
         <span class="material-icons-outlined text-amber-600">check_circle</span>
@@ -70,7 +70,7 @@ if(isset($_SESSION["id"])) {
         </button>
     </div>
     <?php } ?>
-    <div class="absolute w-full min-h-screen top-0 left-0 md:bg-signInBg bg-top bg-[length:1920px]">
+    <div class="absolute w-full min-h-screen top-0 left-0 md:bg-signInBg bg-top bg-[length:1920px] bg-no-repeat min-[1921px]:backdrop-blur-md">
         <div class="relative md:top-36">
             <form action="signing" method="post">
                 <div class="flex flex-col justify-center items-center gap-y-10">

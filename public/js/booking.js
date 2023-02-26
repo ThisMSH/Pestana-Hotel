@@ -36,7 +36,7 @@ for(let i = 2; i <= guestsAmount; i++) {
         <span class="absolute left-0 p-4 pointer-events-none text-zinc-100 transition-all duration-300 ease-in-out">Family Name</span>
     </div>
     <div class="input-container relative w-80">
-        <input class="w-full p-4 border border-solid border-zinc-100 rounded-lg text-zinc-900 bg-zinc-800 outline-none transition duration-300 focus:text-zinc-100 valid:text-zinc-100" type="date" name="bday[]" required>
+        <input class="w-full p-4 border border-solid border-zinc-100 rounded-lg text-zinc-800 bg-zinc-800 outline-none transition duration-300 focus:text-zinc-100 valid:text-zinc-100" type="date" name="bday[]" required>
         <span class="absolute left-0 p-4 pointer-events-none text-zinc-100 transition-all duration-300 ease-in-out">Birthday</span>
     </div>`;
     let guestTemplate = document.createElement("div");

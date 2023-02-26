@@ -108,7 +108,7 @@
                             <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
                                 <i class="relative top-0 text-2xl leading-normal text-amber-500 material-icons-outlined">assignment_turned_in</i>
                             </div>
-                            <span class="ml-1 duration-300 ease">Active Bookings</span>
+                            <span class="ml-1 duration-300 ease">All Reservations</span>
                         </a>
                     </li>
                 <?php } ?>
@@ -373,8 +373,8 @@
                 <div class="update-bookers hidden fixed top-1/2 left-1/2 px-4 py-3 -translate-x-1/2 -translate-y-1/2 bg-white border shadow-xl dark:bg-zinc-800 dark:shadow-dark-xl rounded-2xl bg-clip-border z-[999]">
                     <div class="flex justify-between">
                         <h6 class="dark:text-white text-lg font-semibold">Update bookers</h6>
-                        <button>
-                            <span class="close-update material-icons-outlined text-3xl text-zinc-900 dark:text-zinc-100">close</span>
+                        <button class="close-update">
+                            <span class="material-icons-outlined text-3xl text-zinc-900 dark:text-zinc-100">close</span>
                         </button>
                     </div>
                     <form action="update_bookers" method="post">

@@ -5772,22 +5772,6 @@ video {
   max-width: 65ch;
 }
 
-.max-w-screen-sm {
-  max-width: 640px;
-}
-
-.max-w-screen-md {
-  max-width: 768px;
-}
-
-.max-w-screen-lg {
-  max-width: 1024px;
-}
-
-.max-w-screen-xl {
-  max-width: 1280px;
-}
-
 .flex-auto {
   flex: 1 1 auto;
 }
@@ -10955,27 +10939,21 @@ video {
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
-.from-red-800 {
-  --tw-gradient-from: #991b1b;
-  --tw-gradient-to: rgb(153 27 27 / 0);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-
 .from-amber-600 {
   --tw-gradient-from: #d97706;
   --tw-gradient-to: rgb(217 119 6 / 0);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
-.from-red-600 {
-  --tw-gradient-from: #dc2626;
-  --tw-gradient-to: rgb(220 38 38 / 0);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-
 .from-blue-500 {
   --tw-gradient-from: #3b82f6;
   --tw-gradient-to: rgb(59 130 246 / 0);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.from-red-600 {
+  --tw-gradient-from: #dc2626;
+  --tw-gradient-to: rgb(220 38 38 / 0);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
@@ -11012,6 +10990,12 @@ video {
 .from-gray-400 {
   --tw-gradient-from: #9ca3af;
   --tw-gradient-to: rgb(156 163 175 / 0);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.from-red-800 {
+  --tw-gradient-from: #991b1b;
+  --tw-gradient-to: rgb(153 27 27 / 0);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
@@ -11922,16 +11906,8 @@ video {
   --tw-gradient-to: #38bdf8;
 }
 
-.to-red-400 {
-  --tw-gradient-to: #f87171;
-}
-
 .to-yellow-400 {
   --tw-gradient-to: #facc15;
-}
-
-.to-orange-400 {
-  --tw-gradient-to: #fb923c;
 }
 
 .to-violet-500 {
@@ -11956,6 +11932,14 @@ video {
 
 .to-gray-100 {
   --tw-gradient-to: #f3f4f6;
+}
+
+.to-red-400 {
+  --tw-gradient-to: #f87171;
+}
+
+.to-orange-400 {
+  --tw-gradient-to: #fb923c;
 }
 
 .to-current {
@@ -13038,6 +13022,10 @@ video {
   padding-bottom: 0.5rem;
 }
 
+.pl-10 {
+  padding-left: 2.5rem;
+}
+
 .pt-4 {
   padding-top: 1rem;
 }
@@ -13048,10 +13036,6 @@ video {
 
 .pb-1 {
   padding-bottom: 0.25rem;
-}
-
-.pl-10 {
-  padding-left: 2.5rem;
 }
 
 .pl-3 {
@@ -13884,11 +13868,6 @@ video {
   color: rgb(241 245 249 / var(--tw-text-opacity));
 }
 
-.text-zinc-500 {
-  --tw-text-opacity: 1;
-  color: rgb(113 113 122 / var(--tw-text-opacity));
-}
-
 .text-yellow-800 {
   --tw-text-opacity: 1;
   color: rgb(133 77 14 / var(--tw-text-opacity));
@@ -13922,6 +13901,11 @@ video {
 .text-red-500 {
   --tw-text-opacity: 1;
   color: rgb(239 68 68 / var(--tw-text-opacity));
+}
+
+.text-zinc-500 {
+  --tw-text-opacity: 1;
+  color: rgb(113 113 122 / var(--tw-text-opacity));
 }
 
 .text-blue-500 {
@@ -14350,6 +14334,11 @@ video {
 .text-amber-700 {
   --tw-text-opacity: 1;
   color: rgb(180 83 9 / var(--tw-text-opacity));
+}
+
+.text-zinc-800 {
+  --tw-text-opacity: 1;
+  color: rgb(39 39 42 / var(--tw-text-opacity));
 }
 
 .text-opacity-0 {
@@ -17778,12 +17767,12 @@ video {
     min-height: 60%;
   }
 
-  .lg\:w-1\/2 {
-    width: 50%;
-  }
-
   .lg\:w-2\/3 {
     width: 66.666667%;
+  }
+
+  .lg\:w-1\/2 {
+    width: 50%;
   }
 
   .lg\:flex-none {
@@ -17892,6 +17881,22 @@ video {
 
   .\32xl\:w-96 {
     width: 24rem;
+  }
+}
+
+@media (min-width: 1921px) {
+  .min-\[1921px\]\:bg-signInBg {
+    background-image: url("../img/hotel_room_SI.png");
+  }
+
+  .min-\[1921px\]\:bg-\[length\:100\%\] {
+    background-size: 100%;
+  }
+
+  .min-\[1921px\]\:backdrop-blur-md {
+    --tw-backdrop-blur: blur(12px);
+    -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+            backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
   }
 }
 

@@ -34,8 +34,42 @@ class DashboardController extends DashboardModel {
         $data = $this->fetch_rooms();
         Controller::load("d_manage", $data);
     }
+
+    public function add_room() {
+        if(isset($_POST["submit"]) && !empty($_POST["room-name"]) && !empty($_POST["room-capacity"]) && !empty($_POST["room-price"]) && !empty($_FILES["room-image"])) {
+            $data = array(
+                "name" => $_POST["room-name"],
+                "type" => $_POST["room-type"],
+                "capacity" => $_POST["room-capacity"],
+                "price" => $_POST["room-price"],
+                "img" => $_FILES["room-image"]
+            );
+
+            $this->add_new_room($data);
+        }
+    }
+
+    public function update_room() {
+        if(isset($_POST["submit"]) && !empty($_POST["id"])) {
+            $data = array(
+                "name" => $_POST["room-name"],
+                "type" => $_POST["room-type"],
+                "capacity" => $_POST["room-capacity"],
+                "price" => $_POST["room-price"],
+                "img" => $_FILES["room-image"],
+                "id" => $_POST["id"]
+            );
+
+            $this->updating_room($data);
+        }
+    }
+
+    public function delete_room($id) {
+        $this->deleting_room($id);
+    }
     
     public function actived() {
-        Controller::load("d_active");
+        $data = $this->fetch_all_reservations_users_count();
+        Controller::load("d_reservations", $data);
     }
 }

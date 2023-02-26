@@ -1,3 +1,11 @@
+<?php
+    if(!isset($_SESSION["id"]) || ($_SESSION["admin"] == false)) {
+        Controller::load("404");
+    }else {
+        $users_count = $view_data[0];
+        unset($view_data[0], $view_data["COUNT(*)"]);
+        var_dump($view_data);
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +23,7 @@
     <link rel="stylesheet" href="<?= URLROOT ?>css/tailwind_style.css">
     <link rel="stylesheet" href="<?= URLROOT ?>css/style.css">
     <script src="<?= URLROOT ?>js/trigger-popup.js" defer></script>
-    <title>Pestana Dashboard - Active Bookings</title>
+    <title>Pestana Dashboard - All Reservations</title>
 </head>
 <body class="m-0 font-sans text-base font-normal dark:bg-zinc-900 leading-default bg-zinc-100 text-zinc-900">
     <div class="absolute w-full bg-amber-500 min-h-75"></div>
@@ -80,7 +88,7 @@
                         <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
                             <i class="relative top-0 text-2xl leading-normal text-amber-500 material-icons-outlined">assignment_turned_in</i>
                         </div>
-                        <span class="ml-1 duration-300 ease">Active Bookings</span>
+                        <span class="ml-1 duration-300 ease">All Reservations</span>
                     </a>
                 </li>
             </ul>
@@ -178,7 +186,7 @@
                     <!-- breadcrumb -->
                     <ol class="flex flex-wrap pt-1 mr-12 bg-transparent rounded-lg sm:mr-16">
                         <li class="text-sm leading-normal text-zinc-600">Dashboard</li>
-                        <li class="text-sm pl-2 capitalize leading-normal text-zinc-600 before:float-left before:pr-2 before:text-zinc-600 before:content-['/']" aria-current="page">Active Bookings</li>
+                        <li class="text-sm pl-2 capitalize leading-normal text-zinc-600 before:float-left before:pr-2 before:text-zinc-600 before:content-['/']" aria-current="page">All Reservations</li>
                     </ol>
                 </nav>
                 <div class="flex items-center mt-2 grow sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto">
@@ -295,8 +303,9 @@
                       <table class="items-center w-full mb-0 align-top border-collapse dark:border-white/40 text-slate-500">
                         <thead class="align-bottom">
                             <tr>
-                                <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Room Type</th>
-                                <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Username</th>
+                                <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Room Name & Type</th>
+                                <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Reservation for</th>
+                                <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Bookers</th>
                                 <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Check In</th>
                                 <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Check Out</th>
                                 <th class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Status</th>
@@ -385,3 +394,4 @@
 <!-- main script file  -->
 <script src="<?= URLROOT ?>js/js/argon-dashboard-tailwind.js?v=1.0.1" async></script>
 </html>
+<?php }
