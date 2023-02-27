@@ -24,7 +24,7 @@
     <title>Pestana Dashboard - Profile</title>
   </head>
   <body class="m-0 font-sans text-base font-normal dark:bg-zinc-900 leading-default bg-zinc-100 text-zinc-900">
-    <div class="absolute w-full bg-amber-500 min-h-75"></div>
+    <div class="fixed top-0 w-full bg-amber-500 min-h-75"></div>
     <!-- sidenav  -->
     <aside class="fixed inset-y-0 flex-wrap items-center justify-between block w-full p-0 my-4 overflow-y-auto transition-transform duration-200 -translate-x-full bg-zinc-100 border-0 shadow-xl dark:shadow-none dark:bg-zinc-700 max-w-64 ease z-990 xl:ml-6 rounded-2xl xl:left-0 xl:translate-x-0" aria-expanded="false">
         <div class="h-19">

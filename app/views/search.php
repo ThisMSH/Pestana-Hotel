@@ -1,5 +1,7 @@
 <?php
-    if(!isset($_POST["search"])) {
+    if(!isset($_SESSION['id'])) {
+        header("location: " . URLROOT . "signin/login");
+    }else if(!isset($_POST["search"])) {
         header("location: " . URLROOT . "home/index");
     }else {
         $rooms = new HomeController();

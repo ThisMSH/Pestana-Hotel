@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 26, 2023 at 05:53 PM
+-- Generation Time: Feb 27, 2023 at 11:48 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -54,7 +54,12 @@ INSERT INTO `bookers` (`ID`, `First_Name`, `Family_Name`, `Birthday`, `BookerID`
 (18, 'Another', 'One', '1990-01-01', 1, 16),
 (19, 'El Mahdi', 'Saissi Hassani', '2022-01-01', 1, 17),
 (20, 'El Mahdi', 'Saissi Hassani', '2022-01-01', 1, 18),
-(21, 'Mohammed', 'Moustarhfir', '2002-02-02', 2, 19);
+(21, 'Mohammed', 'Moustarhfir', '2002-02-02', 2, 19),
+(22, 'تحياتي', 'مع السلامة', '2023-02-01', 3, 20),
+(23, 'Mohammed', 'آيت القاضي', '2023-02-28', 3, 20),
+(24, 'أحمد', 'ركن الدين', '2023-02-09', 3, 20),
+(25, 'حميد', 'حميد', '2023-02-11', 3, 20),
+(26, 'تحياتي', 'مع السلامة', '2023-02-01', 3, 21);
 
 -- --------------------------------------------------------
 
@@ -89,7 +94,9 @@ INSERT INTO `reservations` (`ID`, `Room_Name`, `Room_Type`, `Bookers_Number`, `R
 (16, 'Double', '', 2, 'El Mahdi Saissi Hassani', '0000-00-00', '0000-00-00', 1, 2, 236.6),
 (17, 'Double', '', 1, 'El Mahdi Saissi Hassani', '2023-02-25', '2023-02-26', 1, 2, 236.6),
 (18, 'Suite', 'Penthouse Suite', 1, 'El Mahdi Saissi Hassani', '0000-00-00', '0000-00-00', 1, 6, 546),
-(19, 'Single', '', 1, 'Mohammed Moustarhfir', '2023-03-01', '2023-03-04', 2, 1, 150);
+(19, 'Single', '', 1, 'Mohammed Moustarhfir', '2023-03-01', '2023-03-04', 2, 1, 150),
+(20, 'Quad', 'Friendly Quad', 4, 'تحياتي مع السلامة', '2023-03-02', '2023-03-04', 3, 12, 450),
+(21, 'Single', '', 1, 'تحياتي مع السلامة', '2023-03-09', '2023-03-10', 3, 1, 148.5);
 
 -- --------------------------------------------------------
 
@@ -148,7 +155,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`ID`, `First_Name`, `Family_Name`, `Phone_Number`, `Birthday`, `Username`, `Email`, `Password`, `Admin`, `Discount`) VALUES
 (1, 'El Mahdi', 'Saissi Hassani', '0453234323', '2022-01-01', 'mahdi', 'mahdi@gmail.com', '$2y$10$uNjF3cgDr9r5LX5M4slCxuqQtSmnrm.yWYhS8caW8rMypMrzqCpWq', 1, 6),
-(2, 'Mohammed', 'Moustarhfir', '0606666600', '2002-02-02', 'mousta', 'mousta@gmail.com', '$2y$10$IeF.wSPBvHQ3kFuOU0HleeIUrXe0LCmOaqWtDpvqXz6LWUyEd2PCK', 0, 1);
+(2, 'Mohammed', 'Moustarhfir', '0606666600', '2002-02-02', 'mousta', 'mousta@gmail.com', '$2y$10$IeF.wSPBvHQ3kFuOU0HleeIUrXe0LCmOaqWtDpvqXz6LWUyEd2PCK', 0, 1),
+(3, 'تحياتي', 'مع السلامة', '0202021314', '2023-02-01', 'ta7iyati', 'ta7iyati@gmail.com', '$2y$10$/WS7jNW6oOJ6E8prGV7a8OGa1oo1pX1WAnm6L5ez.8.E3yjKGHXvq', 0, 2);
 
 --
 -- Indexes for dumped tables
@@ -190,13 +198,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `bookers`
 --
 ALTER TABLE `bookers`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `reservations`
 --
 ALTER TABLE `reservations`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `rooms`
@@ -208,7 +216,7 @@ ALTER TABLE `rooms`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables

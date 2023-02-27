@@ -27,7 +27,7 @@
     <title>Pestana Dashboard - Booking</title>
 </head>
 <body class="m-0 font-sans text-base font-normal dark:bg-zinc-900 leading-default bg-zinc-100 text-zinc-900">
-    <div class="absolute w-full bg-amber-500 min-h-75"></div>
+    <div class="fixed top-0 w-full bg-amber-500 min-h-75"></div>
     <?php if(isset($_GET["update"]) && $_GET["update"] == "success") { ?>
         <div id="alert" class="fixed top-10 left-1/2 -translate-x-1/2 flex p-4 mb-4 text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 z-50">
             <span class="material-icons-outlined text-amber-600">check_circle</span>
@@ -270,10 +270,10 @@
                                             </div>
                                         </td>
                                         <td class="p-2 align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
-                                            <p class="text-sm font-semibold leading-tight dark:text-white dark:opacity-80"><?= $reserv['Check_In'] ?></p>
+                                            <p class="date-switch text-sm font-semibold leading-tight dark:text-white dark:opacity-80"><?= $reserv['Check_In'] ?></p>
                                         </td>
                                         <td class="p-2 align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
-                                            <p class="text-sm font-semibold leading-tight dark:text-white dark:opacity-80"><?= $reserv['Check_Out'] ?></p>
+                                            <p class="date-switch text-sm font-semibold leading-tight dark:text-white dark:opacity-80"><?= $reserv['Check_Out'] ?></p>
                                         </td>
                                         <td class="p-2 align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
                                             <p class="text-sm font-semibold leading-tight dark:text-white dark:opacity-80">

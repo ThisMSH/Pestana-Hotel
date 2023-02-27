@@ -56,6 +56,13 @@ for(let i = 0; i < updateBtn.length; i++) {
     })
 }
 
+// ===== Switching date form to dd-mm-yyy =====
+const date = document.querySelectorAll(".date-switch");
+
+for(let i = 0; i < date.length; i++) {
+    date[i].innerText = date[i].innerText.replace(/(\d{4})-(\d{2})-(\d{2})/, "$3-$2-$1");
+}
+
 // ===== Alert =====
 const alertContainer = document.querySelector("#alert");
 

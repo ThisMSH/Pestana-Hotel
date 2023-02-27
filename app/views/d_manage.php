@@ -23,7 +23,7 @@
     <script src="<?= URLROOT ?>/js/manage-rooms.js" defer></script>
   </head>
   <body class="m-0 font-sans text-base font-normal dark:bg-zinc-900 leading-default bg-zinc-100 text-zinc-900">
-    <div class="absolute w-full bg-amber-500 min-h-75"></div>
+    <div class="fixed top-0 w-full bg-amber-500 min-h-75"></div>
     <?php if(isset($_GET["add"]) && $_GET["add"] == "success") { ?>
         <div id="alert" class="fixed top-10 left-1/2 -translate-x-1/2 flex p-4 mb-4 text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 z-50">
             <span class="material-icons-outlined text-amber-600">check_circle</span>
@@ -288,11 +288,11 @@
                       <table class="items-center w-full mb-0 align-top border-collapse dark:border-white/40 text-slate-500">
                         <thead class="align-bottom">
                             <tr>
-                                <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-zinc-700 opacity-80">Thumbnail</th>
-                                <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-zinc-700 opacity-80">Room Name</th>
-                                <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-zinc-700 opacity-80">Room Type</th>
-                                <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-zinc-700 opacity-80">Room Capacity</th>
-                                <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-zinc-700 opacity-80">Price</th>
+                                <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xs border-b-solid tracking-none whitespace-nowrap text-zinc-700 opacity-80">Thumbnail</th>
+                                <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xs border-b-solid tracking-none whitespace-nowrap text-zinc-700 opacity-80">Room Name</th>
+                                <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xs border-b-solid tracking-none whitespace-nowrap text-zinc-700 opacity-80">Room Type</th>
+                                <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xs border-b-solid tracking-none whitespace-nowrap text-zinc-700 opacity-80">Room Capacity</th>
+                                <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xs border-b-solid tracking-none whitespace-nowrap text-zinc-700 opacity-80">Price</th>
                                 <th class="px-6 py-3 font-semibold capitalize align-middle bg-transparent border-b border-collapse border-solid shadow-none dark:border-white/40 dark:text-white tracking-none whitespace-nowrap text-zinc-700 opacity-80"></th>
                             </tr>
                         </thead>
@@ -305,20 +305,20 @@
                                         </div>
                                     </td>
                                     <td class="p-2 align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
-                                        <p class="text-sm font-semibold leading-tight dark:text-white dark:opacity-80"><?= $room['Room_Name'] ?></p>
+                                        <p class="text-base font-semibold leading-tight dark:text-white dark:opacity-80"><?= $room['Room_Name'] ?></p>
                                     </td>
                                     <td class="p-2 align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
-                                        <p class="text-sm font-semibold leading-tight dark:text-white dark:opacity-80"><?= $room['Room_Type'] ?></p>
+                                        <p class="text-base font-semibold leading-tight dark:text-white dark:opacity-80"><?= $room['Room_Type'] ?></p>
                                     </td>
-                                    <td class="p-2 text-sm leading-normal align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
-                                        <p class="text-sm font-semibold leading-tight dark:text-white dark:opacity-80"><?= $room['Room_Capacity'] ?></p>
+                                    <td class="p-2 text-base leading-normal align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                        <p class="text-base font-semibold leading-tight dark:text-white dark:opacity-80"><?= $room['Room_Capacity'] ?></p>
                                     </td>
-                                    <td class="p-2 text-sm leading-normal align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
-                                        <p class="text-sm font-semibold leading-tight dark:text-white dark:opacity-80"><?= number_format($room['Price'], 2) ?> €</p>
+                                    <td class="p-2 text-base leading-normal align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                        <p class="text-base font-semibold leading-tight dark:text-white dark:opacity-80"><?= number_format($room['Price'], 2) ?> €</p>
                                     </td>
                                     <td class="p-2 align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
-                                        <button type="button" class="edit-btn inline-flex items-center px-4 py-2.5 mb-0 font-bold text-center align-middle transition-all bg-transparent border-0 rounded-lg shadow-none cursor-pointer leading-normal text-sm ease-in bg-150 hover:-translate-y-px active:opacity-85 bg-x-25 text-sky-700 dark:text-sky-300"><span class="material-icons-outlined mr-2 text-sky-700 dark:text-sky-300">edit</span>Edit</button>
-                                        <button type="button" class="delete-btn relative z-10 inline-flex items-center px-4 py-2.5 mb-0 font-bold text-center text-transparent align-middle transition-all border-0 rounded-lg shadow-none cursor-pointer leading-normal text-sm ease-in bg-150 bg-gradient-to-tl from-red-700 to-orange-600 dark:from-red-400 dark:to-orange-300 hover:-translate-y-px active:opacity-85 bg-x-25 bg-clip-text"><span class="material-icons-outlined mr-2 bg-150 bg-gradient-to-tl from-red-700 to-orange-600 dark:from-red-400 dark:to-orange-300 bg-x-25 bg-clip-text">highlight_off</span>Delete</button>
+                                        <button type="button" class="edit-btn inline-flex items-center px-4 py-2.5 mb-0 font-bold text-center align-middle transition-all bg-transparent border-0 rounded-lg shadow-none cursor-pointer leading-normal text-base ease-in bg-150 hover:-translate-y-px active:opacity-85 bg-x-25 text-sky-700 dark:text-sky-300"><span class="material-icons-outlined mr-2 text-sky-700 dark:text-sky-300">edit</span>Edit</button>
+                                        <button type="button" class="delete-btn relative z-10 inline-flex items-center px-4 py-2.5 mb-0 font-bold text-center text-transparent align-middle transition-all border-0 rounded-lg shadow-none cursor-pointer leading-normal text-base ease-in bg-150 bg-gradient-to-tl from-red-700 to-orange-600 dark:from-red-400 dark:to-orange-300 hover:-translate-y-px active:opacity-85 bg-x-25 bg-clip-text"><span class="material-icons-outlined mr-2 bg-150 bg-gradient-to-tl from-red-700 to-orange-600 dark:from-red-400 dark:to-orange-300 bg-x-25 bg-clip-text">highlight_off</span>Delete</button>
                                     </td>
                                 </tr>
                             <?php } ?>

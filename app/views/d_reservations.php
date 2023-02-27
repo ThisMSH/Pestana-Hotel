@@ -4,7 +4,19 @@
     }else {
         $users_count = $view_data[0];
         unset($view_data[0], $view_data["COUNT(*)"]);
-        var_dump($view_data);
+        // print_r($view_data);
+        $canceled_count = 0;
+        $in_service_count = 0;
+        $booked_count = 0;
+        foreach($view_data as $data) {
+            if($data['Check_In'] == "0000-00-00") {
+                $canceled_count++;
+            }else if($data['Check_In'] <= date("Y-m-d") && $data['Check_Out'] >= date("Y-m-d")) {
+                $in_service_count++;
+            }else if($data['Check_In'] > date("Y-m-d")) {
+                $booked_count++;
+            }
+        }
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,7 +38,7 @@
     <title>Pestana Dashboard - All Reservations</title>
 </head>
 <body class="m-0 font-sans text-base font-normal dark:bg-zinc-900 leading-default bg-zinc-100 text-zinc-900">
-    <div class="absolute w-full bg-amber-500 min-h-75"></div>
+    <div class="fixed top-0 w-full bg-amber-500 min-h-75"></div>
     <!-- sidenav  -->
     <aside class="fixed inset-y-0 flex-wrap items-center justify-between block w-full p-0 my-4 overflow-y-auto transition-transform duration-200 -translate-x-full bg-zinc-100 border-0 shadow-xl dark:shadow-none dark:bg-zinc-700 max-w-64 ease z-990 xl:ml-6 rounded-2xl xl:left-0 xl:translate-x-0" aria-expanded="false">
         <div class="h-19">
@@ -220,8 +232,8 @@
                             <div class="flex flex-row -mx-3">
                                 <div class="flex-none w-2/3 max-w-full px-3">
                                     <div>
-                                        <p class="font-sans text-sm font-semibold leading-normal uppercase dark:text-white dark:opacity-60">Total Number Of Rooms Booked</p>
-                                        <h5 class="mb-2 text-2xl font-bold text-emerald-500">5</h5>
+                                        <p class="font-sans text-sm font-semibold leading-normal uppercase dark:text-white dark:opacity-60">Total Number Of Reserved Rooms</p>
+                                        <h5 class="mb-2 text-2xl font-bold text-emerald-500"><?= $booked_count ?></h5>
                                     </div>
                                 </div>
                                 <div class="px-3 text-right basis-1/3">
@@ -241,7 +253,7 @@
                                 <div class="flex-none w-2/3 max-w-full px-3">
                                     <div>
                                         <p class="font-sans text-sm font-semibold leading-normal uppercase dark:text-white dark:opacity-60">Total Number Of Rooms In Service</p>
-                                        <h5 class="mb-2 text-2xl font-bold text-emerald-500">2</h5>
+                                        <h5 class="mb-2 text-2xl font-bold text-emerald-500"><?= $in_service_count ?></h5>
                                     </div>
                                 </div>
                                 <div class="px-3 text-right basis-1/3">
@@ -261,7 +273,7 @@
                                 <div class="flex-none w-2/3 max-w-full px-3">
                                     <div>
                                         <p class="font-sans text-sm font-semibold leading-normal uppercase dark:text-white dark:opacity-60">Total Number Of Canceled Reservations</p>
-                                        <h5 class="mb-2 text-2xl font-bold text-emerald-500">2</h5>
+                                        <h5 class="mb-2 text-2xl font-bold text-emerald-500"><?= $canceled_count ?></h5>
                                     </div>
                                 </div>
                                 <div class="px-3 text-right basis-1/3">
@@ -281,7 +293,7 @@
                                 <div class="flex-none w-2/3 max-w-full px-3">
                                     <div>
                                         <p class="font-sans text-sm font-semibold leading-normal uppercase dark:text-white dark:opacity-60">Total Number Of Users</p>
-                                        <h5 class="mb-2 text-2xl font-bold text-emerald-500">2</h5>
+                                        <h5 class="mb-2 text-2xl font-bold text-emerald-500"><?= $users_count ?></h5>
                                     </div>
                                 </div>
                                 <div class="px-3 text-right basis-1/3">
@@ -300,89 +312,59 @@
                 </div>
                 <div class="px-0 pb-2">
                     <div class="overflow-x-auto scroll-bar">
-                      <table class="items-center w-full mb-0 align-top border-collapse dark:border-white/40 text-slate-500">
-                        <thead class="align-bottom">
-                            <tr>
-                                <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Room Name & Type</th>
-                                <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Reservation for</th>
-                                <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Bookers</th>
-                                <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Check In</th>
-                                <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Check Out</th>
-                                <th class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Status</th>
-                                <th class="px-6 py-3 font-semibold capitalize align-middle bg-transparent border-b border-collapse border-solid shadow-none dark:border-white/40 dark:text-white tracking-none whitespace-nowrap text-slate-400 opacity-70"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="p-2 align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
-                                    <div class="px-2 py-1">
-                                        <h6 class="leading-normal dark:text-white">Single</h6>
-                                        <p class="text-xs leading-tight dark:text-white dark:opacity-80 text-slate-400">Room type extra</p>
-                                    </div>
-                                </td>
-                                <td class="p-2 align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
-                                    <p class="text-sm font-semibold leading-tight dark:text-white dark:opacity-80">someone</p>
-                                </td>
-                                <td class="p-2 align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
-                                    <p class="text-sm font-semibold leading-tight dark:text-white dark:opacity-80">2023-01-01</p>
-                                </td>
-                                <td class="p-2 align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
-                                    <p class="text-sm font-semibold leading-tight dark:text-white dark:opacity-80">2023-01-01</p>
-                                </td>
-                                <td class="p-2 text-sm leading-normal text-center align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
-                                <span class="bg-gradient-to-tl from-emerald-600 to-teal-400 px-2.5 text-xs rounded-1.8 py-1.4 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white">In Service</span>
-                                </td>
-                                <td class="p-2 align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
-                                    <a class="inline-flex items-center px-4 py-2.5 mb-0 font-bold text-center align-middle transition-all bg-transparent border-0 rounded-lg shadow-none cursor-pointer leading-normal text-sm ease-in bg-150 hover:-translate-y-px active:opacity-85 bg-x-25 text-sky-700 dark:text-sky-300" href=""><span class="material-icons-outlined mr-2 text-sky-700 dark:text-sky-300">edit</span>Edit</a>
-                                    <button class="cancel-btn relative z-10 inline-flex items-center px-4 py-2.5 mb-0 font-bold text-center text-transparent align-middle transition-all border-0 rounded-lg shadow-none cursor-pointer leading-normal text-sm ease-in bg-150 bg-gradient-to-tl from-red-700 to-orange-600 dark:from-red-400 dark:to-orange-300 hover:-translate-y-px active:opacity-85 bg-x-25 bg-clip-text" type="button"><span class="material-icons-outlined mr-2 bg-150 bg-gradient-to-tl from-red-700 to-orange-600 dark:from-red-400 dark:to-orange-300 bg-x-25 bg-clip-text">highlight_off</span>Cancel</button>
-                                    <div class="cancel-popup hidden top-1/2 left-1/2 w-[500px] max-w-[94%] h-72 bg-slate-100 text-slate-900 rounded-xl px-3 py-8 -translate-x-1/2 -translate-y-1/2 z-[100]">
-                                        <div class="flex flex-col justify-between items-center w-full h-full">
-                                            <p class="text-center font-semibold text-2xl">ARE YOU SURE THAT YOU WANT<br>TO CANCEL YOUR RESERVATION?</p>
-                                            <div class="flex gap-8">
-                                                <button class="undo-btn w-24 bg-slate-900 text-slate-100 px-4 py-2 rounded-lg font-semibold">Undo</button>
-                                                <a href="#" class="rounded-lg"><p class="w-24 bg-red-600 text-slate-100 px-4 py-2 rounded-lg font-semibold">CANCEL</p></a>
+                        <table class="items-center w-full mb-0 align-top border-collapse dark:border-white/40 text-slate-500">
+                            <thead class="align-bottom">
+                                <tr>
+                                    <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Room Name & Type</th>
+                                    <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Reservation for</th>
+                                    <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Bookers</th>
+                                    <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Check In</th>
+                                    <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Check Out</th>
+                                    <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Price</th>
+                                    <th class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach($view_data as $data) { ?>
+                                    <tr>
+                                        <td class="p-2 pl-4 align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                            <div class="px-2 py-1">
+                                                <h6 class="leading-normal dark:text-white"><?= $data['Room_Name'] ?></h6>
+                                                <p class="text-xs leading-tight dark:text-white dark:opacity-80 text-slate-400"><?= $data['Room_Type'] ?></p>
                                             </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="p-2 align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
-                                    <div class="px-2 py-1">
-                                        <h6 class="leading-normal dark:text-white">Single</h6>
-                                        <p class="text-xs leading-tight dark:text-white dark:opacity-80 text-slate-400">Room type extra</p>
-                                    </div>
-                                </td>
-                                <td class="p-2 align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
-                                    <p class="text-sm font-semibold leading-tight dark:text-white dark:opacity-80">someone</p>
-                                </td>
-                                <td class="p-2 align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
-                                    <p class="text-sm font-semibold leading-tight dark:text-white dark:opacity-80">2023-01-01</p>
-                                </td>
-                                <td class="p-2 align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
-                                    <p class="text-sm font-semibold leading-tight dark:text-white dark:opacity-80">2023-01-01</p>
-                                </td>
-                                <td class="p-2 text-sm leading-normal text-center align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
-                                <span class="bg-gradient-to-tl from-blue-600 to-sky-400 px-2.5 text-xs rounded-1.8 py-1.4 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white">Booked</span>
-                                </td>
-                                <td class="p-2 align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
-                                    <a class="inline-flex items-center px-4 py-2.5 mb-0 font-bold text-center align-middle transition-all bg-transparent border-0 rounded-lg shadow-none cursor-pointer leading-normal text-sm ease-in bg-150 hover:-translate-y-px active:opacity-85 bg-x-25 text-sky-700 dark:text-sky-300" href=""><span class="material-icons-outlined mr-2 text-sky-700 dark:text-sky-300">edit</span>Edit</a>
-                                    <button class="cancel-btn relative z-10 inline-flex items-center px-4 py-2.5 mb-0 font-bold text-center text-transparent align-middle transition-all border-0 rounded-lg shadow-none cursor-pointer leading-normal text-sm ease-in bg-150 bg-gradient-to-tl from-red-700 to-orange-600 dark:from-red-400 dark:to-orange-300 hover:-translate-y-px active:opacity-85 bg-x-25 bg-clip-text" type="button"><span class="material-icons-outlined mr-2 bg-150 bg-gradient-to-tl from-red-700 to-orange-600 dark:from-red-400 dark:to-orange-300 bg-x-25 bg-clip-text">highlight_off</span>Cancel</button>
-                                    <div class="cancel-popup hidden top-1/2 left-1/2 w-[500px] max-w-[94%] h-72 bg-slate-100 text-slate-900 rounded-xl px-3 py-8 -translate-x-1/2 -translate-y-1/2 z-[100]">
-                                        <div class="flex flex-col justify-between items-center w-full h-full">
-                                            <p class="text-center font-semibold text-2xl">ARE YOU SURE THAT YOU WANT<br>TO CANCEL YOUR RESERVATION?</p>
-                                            <div class="flex gap-8">
-                                                <button class="undo-btn w-24 bg-slate-900 text-slate-100 px-4 py-2 rounded-lg font-semibold">Undo</button>
-                                                <a href="#" class="rounded-lg"><p class="w-24 bg-red-600 text-slate-100 px-4 py-2 rounded-lg font-semibold">CANCEL</p></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                      </table>
+                                        </td>
+                                        <td class="p-2 align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                            <p class="font-semibold leading-tight dark:text-white dark:opacity-80"><?= $data['Reservation_for'] ?></p>
+                                        </td>
+                                        <td class="p-2 align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                            <p class="font-semibold leading-tight dark:text-white dark:opacity-80"><?= $data['Bookers_Number'] ?></p>
+                                        </td>
+                                        <td class="p-2 align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                            <p class="date-switch font-semibold leading-tight dark:text-white dark:opacity-80"><?= $data['Check_In'] ?></p>
+                                        </td>
+                                        <td class="p-2 align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                            <p class="date-switch font-semibold leading-tight dark:text-white dark:opacity-80"><?= $data['Check_Out'] ?></p>
+                                        </td>
+                                        <td class="p-2 align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                            <p class="font-semibold leading-tight dark:text-white dark:opacity-80"><?= number_format($data['Price'], 2) ?> €</p>
+                                        </td>
+                                        <td class="p-2 leading-normal text-center align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                            <?php if($data['Check_In'] == "0000-00-00") { ?>
+                                                <span class="bg-gradient-to-tl from-red-800 to-red-400 px-2.5 text-xs rounded-1.8 py-1.4 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white">Canceled</span>
+                                            <?php }else if($data['Check_Out'] >= date("Y-m-d") && $data['Check_In'] <= date("Y-m-d")) { ?>
+                                                <span class="bg-gradient-to-tl from-emerald-600 to-teal-400 px-2.5 text-xs rounded-1.8 py-1.4 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white">In Service</span>
+                                            <?php }else if($data['Check_Out'] < date("Y-m-d")) { ?>
+                                                <span class="bg-gradient-to-tl from-blue-600 to-sky-400 px-2.5 text-xs rounded-1.8 py-1.4 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white">Done</span>
+                                            <?php }else if($data['Check_In'] > date("Y-m-d")) { ?>
+                                                <span class="bg-gradient-to-tl from-amber-600 to-yellow-400 px-2.5 text-xs rounded-1.8 py-1.4 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white">Pending</span>
+                                            <?php } ?>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
                     </div>
-                  </div>
+                </div>
             </div>
             <?php include_once(INCLUDES . "d-footer.php"); ?>
         </div>
