@@ -5,16 +5,140 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="Welcome to Pestana Hotel where you can find the best offers and the most comfortable services.">
-	<link rel="stylesheet" href="../css/tailwind_style.css">
-	<link rel="stylesheet" href="../css/style.css">
-	<link rel="shortcut icon" href="../img/logo/pestana_logo.png" type="image/x-icon">
+	<link rel="stylesheet" href="<?= URLROOT ?>/css/tailwind_style.css">
+	<link rel="stylesheet" href="<?= URLROOT ?>/css/style.css">
+	<link rel="shortcut icon" href="<?= URLROOT ?>/img/logo/pestana_logo.png" type="image/x-icon">
 	<script src="https://kit.fontawesome.com/b44b654493.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Sharp|Material+Icons+Two+Tone" rel="stylesheet">
 	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 	<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    <script defer src="../js/signUp.js"></script>
+    <script defer src="<?= URLROOT ?>/js/signUp.js"></script>
 	<title>Sign Up - Pestana Hotel</title>
 </head>
 <body class="bg-zinc-900 text-zinc-100">
+<?php if(isset($_GET["error"]) && $_GET["error"] == "empty") { ?>
+    <div id="alert" class="fixed top-10 left-1/2 -translate-x-1/2 flex p-4 mb-4 text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 z-10">
+        <span class="material-icons-outlined text-amber-600">cancel</span>
+        <p class="ml-3 text-sm font-medium">Please fill in all the inputs.</p>
+        <button type="button" id="close-alert" class="ml-auto -mx-1.5 -my-1.5 bg-yellow-50 text-yellow-500 rounded-lg focus:ring-2 focus:ring-yellow-400 p-1.5 hover:bg-yellow-200 inline-flex h-8 w-8 dark:bg-gray-800 dark:text-yellow-300 dark:hover:bg-gray-700">
+            <svg aria-hidden="true" class="w-5 h-5 pointer-events-none" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </button>
+    </div>
+    <?php } ?>
+    <?php if(isset($_GET["error"]) && ($_GET["error"] == "signup_stmt_failed" || $_GET["error"] == "usercheck_stmt_failed" || $_GET["error"] == "emailcheck_stmt_failed")) { ?>
+    <div id="alert" class="fixed top-10 left-1/2 -translate-x-1/2 flex p-4 mb-4 text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 z-10">
+        <span class="material-icons-outlined text-amber-600">cancel</span>
+        <p class="ml-3 text-sm font-medium">
+            <?php if($_GET["error"] == "signup_stmt_failed") {echo "Sign-up ";}
+            else if($_GET["error"] == "usercheck_stmt_failed") {echo "User check ";}
+            else if($_GET["error"] == "emailcheck_stmt_failed") {echo "Email check ";} ?>
+            statement failed.
+        </p>
+        <button type="button" id="close-alert" class="ml-auto -mx-1.5 -my-1.5 bg-yellow-50 text-yellow-500 rounded-lg focus:ring-2 focus:ring-yellow-400 p-1.5 hover:bg-yellow-200 inline-flex h-8 w-8 dark:bg-gray-800 dark:text-yellow-300 dark:hover:bg-gray-700">
+            <svg aria-hidden="true" class="w-5 h-5 pointer-events-none" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </button>
+    </div>
+    <?php } ?>
+    <?php if(isset($_GET["error"]) && $_GET["error"] == "wrong1" || isset($_GET["error"]) && $_GET["error"] == "wrong2") { ?>
+    <div id="alert" class="fixed top-10 left-1/2 -translate-x-1/2 flex p-4 mb-4 text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 z-10">
+        <span class="material-icons-outlined text-amber-600">cancel</span>
+        <p class="ml-3 text-sm font-medium">Your Username/Email or/and the password is wrong.</p>
+        <button type="button" id="close-alert" class="ml-auto -mx-1.5 -my-1.5 bg-yellow-50 text-yellow-500 rounded-lg focus:ring-2 focus:ring-yellow-400 p-1.5 hover:bg-yellow-200 inline-flex h-8 w-8 dark:bg-gray-800 dark:text-yellow-300 dark:hover:bg-gray-700">
+            <svg aria-hidden="true" class="w-5 h-5 pointer-events-none" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </button>
+    </div>
+    <?php } ?>
+    <?php if(isset($_GET["error"]) && $_GET["error"] == "firstname_invalid") { ?>
+    <div id="alert" class="fixed top-10 left-1/2 -translate-x-1/2 flex p-4 mb-4 text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 z-10">
+        <span class="material-icons-outlined text-amber-600">cancel</span>
+        <p class="ml-3 text-sm font-medium">First name is not valid.</p>
+        <button type="button" id="close-alert" class="ml-auto -mx-1.5 -my-1.5 bg-yellow-50 text-yellow-500 rounded-lg focus:ring-2 focus:ring-yellow-400 p-1.5 hover:bg-yellow-200 inline-flex h-8 w-8 dark:bg-gray-800 dark:text-yellow-300 dark:hover:bg-gray-700">
+            <svg aria-hidden="true" class="w-5 h-5 pointer-events-none" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </button>
+    </div>
+    <?php } ?>
+    <?php if(isset($_GET["error"]) && $_GET["error"] == "familyname_invalid") { ?>
+    <div id="alert" class="fixed top-10 left-1/2 -translate-x-1/2 flex p-4 mb-4 text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 z-10">
+        <span class="material-icons-outlined text-amber-600">cancel</span>
+        <p class="ml-3 text-sm font-medium">Family name is not valid.</p>
+        <button type="button" id="close-alert" class="ml-auto -mx-1.5 -my-1.5 bg-yellow-50 text-yellow-500 rounded-lg focus:ring-2 focus:ring-yellow-400 p-1.5 hover:bg-yellow-200 inline-flex h-8 w-8 dark:bg-gray-800 dark:text-yellow-300 dark:hover:bg-gray-700">
+            <svg aria-hidden="true" class="w-5 h-5 pointer-events-none" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </button>
+    </div>
+    <?php } ?>
+    <?php if(isset($_GET["error"]) && $_GET["error"] == "phone_invalid") { ?>
+    <div id="alert" class="fixed top-10 left-1/2 -translate-x-1/2 flex p-4 mb-4 text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 z-10">
+        <span class="material-icons-outlined text-amber-600">cancel</span>
+        <p class="ml-3 text-sm font-medium">Phone number is not valid.</p>
+        <button type="button" id="close-alert" class="ml-auto -mx-1.5 -my-1.5 bg-yellow-50 text-yellow-500 rounded-lg focus:ring-2 focus:ring-yellow-400 p-1.5 hover:bg-yellow-200 inline-flex h-8 w-8 dark:bg-gray-800 dark:text-yellow-300 dark:hover:bg-gray-700">
+            <svg aria-hidden="true" class="w-5 h-5 pointer-events-none" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </button>
+    </div>
+    <?php } ?>
+    <?php if(isset($_GET["error"]) && $_GET["error"] == "username_invalid") { ?>
+    <div id="alert" class="fixed top-10 left-1/2 -translate-x-1/2 flex p-4 mb-4 text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 z-10">
+        <span class="material-icons-outlined text-amber-600">cancel</span>
+        <p class="ml-3 text-sm font-medium">Username is not valid.</p>
+        <button type="button" id="close-alert" class="ml-auto -mx-1.5 -my-1.5 bg-yellow-50 text-yellow-500 rounded-lg focus:ring-2 focus:ring-yellow-400 p-1.5 hover:bg-yellow-200 inline-flex h-8 w-8 dark:bg-gray-800 dark:text-yellow-300 dark:hover:bg-gray-700">
+            <svg aria-hidden="true" class="w-5 h-5 pointer-events-none" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </button>
+    </div>
+    <?php } ?>
+    <?php if(isset($_GET["error"]) && $_GET["error"] == "email_invalid") { ?>
+    <div id="alert" class="fixed top-10 left-1/2 -translate-x-1/2 flex p-4 mb-4 text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 z-10">
+        <span class="material-icons-outlined text-amber-600">cancel</span>
+        <p class="ml-3 text-sm font-medium">E-mail is not valid.</p>
+        <button type="button" id="close-alert" class="ml-auto -mx-1.5 -my-1.5 bg-yellow-50 text-yellow-500 rounded-lg focus:ring-2 focus:ring-yellow-400 p-1.5 hover:bg-yellow-200 inline-flex h-8 w-8 dark:bg-gray-800 dark:text-yellow-300 dark:hover:bg-gray-700">
+            <svg aria-hidden="true" class="w-5 h-5 pointer-events-none" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </button>
+    </div>
+    <?php } ?>
+    <?php if(isset($_GET["error"]) && $_GET["error"] == "pwd_invalid") { ?>
+    <div id="alert" class="fixed top-10 left-1/2 -translate-x-1/2 flex p-4 mb-4 text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 z-10">
+        <span class="material-icons-outlined text-amber-600">cancel</span>
+        <p class="ml-3 text-sm font-medium">Password is not valid.</p>
+        <button type="button" id="close-alert" class="ml-auto -mx-1.5 -my-1.5 bg-yellow-50 text-yellow-500 rounded-lg focus:ring-2 focus:ring-yellow-400 p-1.5 hover:bg-yellow-200 inline-flex h-8 w-8 dark:bg-gray-800 dark:text-yellow-300 dark:hover:bg-gray-700">
+            <svg aria-hidden="true" class="w-5 h-5 pointer-events-none" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </button>
+    </div>
+    <?php } ?>
+    <?php if(isset($_GET["error"]) && $_GET["error"] == "Rpwd_invalid") { ?>
+    <div id="alert" class="fixed top-10 left-1/2 -translate-x-1/2 flex p-4 mb-4 text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 z-10">
+        <span class="material-icons-outlined text-amber-600">cancel</span>
+        <p class="ml-3 text-sm font-medium">The passwords don't match.</p>
+        <button type="button" id="close-alert" class="ml-auto -mx-1.5 -my-1.5 bg-yellow-50 text-yellow-500 rounded-lg focus:ring-2 focus:ring-yellow-400 p-1.5 hover:bg-yellow-200 inline-flex h-8 w-8 dark:bg-gray-800 dark:text-yellow-300 dark:hover:bg-gray-700">
+            <svg aria-hidden="true" class="w-5 h-5 pointer-events-none" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </button>
+    </div>
+    <?php } ?>
+    <?php if(isset($_GET["error"]) && $_GET["error"] == "email_taken") { ?>
+    <div id="alert" class="fixed top-10 left-1/2 -translate-x-1/2 flex p-4 mb-4 text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 z-10">
+        <span class="material-icons-outlined text-amber-600">cancel</span>
+        <p class="ml-3 text-sm font-medium">E-mail is already taken.</p>
+        <button type="button" id="close-alert" class="ml-auto -mx-1.5 -my-1.5 bg-yellow-50 text-yellow-500 rounded-lg focus:ring-2 focus:ring-yellow-400 p-1.5 hover:bg-yellow-200 inline-flex h-8 w-8 dark:bg-gray-800 dark:text-yellow-300 dark:hover:bg-gray-700">
+            <svg aria-hidden="true" class="w-5 h-5 pointer-events-none" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </button>
+    </div>
+    <?php } ?>
+    <?php if(isset($_GET["error"]) && $_GET["error"] == "username_taken") { ?>
+    <div id="alert" class="fixed top-10 left-1/2 -translate-x-1/2 flex p-4 mb-4 text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 z-10">
+        <span class="material-icons-outlined text-amber-600">cancel</span>
+        <p class="ml-3 text-sm font-medium">Username is already taken.</p>
+        <button type="button" id="close-alert" class="ml-auto -mx-1.5 -my-1.5 bg-yellow-50 text-yellow-500 rounded-lg focus:ring-2 focus:ring-yellow-400 p-1.5 hover:bg-yellow-200 inline-flex h-8 w-8 dark:bg-gray-800 dark:text-yellow-300 dark:hover:bg-gray-700">
+            <svg aria-hidden="true" class="w-5 h-5 pointer-events-none" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </button>
+    </div>
+    <?php } ?>
+    <?php if(isset($_GET["error"]) && $_GET["error"] == "familyname_invalid") { ?>
+    <div id="alert" class="fixed top-10 left-1/2 -translate-x-1/2 flex p-4 mb-4 text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 z-10">
+        <span class="material-icons-outlined text-amber-600">cancel</span>
+        <p class="ml-3 text-sm font-medium">Family name is not valid.</p>
+        <button type="button" id="close-alert" class="ml-auto -mx-1.5 -my-1.5 bg-yellow-50 text-yellow-500 rounded-lg focus:ring-2 focus:ring-yellow-400 p-1.5 hover:bg-yellow-200 inline-flex h-8 w-8 dark:bg-gray-800 dark:text-yellow-300 dark:hover:bg-gray-700">
+            <svg aria-hidden="true" class="w-5 h-5 pointer-events-none" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </button>
+    </div>
+    <?php } ?>
+    <!-- =================== -->
     <div class="absolute flex lg:block justify-center items-start sm:items-center w-full h-full min-h-screen top-0 left-0 lg:bg-signUpBg bg-center bg-cover">
         <div class="relative lg:w-2/3 lg:h-[38vw] lg:min-h-[60%] lg:top-[48%] lg:left-[35%] lg:-translate-x-1/2 lg:-translate-y-1/2">
             <form action="signing_up" method="post" class="flex flex-col items-center justify-around h-full">
