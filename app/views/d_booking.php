@@ -329,7 +329,11 @@
                     </div>
                 </div>
             </div>
-            <?php foreach($reservations as $reserv) { ?>
+            <!-- Bookers table -->
+            <?php
+                foreach($reservations as $reserv) { 
+                    if($reserv['Check_Out'] != "0000-00-00" && $reserv['Check_In'] != "0000-00-00") {
+            ?>
                 <div class="bookers hidden fixed top-1/2 left-1/2 px-4 py-3 -translate-x-1/2 -translate-y-1/2 bg-white border shadow-xl dark:bg-zinc-800 dark:shadow-dark-xl rounded-2xl bg-clip-border z-[999]">
                     <div class="flex justify-between">
                         <h6 class="dark:text-white text-lg font-semibold">Bookers</h6>
@@ -358,7 +362,7 @@
                                         <p class="text-base font-semibold dark:text-white dark:opacity-80"><?= $booker['Family_Name'] ?></p>
                                     </td>
                                     <td class="p-2 align-middle bg-transparent border-t dark:border-white/40 whitespace-nowrap shadow-transparent">
-                                        <p class="text-base font-semibold dark:text-white dark:opacity-80"><?= $booker['Birthday'] ?></p>
+                                        <p class="date-switch text-base font-semibold dark:text-white dark:opacity-80"><?= $booker['Birthday'] ?></p>
                                     </td>
                                 </tr>
                             <?php
@@ -368,8 +372,15 @@
                         </tbody>
                     </table>
                 </div>
-            <?php } ?>
-            <?php foreach($reservations as $reserv) { ?>
+            <?php 
+                    }
+                }
+            ?>
+            <!-- Update bookers -->
+            <?php
+                foreach($reservations as $reserv) {
+                    if($reserv['Check_Out'] != "0000-00-00" && $reserv['Check_In'] != "0000-00-00" && $reserv['Check_In'] > date("Y-m-d")) {
+            ?>
                 <div class="update-bookers hidden fixed top-1/2 left-1/2 px-4 py-3 -translate-x-1/2 -translate-y-1/2 bg-white border shadow-xl dark:bg-zinc-800 dark:shadow-dark-xl rounded-2xl bg-clip-border z-[999]">
                     <div class="flex justify-between">
                         <h6 class="dark:text-white text-lg font-semibold">Update bookers</h6>
@@ -415,7 +426,8 @@
                     </form>
                 </div>
             <?php 
-                    } 
+                    }
+                }
                 include_once(INCLUDES . "d-footer.php");
             ?>
         </div>
