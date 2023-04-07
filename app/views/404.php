@@ -63,7 +63,7 @@
 			</div>
 		</section>
         <section class="flex justify-center items-center mb-20">
-            <a href="<?= URLROOT ?>/home/index" class="group text-center font-bold text-3xl text-zinc-900 relative bg-amber-400 rounded-md before:absolute before:top-0 before:-left-10 before:h-full before:w-5 before:bg-gradient-to-l before:from-zinc-100 before:to-transparent before:bg-opacity-40 before:skew-x-[30deg] before:transition-all before:duration-300 before:hover:left-[110%] active:bg-amber-500 overflow-hidden"><p class="py-4 px-6 transition-all duration-300 group-hover:scale-110 group-active:scale-95 group-active:transition-none">GHAYYARHA!</p></a>
+            <a href="<?= URLROOT ?>/home/index" class="group text-center font-bold text-3xl text-zinc-900 relative bg-amber-400 rounded-md before:absolute before:top-0 before:-left-10 before:h-full before:w-5 before:bg-gradient-to-l before:from-zinc-100 before:to-transparent before:bg-opacity-40 before:skew-x-[30deg] before:transition-all before:duration-300 before:hover:left-[110%] active:bg-amber-500 overflow-hidden"><p class="py-4 px-6 transition-all duration-300 group-hover:scale-110 group-active:scale-95 group-active:transition-none">Back to home</p></a>
         </section>
 	</main>
 	<?php require_once(INCLUDES . "footer.php"); ?>

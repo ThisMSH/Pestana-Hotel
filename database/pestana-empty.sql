@@ -36,31 +36,6 @@ CREATE TABLE `bookers` (
   `ReservationID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `bookers`
---
-
-INSERT INTO `bookers` (`ID`, `First_Name`, `Family_Name`, `Birthday`, `BookerID`, `ReservationID`) VALUES
-(8, 'El Mahdi', 'Saissi Hassani', '2022-01-01', 1, 10),
-(9, 'Mohammed', 'Bourra', '2004-06-20', 1, 11),
-(10, 'Mohamed', 'Mousta', '2002-12-14', 1, 11),
-(11, 'El Mehdi', 'Bahij', '2000-12-04', 1, 12),
-(12, 'Younes ', 'Elbezzi', '2001-02-17', 1, 12),
-(13, 'Jalal', 'Lagdimi', '2002-02-03', 1, 12),
-(14, 'El Mahdi', 'Saissi Hassani', '2022-01-01', 1, 13),
-(15, 'El Mahdi', 'Saissi Hassani', '2022-01-01', 1, 14),
-(16, 'El Mahdi', 'Saissi Hassani', '2022-01-01', 1, 15),
-(17, 'Some', 'One', '2000-01-01', 1, 16),
-(18, 'Another', 'One', '1990-01-01', 1, 16),
-(19, 'El Mahdi', 'Saissi Hassani', '2022-01-01', 1, 17),
-(20, 'El Mahdi', 'Saissi Hassani', '2022-01-01', 1, 18),
-(21, 'Mohammed', 'Moustarhfir', '2002-02-02', 2, 19),
-(22, 'تحياتي', 'مع السلامة', '2023-02-01', 3, 20),
-(23, 'Mohammed', 'آيت القاضي', '2023-02-28', 3, 20),
-(24, 'أحمد', 'ركن الدين', '2023-02-09', 3, 20),
-(25, 'حميد', 'حميد', '2023-02-11', 3, 20),
-(26, 'تحياتي', 'مع السلامة', '2023-02-01', 3, 21);
-
 -- --------------------------------------------------------
 
 --
@@ -79,24 +54,6 @@ CREATE TABLE `reservations` (
   `RoomID` int(11) NOT NULL,
   `Price` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `reservations`
---
-
-INSERT INTO `reservations` (`ID`, `Room_Name`, `Room_Type`, `Bookers_Number`, `Reservation_for`, `Check_In`, `Check_Out`, `UserID`, `RoomID`, `Price`) VALUES
-(10, 'Single', '', 1, 'El Mahdi Saissi Hassani', '2023-02-25', '2023-02-26', 1, 1, 142.5),
-(11, 'Double', '', 2, 'El Mahdi Saissi Hassani', '2023-03-02', '2023-03-03', 1, 2, 247),
-(12, 'Suite', 'Standard Suite', 3, 'El Mahdi Saissi Hassani', '2023-03-03', '2023-03-05', 1, 3, 475),
-(13, 'Suite', 'Junior Suite', 1, 'El Mahdi Saissi Hassani', '2023-01-20', '2023-01-22', 1, 4, 460.6),
-(14, 'Suite', 'Honeymoon Suite', 1, 'El Mahdi Saissi Hassani', '2023-02-21', '2023-02-25', 1, 7, 564),
-(15, 'Double', '', 1, 'El Mahdi Saissi Hassani', '0000-00-00', '0000-00-00', 1, 2, 244.4),
-(16, 'Double', '', 2, 'El Mahdi Saissi Hassani', '0000-00-00', '0000-00-00', 1, 2, 236.6),
-(17, 'Double', '', 1, 'El Mahdi Saissi Hassani', '2023-02-25', '2023-02-26', 1, 2, 236.6),
-(18, 'Suite', 'Penthouse Suite', 1, 'El Mahdi Saissi Hassani', '0000-00-00', '0000-00-00', 1, 6, 546),
-(19, 'Single', '', 1, 'Mohammed Moustarhfir', '2023-03-01', '2023-03-04', 2, 1, 150),
-(20, 'Quad', 'Friendly Quad', 4, 'تحياتي مع السلامة', '2023-03-02', '2023-03-04', 3, 12, 450),
-(21, 'Single', '', 1, 'تحياتي مع السلامة', '2023-03-09', '2023-03-10', 3, 1, 148.5);
 
 -- --------------------------------------------------------
 
@@ -147,15 +104,6 @@ CREATE TABLE `users` (
   `Admin` int(11) DEFAULT 0,
   `Discount` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`ID`, `First_Name`, `Family_Name`, `Phone_Number`, `Birthday`, `Username`, `Email`, `Password`, `Admin`, `Discount`) VALUES
-(1, 'El Mahdi', 'Saissi Hassani', '0453234323', '2022-01-01', 'mahdi', 'mahdi@gmail.com', '$2y$10$uNjF3cgDr9r5LX5M4slCxuqQtSmnrm.yWYhS8caW8rMypMrzqCpWq', 1, 6),
-(2, 'Mohammed', 'Moustarhfir', '0606666600', '2002-02-02', 'mousta', 'mousta@gmail.com', '$2y$10$IeF.wSPBvHQ3kFuOU0HleeIUrXe0LCmOaqWtDpvqXz6LWUyEd2PCK', 0, 1),
-(3, 'تحياتي', 'مع السلامة', '0202021314', '2023-02-01', 'ta7iyati', 'ta7iyati@gmail.com', '$2y$10$/WS7jNW6oOJ6E8prGV7a8OGa1oo1pX1WAnm6L5ez.8.E3yjKGHXvq', 0, 2);
 
 --
 -- Indexes for dumped tables
