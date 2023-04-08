@@ -31,7 +31,8 @@ In `phpMyAdmin` create a new database called `pestana`. After that import one of
 > Note that the database name have to be `pestana`, else you'll need to modify the database name in `\Pestana-Hotel\app\config\Config.php`.
 
 Now you should be able to run the project without any issue, this link may lead you to the project if you're using [Pestana Hotel](http://localhost/Pestana-Hotel/).
-## Demo
+
+## Usage
 
 First you'll have to be a user in the website in order to search or book a room, just go to [Sign up](http://localhost/Pestana-Hotel/signup/register) and create an account.
 
@@ -43,14 +44,14 @@ After creating your account and signing in, you can search and book some rooms, 
     UPDATE `users` SET `Admin` = '1' WHERE `users`.`ID` = ?;
 ```
 
-Replace `?` with the ID of the user that you want to set as admin.
+> Replace `?` with the ID of the user that you want to set as admin.
 
 
 ## Tech Stack
 
 **Frontend:** HTML, CSS, JavaScript, TailwindCSS.
 
-**Backend:** PHP (OOP MVC), MySQL.
+**Backend:** PHP (OOP & MVC), MySQL.
 
 
 ## Screenshots
