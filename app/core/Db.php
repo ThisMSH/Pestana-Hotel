@@ -3,7 +3,7 @@ class Db {
     private $connection;
     
     protected function conn() {
-        $dsn = "mysql:host" . DB_HOST . "; dbname=" . DB_NAME;
+        $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME;
         $options = array(PDO::ATTR_PERSISTENT => true);
 
         try {
